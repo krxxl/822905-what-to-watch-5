@@ -1,10 +1,10 @@
 import React from 'react';
-import MovieItem from '../movie-item/movie-item';
+import MovieListItem from '../movie-list-item/movie-list-item';
 
 const MovieList = () => {
   return (
     <div className="catalog__movies-list">
-      <MovieItem />
+      <MovieListItem />
     </div>
   );
 };

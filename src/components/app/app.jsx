@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import Login from '../login/login';
 import MyList from '../mylist/mylist';
-import Film from '../film/film';
+import MoviePage from '../movie-page/movie-page';
 import Review from '../review/review';
 import Player from '../player/player';
 
@@ -21,11 +21,11 @@ const App = ({film}) => {
         <Route exact path="/mylist">
           <MyList />
         </Route>
-        <Route path="/films/:id">
-          <Film />
-        </Route>
         <Route exact path="/films/:id/review">
           <Review />
+        </Route>
+        <Route path="/films/:id">
+          <MoviePage />
         </Route>
         <Route exact path="/player/:id">
           <Player />

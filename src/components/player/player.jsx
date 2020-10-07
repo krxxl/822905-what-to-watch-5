@@ -21,7 +21,7 @@ const Player = () => {
               value="30"
               max="100"
             ></progress>
-            <div className="player__toggler" style="left: 30%;">
+            <div className="player__toggler" >
               Toggler
             </div>
           </div>
