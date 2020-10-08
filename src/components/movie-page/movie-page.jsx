@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import MovieList from '../movie-list/movie-list';
@@ -109,6 +110,28 @@ const MoviePage = (props) => {
       </div>
     </React.Fragment>
   );
+};
+
+MoviePage.propTypes = {
+  props: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+  films: PropTypes.arrayOf(PropTypes.arrayOf({
+    name: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
+    hero: PropTypes.string.isRequired,
+    time: PropTypes.string.isRequired,
+    rating: PropTypes.string.isRequired,
+    count: PropTypes.number.isRequired,
+    desc: PropTypes.string.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.array.isRequired,
+    isInList: PropTypes.bool.isRequired,
+    id: PropTypes.number.isRequired,
+  }).isRequired).isRequired,
+  onSmallCardClick: PropTypes.func.isRequired,
 };
 
 export default MoviePage;
