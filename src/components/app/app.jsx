@@ -8,25 +8,43 @@ import MoviePage from '../movie-page/movie-page';
 import Review from '../review/review';
 import Player from '../player/player';
 
-const App = ({film}) => {
+const App = ({films, reviews}) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
-          <MainPage {...film} />;
-        </Route>
+        <Route exact path="/"
+          render={({history}) => (
+            <MainPage
+              onSmallCardClick={(id) => history.push(`/films/${id}`)}
+              films={films}
+            />
+          )}
+        />
+        {/* <MainPage films={films} />;
+        </Route> */}
         <Route exact path="/login">
           <Login />
         </Route>
-        <Route exact path="/mylist">
-          <MyList />
-        </Route>
+        <Route exact path="/mylist"
+          render={({history}) => (
+            <MyList
+              onSmallCardClick={(id) => history.push(`/films/${id}`)}
+              films={films}
+            />
+          )}
+        />
         <Route exact path="/films/:id/review">
           <Review />
         </Route>
-        <Route path="/films/:id">
-          <MoviePage />
-        </Route>
+        <Route path="/films/:id"
+          render={(props) => (
+            <MoviePage
+              onSmallCardClick={(id) => props.history.push(`/films/${id}`)}
+              films={films}
+              reviews={reviews}
+              {...props}
+            />
+          )} />
         <Route exact path="/player/:id">
           <Player />
         </Route>
@@ -39,7 +57,7 @@ const App = ({film}) => {
 };
 
 App.propTypes = {
-  film: PropTypes.object.isRequired,
+  films: PropTypes.array.isRequired,
 };
 
 export default App;

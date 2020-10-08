@@ -6,12 +6,14 @@ import MovieList from '../movie-list/movie-list';
 import GenreList from '../genre-list/genre-list';
 
 
-const MainPage = ({name, genre, year}) => {
+const MainPage = ({films, onSmallCardClick}) => {
+  const {hero, name, poster, genre, year} = films[0];
   return (
+
     <React.Fragment>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={hero} alt={name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -21,7 +23,7 @@ const MainPage = ({name, genre, year}) => {
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={poster} alt={name} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
@@ -36,6 +38,7 @@ const MainPage = ({name, genre, year}) => {
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use href="#play-s"></use>
                   </svg>
+                  <span>Play</span>
                   <span>Play</span>
                 </button>
                 <button className="btn btn--list movie-card__button" type="button">
@@ -55,7 +58,7 @@ const MainPage = ({name, genre, year}) => {
 
           <GenreList />
 
-          <MovieList />
+          <MovieList films={films} onSmallCardClick = {onSmallCardClick}/>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
@@ -68,10 +71,10 @@ const MainPage = ({name, genre, year}) => {
   );
 };
 
-MainPage.propTypes = {
-  name: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
-  year: PropTypes.number.isRequired,
-};
+// MainPage.propTypes = {
+//   name: PropTypes.string.isRequired,
+//   genre: PropTypes.string.isRequired,
+//   year: PropTypes.number.isRequired,
+// };
 
 export default MainPage;
