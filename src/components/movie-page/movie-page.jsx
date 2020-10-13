@@ -119,7 +119,7 @@ const MoviePage = (props) => {
 MoviePage.propTypes = {
   props: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
-  films: PropTypes.arrayOf(PropTypes.arrayOf({
+  films: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     year: PropTypes.string.isRequired,
@@ -133,6 +133,7 @@ MoviePage.propTypes = {
     director: PropTypes.string.isRequired,
     starring: PropTypes.array.isRequired,
     isInList: PropTypes.bool.isRequired,
+    video: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
   }).isRequired).isRequired,
   onSmallCardClick: PropTypes.func.isRequired,
