@@ -11,12 +11,16 @@ const MoviePage = (props) => {
   const film = films.find((item)=>item.id === +filmId);
   const {hero, name, poster, genre, year, rating, count, desc, director, starring} = film;
   const ratingWord = (val) => {
-    if (val >= 0 && val < 5) {
-      return `Very Bad`;
-    } else if (val >= 5 && val < 7) {
-      return `Norm`;
+    if (val >= 0 && val < 3) {
+      return `Bad`;
+    } else if (val >= 3 && val < 5) {
+      return `Normal`;
+    } else if (val >= 5 && val < 8) {
+      return `Good`;
+    } else if (val >= 8 && val < 10) {
+      return `Very good`;
     } else {
-      return `Ok`;
+      return `Awesome`;
     }
   };
 

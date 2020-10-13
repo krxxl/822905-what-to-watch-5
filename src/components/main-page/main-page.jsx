@@ -39,7 +39,6 @@ const MainPage = ({films, onSmallCardClick}) => {
                     <use href="#play-s"></use>
                   </svg>
                   <span>Play</span>
-                  <span>Play</span>
                 </button>
                 <button className="btn btn--list movie-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
