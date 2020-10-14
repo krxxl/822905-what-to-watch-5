@@ -18,7 +18,7 @@ const MyList = ({films, onSmallCardClick}) => {
 };
 
 MyList.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.arrayOf({
+  films: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     year: PropTypes.string.isRequired,
@@ -33,6 +33,7 @@ MyList.propTypes = {
     starring: PropTypes.array.isRequired,
     isInList: PropTypes.bool.isRequired,
     id: PropTypes.number.isRequired,
+    video: PropTypes.string.isRequired,
   }).isRequired).isRequired,
   onSmallCardClick: PropTypes.func.isRequired,
 };

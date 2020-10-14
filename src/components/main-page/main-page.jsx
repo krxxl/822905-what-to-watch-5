@@ -71,7 +71,7 @@ const MainPage = ({films, onSmallCardClick}) => {
 };
 
 MainPage.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.arrayOf({
+  films: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     year: PropTypes.string.isRequired,
@@ -85,6 +85,7 @@ MainPage.propTypes = {
     director: PropTypes.string.isRequired,
     starring: PropTypes.array.isRequired,
     isInList: PropTypes.bool.isRequired,
+    video: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
   }).isRequired).isRequired,
   onSmallCardClick: PropTypes.func.isRequired,

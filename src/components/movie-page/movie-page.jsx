@@ -6,8 +6,8 @@ import MovieList from '../movie-list/movie-list';
 import {Link} from "react-router-dom";
 
 const MoviePage = (props) => {
-  const filmId = props.match.params.id;
-  const {films, onSmallCardClick} = props;
+  // const filmId = props.match.params.id;
+  const {films, onSmallCardClick, filmId} = props;
   const film = films.find((item)=>item.id === +filmId);
   const {hero, name, poster, genre, year, rating, count, desc, director, starring} = film;
   const ratingWord = (val) => {
@@ -117,9 +117,8 @@ const MoviePage = (props) => {
 };
 
 MoviePage.propTypes = {
-  props: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired,
-  films: PropTypes.arrayOf(PropTypes.arrayOf({
+  filmId: PropTypes.number.isRequired,
+  films: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     year: PropTypes.string.isRequired,
@@ -133,6 +132,7 @@ MoviePage.propTypes = {
     director: PropTypes.string.isRequired,
     starring: PropTypes.array.isRequired,
     isInList: PropTypes.bool.isRequired,
+    video: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
   }).isRequired).isRequired,
   onSmallCardClick: PropTypes.func.isRequired,
