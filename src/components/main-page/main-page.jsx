@@ -6,12 +6,14 @@ import MovieList from '../movie-list/movie-list';
 import GenreList from '../genre-list/genre-list';
 
 
-const MainPage = ({name, genre, year}) => {
+const MainPage = ({films, onSmallCardClick}) => {
+  const {hero, name, poster, genre, year} = films[0];
   return (
+
     <React.Fragment>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={hero} alt={name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -21,7 +23,7 @@ const MainPage = ({name, genre, year}) => {
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={poster} alt={name} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
@@ -55,7 +57,7 @@ const MainPage = ({name, genre, year}) => {
 
           <GenreList />
 
-          <MovieList />
+          <MovieList films={films} onSmallCardClick = {onSmallCardClick}/>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
@@ -69,9 +71,23 @@ const MainPage = ({name, genre, year}) => {
 };
 
 MainPage.propTypes = {
-  name: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
-  year: PropTypes.number.isRequired,
+  films: PropTypes.arrayOf(PropTypes.arrayOf({
+    name: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
+    hero: PropTypes.string.isRequired,
+    time: PropTypes.string.isRequired,
+    rating: PropTypes.string.isRequired,
+    count: PropTypes.number.isRequired,
+    desc: PropTypes.string.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.array.isRequired,
+    isInList: PropTypes.bool.isRequired,
+    id: PropTypes.number.isRequired,
+  }).isRequired).isRequired,
+  onSmallCardClick: PropTypes.func.isRequired,
 };
 
 export default MainPage;
