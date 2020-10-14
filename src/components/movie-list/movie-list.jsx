@@ -5,9 +5,7 @@ import PropTypes from 'prop-types';
 
 class MovieList extends React.PureComponent {
   constructor(props) {
-    
     super(props);
-
   }
 
 

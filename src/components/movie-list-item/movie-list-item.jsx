@@ -30,8 +30,6 @@ export default class MovieListItem extends React.PureComponent {
       onSmallCardClick,
     } = this.props;
 
-  
-
     return (
       <article
         className="small-movie-card catalog__movies-card"
@@ -58,5 +56,6 @@ MovieListItem.propTypes = {
   name: PropTypes.string.isRequired,
   preview: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
+  video: PropTypes.string.isRequired,
   onSmallCardClick: PropTypes.func.isRequired
-}
+};
