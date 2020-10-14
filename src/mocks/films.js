@@ -16,7 +16,7 @@ export default [{
     `Willem Dafoe`,
     `Saoirse Ronan`,
     `Tony Revoloru`],
-  video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  video: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   isInList: true,
   id: 1,
 },
@@ -38,7 +38,7 @@ export default [{
     `Willem Dafoe`,
     `Saoirse Ronan`,
     `Tony Revoloru`],
-  video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  video: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   isInList: true,
   id: 2,
 }, {
@@ -59,7 +59,7 @@ export default [{
     `Willem Dafoe`,
     `Saoirse Ronan`,
     `Tony Revoloru`],
-  video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  video: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   isInList: true,
   id: 3,
 }, {
@@ -80,7 +80,7 @@ export default [{
     `Willem Dafoe`,
     `Saoirse Ronan`,
     `Tony Revoloru`],
-  video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  video: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   isInList: true,
   id: 4,
 }, {
@@ -101,7 +101,7 @@ export default [{
     `Willem Dafoe`,
     `Saoirse Ronan`,
     `Tony Revoloru`],
-  video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  video: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   isInList: true,
   id: 5,
 }, {
@@ -122,7 +122,7 @@ export default [{
     `Willem Dafoe`,
     `Saoirse Ronan`,
     `Tony Revoloru`],
-  video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  video: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   isInList: true,
   id: 6,
 }, {
@@ -144,7 +144,7 @@ export default [{
     `Saoirse Ronan`,
     `Tony Revoloru`],
   isInList: true,
-  video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  video: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   id: 7,
 }, {
   name: `moonrise-kingdom`,
@@ -165,7 +165,7 @@ export default [{
     `Saoirse Ronan`,
     `Tony Revoloru`],
   isInList: true,
-  video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  video: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   id: 8,
 }
 ];

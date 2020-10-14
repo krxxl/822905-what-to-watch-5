@@ -5,25 +5,21 @@ import PropTypes from 'prop-types';
 
 class MovieList extends React.PureComponent {
   constructor(props) {
+    
     super(props);
-    this.state = {
-      active: null
-    };
-    this.onMouseHandle = this.onMouseHandle.bind(this);
+
   }
 
-  onMouseHandle(id) {
-    this.setState({active: id});
-  }
 
   render() {
+
 
     const {films, onSmallCardClick} = this.props;
 
     const elements = films.map((film) => {
       const {name, id, preview, video} = film;
 
-      return <MovieListItem key={id} video={video} name={name} id={id} preview={preview} onActive={this.onMouseHandle} onSmallCardClick={onSmallCardClick} />;
+      return <MovieListItem key={id} video={video} name={name} id={id} preview={preview} onSmallCardClick={onSmallCardClick} />;
     });
     return (
       <div className="catalog__movies-list">
