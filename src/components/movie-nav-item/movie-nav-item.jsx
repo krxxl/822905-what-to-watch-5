@@ -1,10 +1,12 @@
 import React from 'react';
 
-const MovieNavItem = ({name, clickOnTab}) => {
+const MovieNavItem = ({name, className, clickOnTab}) => {
   return (
-    <a href="#" className="movie-nav__link" onClick={(evt)=>clickOnTab(evt, name)}>
-      {name}
-    </a>
+    <li className={`movie-nav__item ${className}`} >
+      <a href="#" className="movie-nav__link" onClick={(evt) => clickOnTab(evt, name)}>
+        {name}
+      </a>
+    </li>
   );
 };
 

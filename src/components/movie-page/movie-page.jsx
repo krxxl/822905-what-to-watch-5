@@ -8,23 +8,11 @@ import MovieDesc from '../movie-desc/movie-desc'
 import tabNames from '../../movie-tabs-names'
 
 const MoviePage = (props) => {
-  // const filmId = props.match.params.id;
-  const {films, onSmallCardClick, filmId} = props;
+
+  const {films, reviews, onSmallCardClick, filmId} = props;
   const film = films.find((item)=>item.id === +filmId);
-  const {hero, name, poster, genre, year, rating, count, desc, director, starring} = film;
-  const ratingWord = (val) => {
-    if (val >= 0 && val < 3) {
-      return `Bad`;
-    } else if (val >= 3 && val < 5) {
-      return `Normal`;
-    } else if (val >= 5 && val < 8) {
-      return `Good`;
-    } else if (val >= 8 && val < 10) {
-      return `Very good`;
-    } else {
-      return `Awesome`;
-    }
-  };
+  const filmReviews = reviews.find((item)=>item.id === +filmId);
+  const {hero, name, poster, genre, year} = film;
 
   return (
     <React.Fragment>
@@ -70,7 +58,7 @@ const MoviePage = (props) => {
             <div className="movie-card__poster movie-card__poster--big">
               <img src={poster} alt={name} width="218" height="327" />
             </div>
-            <MovieDesc tabNames={tabNames}/>
+            <MovieDesc film={film} filmReviews={filmReviews} tabNames={tabNames}/>
           </div>
         </div>
       </section>
