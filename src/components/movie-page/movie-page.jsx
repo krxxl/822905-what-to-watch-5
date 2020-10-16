@@ -4,25 +4,15 @@ import Header from '../header/header';
 import Footer from '../footer/footer';
 import MovieList from '../movie-list/movie-list';
 import {Link} from "react-router-dom";
+import MovieDesc from '../movie-desc/movie-desc'
+import tabNames from '../../movie-tabs-names'
 
 const MoviePage = (props) => {
-  const filmId = props.match.params.id;
-  const {films, onSmallCardClick} = props;
+
+  const {films, reviews, onSmallCardClick, filmId} = props;
   const film = films.find((item)=>item.id === +filmId);
-  const {hero, name, poster, genre, year, rating, count, desc, director, starring} = film;
-  const ratingWord = (val) => {
-    if (val >= 0 && val < 3) {
-      return `Bad`;
-    } else if (val >= 3 && val < 5) {
-      return `Normal`;
-    } else if (val >= 5 && val < 8) {
-      return `Good`;
-    } else if (val >= 8 && val < 10) {
-      return `Very good`;
-    } else {
-      return `Awesome`;
-    }
-  };
+  const filmReviews = reviews.find((item)=>item.id === +filmId);
+  const {hero, name, poster, genre, year} = film;
 
   return (
     <React.Fragment>
@@ -68,38 +58,7 @@ const MoviePage = (props) => {
             <div className="movie-card__poster movie-card__poster--big">
               <img src={poster} alt={name} width="218" height="327" />
             </div>
-
-            <div className="movie-card__desc">
-              <nav className="movie-nav movie-card__nav">
-                <ul className="movie-nav__list">
-                  <li className="movie-nav__item movie-nav__item--active">
-                    <a href="#" className="movie-nav__link">Overview</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Details</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
-
-              <div className="movie-rating">
-                <div className="movie-rating__score">{rating}</div>
-                <p className="movie-rating__meta">
-                  <span className="movie-rating__level">{ratingWord(rating)}</span>
-                  <span className="movie-rating__count">{count} ratings</span>
-                </p>
-              </div>
-
-              <div className="movie-card__text">
-                {desc}
-
-                <p className="movie-card__director"><strong>Director: {director}</strong></p>
-
-                <p className="movie-card__starring"><strong>Starring: {starring.join(`, `)} and other</strong></p>
-              </div>
-            </div>
+            <MovieDesc film={film} filmReviews={filmReviews} tabNames={tabNames}/>
           </div>
         </div>
       </section>
@@ -117,9 +76,8 @@ const MoviePage = (props) => {
 };
 
 MoviePage.propTypes = {
-  props: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired,
-  films: PropTypes.arrayOf(PropTypes.arrayOf({
+  filmId: PropTypes.number.isRequired,
+  films: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     year: PropTypes.string.isRequired,
@@ -133,6 +91,7 @@ MoviePage.propTypes = {
     director: PropTypes.string.isRequired,
     starring: PropTypes.array.isRequired,
     isInList: PropTypes.bool.isRequired,
+    video: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
   }).isRequired).isRequired,
   onSmallCardClick: PropTypes.func.isRequired,

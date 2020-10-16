@@ -20,8 +20,6 @@ const App = ({films, reviews}) => {
             />
           )}
         />
-        {/* <MainPage films={films} />;
-        </Route> */}
         <Route exact path="/login">
           <Login />
         </Route>
@@ -37,14 +35,21 @@ const App = ({films, reviews}) => {
           <Review />
         </Route>
         <Route path="/films/:id"
-          render={(props) => (
-            <MoviePage
-              onSmallCardClick={(id) => props.history.push(`/films/${id}`)}
-              films={films}
-              reviews={reviews}
-              {...props}
-            />
-          )} />
+          render={(props) => {
+            const filmId = +props.match.params.id;
+
+            return (
+              <MoviePage
+                onSmallCardClick={(id) => props.history.push(`/films/${id}`)}
+                films={films}
+                history={props.history}
+                reviews={reviews}
+                filmId={filmId}
+              />
+            );
+          }
+
+          } />
         <Route exact path="/player/:id">
           <Player />
         </Route>
@@ -59,7 +64,8 @@ const App = ({films, reviews}) => {
 App.propTypes = {
   films: PropTypes.array.isRequired,
   reviews: PropTypes.array.isRequired,
-  history: PropTypes.object.isRequired,
+  history: PropTypes.object,
+  match: PropTypes.object,
 };
 
 export default App;
