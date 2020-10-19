@@ -2,7 +2,6 @@ import React from 'react';
 import MovieListItem from '../movie-list-item/movie-list-item';
 import PropTypes from 'prop-types';
 
-
 class MovieList extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -11,10 +10,14 @@ class MovieList extends React.PureComponent {
 
   render() {
 
+    const {COUNTFILM, genre, films, onSmallCardClick} = this.props;
+    let filmLikeThis = films;
 
-    const {films, onSmallCardClick} = this.props;
+    if (COUNTFILM) {
+      filmLikeThis = films.filter((film) => film.genre === genre).slice(0, COUNTFILM);
+    }
 
-    const elements = films.map((film) => {
+    const elements = filmLikeThis.map((film) => {
       const {name, id, preview, video} = film;
 
       return <MovieListItem key={id} video={video} name={name} id={id} preview={preview} onSmallCardClick={onSmallCardClick} />;
@@ -46,6 +49,8 @@ MovieList.propTypes = {
     id: PropTypes.number.isRequired,
   }).isRequired).isRequired,
   onSmallCardClick: PropTypes.func.isRequired,
+  COUNTFILM: PropTypes.number,
+  genre: PropTypes.string,
 };
 
 export default MovieList;
