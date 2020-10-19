@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const MovieNavItem = ({name, className, clickOnTab}) => {
   return (
@@ -11,3 +12,9 @@ const MovieNavItem = ({name, className, clickOnTab}) => {
 };
 
 export default MovieNavItem;
+
+MovieNavItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  className: PropTypes.string.isRequired,
+  clickOnTab: PropTypes.func.isRequired
+};

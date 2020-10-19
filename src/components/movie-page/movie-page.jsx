@@ -4,8 +4,9 @@ import Header from '../header/header';
 import Footer from '../footer/footer';
 import MovieList from '../movie-list/movie-list';
 import {Link} from "react-router-dom";
-import MovieDesc from '../movie-desc/movie-desc'
-import tabNames from '../../movie-tabs-names'
+import MovieDesc from '../movie-desc/movie-desc';
+import tabNames from '../../movie-tabs-names';
+import COUNTFILM from '../../constant/constant';
 
 const MoviePage = (props) => {
 
@@ -66,7 +67,7 @@ const MoviePage = (props) => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <MovieList films={films} onSmallCardClick={onSmallCardClick} />
+          <MovieList COUNTFILM={COUNTFILM} genre={genre} films={films} onSmallCardClick={onSmallCardClick} />
         </section>
 
         <Footer />
@@ -95,6 +96,16 @@ MoviePage.propTypes = {
     id: PropTypes.number.isRequired,
   }).isRequired).isRequired,
   onSmallCardClick: PropTypes.func.isRequired,
+  reviews: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    reviews: PropTypes.arrayOf(PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+      rating: PropTypes.number.isRequired,
+      id: PropTypes.number.isRequired,
+    }).isRequired).isRequired,
+  })).isRequired
 };
 
 export default MoviePage;

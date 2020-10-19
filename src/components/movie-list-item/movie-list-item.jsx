@@ -57,5 +57,9 @@ MovieListItem.propTypes = {
   preview: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   video: PropTypes.string.isRequired,
-  onSmallCardClick: PropTypes.func.isRequired
+  onSmallCardClick: PropTypes.func.isRequired,
+  tabNames: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+  }).isRequired),
 };

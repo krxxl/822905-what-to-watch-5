@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const ratingWord = (val) => {
   if (val >= 0 && val < 3) {
@@ -14,8 +15,8 @@ const ratingWord = (val) => {
   }
 };
 
-const TabsOverview = ({ film }) => {
-  const {rating, count, desc, director, starring} = film
+const TabsOverview = ({film}) => {
+  const {rating, count, desc, director, starring} = film;
   return (
     <React.Fragment>
       <div className="movie-rating">
@@ -29,16 +30,33 @@ const TabsOverview = ({ film }) => {
       <div className="movie-card__text">
         <p>{desc}</p>
 
-  <p className="movie-card__director"><strong>Director: {director}</strong></p>
+        <p className="movie-card__director"><strong>Director: {director}</strong></p>
 
-  <p className="movie-card__starring"><strong>Starring: {starring.join(`, `)} and other</strong></p>
+        <p className="movie-card__starring"><strong>Starring: {starring.join(`, `)} and other</strong></p>
       </div>
     </React.Fragment>
   );
-}
+};
 
+TabsOverview.propTypes = {
+  film: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
+    hero: PropTypes.string.isRequired,
+    time: PropTypes.string.isRequired,
+    rating: PropTypes.string.isRequired,
+    count: PropTypes.number.isRequired,
+    desc: PropTypes.string.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.array.isRequired,
+    isInList: PropTypes.bool.isRequired,
+    video: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+  }).isRequired
 
-
-
+};
 
 export default TabsOverview;
