@@ -1,7 +1,8 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const TabsDetail = ({film}) => {
-  const { director, starring, time, genre, year } = film
+  const {director, starring, time, genre, year} = film;
   return (
     <div className="movie-card__text movie-card__row">
       <div className="movie-card__text-col">
@@ -38,7 +39,28 @@ const TabsDetail = ({film}) => {
         </p>
       </div>
     </div>
-  )
-}
+  );
+};
+
+TabsDetail.propTypes = {
+  film: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
+    hero: PropTypes.string.isRequired,
+    time: PropTypes.string.isRequired,
+    rating: PropTypes.string.isRequired,
+    count: PropTypes.number.isRequired,
+    desc: PropTypes.string.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.array.isRequired,
+    isInList: PropTypes.bool.isRequired,
+    video: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+  }).isRequired
+
+};
 
 export default TabsDetail;
