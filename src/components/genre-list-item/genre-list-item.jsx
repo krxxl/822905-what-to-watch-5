@@ -1,10 +1,10 @@
 import React from 'react';
 
 
-const GenreListItem = () => {
+const GenreListItem = ({className, name, onGenreChange}) => {
   return (
-    <li className="catalog__genres-item catalog__genres-item--active">
-      <a href="#" className="catalog__genres-link">All genres</a>
+    <li className={`"catalog__genres-item" ${className}`}>
+      <a href="#" onClick={(evt) => {evt.preventDefault; onGenreChange(name)}} className="catalog__genres-link">{name}</a>
     </li>
   );
 };

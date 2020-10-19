@@ -1,23 +1,32 @@
 import {extend} from "../utils";
+import films from '../mocks/films';
+import {ActionType} from "./action";
 
-const initialStatr = {
-  genre: `All genres`,
+const initialState = {
+  genreActive: `comedy`,
   films
 };
 
+
+
+const GENRE_TYPE = {
+
+}
+
 const sortedFilms = (state) => {
-  return state.films.filter((film) => {return film.genre = state.genre})
+  console.log(state)
+  return state.films.filter((film) => {return film.genre === state.genre})
 }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_GENRE:
       return extend(state, {
-        genre: action.payload,
+        genreActive: action.payload,
       });
   }
   return state;
 };
 
 
-export {reducer};
+export {sortedFilms, reducer};

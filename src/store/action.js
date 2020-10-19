@@ -3,8 +3,8 @@ export const ActionType = {
 }
 
 export const ActionCreator = {
-  changeGenre: () => ({
+  changeGenre: (name) => ({
     type: CHANGE_GENRE,
-    payload: 1,
+    payload: name,
   }),
 };
