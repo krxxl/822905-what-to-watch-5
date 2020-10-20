@@ -15,7 +15,7 @@ const GENRE_TYPE = {
 
 const sortedFilms = (state) => {
   console.log(state)
-  return state.films.filter((film) => {return film.genre === state.genre})
+  return state.films.filter((film) => {return film.genre === state.genreActive})
 }
 
 const reducer = (state = initialState, action) => {
