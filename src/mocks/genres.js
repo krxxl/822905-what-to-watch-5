@@ -1,4 +1,4 @@
-export default [
+export const genres = [
   {
     name: `All genres`,
     id: 1
@@ -39,4 +39,17 @@ export default [
     name: `Thrillers`,
     id: 10
   },
-]
+];
+
+export const genresInSingular = {
+  ALL: `All genres`,
+  COMEDY: `Comedies`,
+  CRIME: `Crime`,
+  DOCUMENTARY: `Documentary`,
+  DRAMA: `Dramas`,
+  HORROR: `Horror`,
+  KIDS: `Kids & Family`,
+  ROMANCE: `Romance`,
+  SCI_FI: `Sci-Fi`,
+  THRILLER: `Thrillers`,
+};

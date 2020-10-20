@@ -6,11 +6,10 @@ import MovieList from '../movie-list/movie-list';
 import GenreList from '../genre-list/genre-list';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
-import {sortedFilms} from '../../store/reducer'
+import {sortedFilms} from '../../store/reducer';
 
 
 const MainPage = ({films, onSmallCardClick, genreActive, onGenreChange}) => {
-  console.log(films)
   const {hero, name, poster, genre, year} = films[0];
   return (
 
@@ -93,6 +92,8 @@ MainPage.propTypes = {
     id: PropTypes.number.isRequired,
   }).isRequired).isRequired,
   onSmallCardClick: PropTypes.func.isRequired,
+  genreActive: PropTypes.string.isRequired,
+  onGenreChange: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -101,8 +102,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onGenreChange() {
-    dispatch(ActionCreator.CHANGE_GENRE());
+  onGenreChange(name) {
+    dispatch(ActionCreator.changeGenre(name));
   },
 });
 
