@@ -7,25 +7,26 @@ export default class MovieDesc extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.onTabHandle = this.onTabHandle.bind(this);
-    this.state = {
-      active: `Overview`,
-    };
+    // this.onTabHandle = this.onTabHandle.bind(this);
+    // this.state = {
+    //   active: `Overview`,
+    // };
   }
 
-  onTabHandle(evt, name) {
-    evt.preventDefault();
-    this.setState({active: name});
-  }
+  // onTabHandle(evt, name) {
+  //   evt.preventDefault();
+  //   this.setState({active: name});
+  // }
 
   render() {
 
-    const {film, filmReviews, tabNames} = this.props;
+    const {film, filmReviews, tabNames, onTabHandle} = this.props;
     const {active} = this.state;
 
     return (
       <div className="movie-card__desc">
-        <MovieNav active={active} tabNames={tabNames} clickOnTab={this.onTabHandle} />
+        {/* <MovieNav active={active} tabNames={tabNames} clickOnTab={onTabHandle} /> */}
+        {this.props.children}
         <Tabs filmReviews={filmReviews} film={film} active={active}/>
       </div>
     );

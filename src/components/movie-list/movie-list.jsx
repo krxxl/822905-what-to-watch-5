@@ -1,6 +1,9 @@
 import React from 'react';
 import MovieListItem from '../movie-list-item/movie-list-item';
 import PropTypes from 'prop-types';
+import withVideo from '../../hocs/with-video/with-video';
+
+const Components = withVideo(MovieListItem);
 
 class MovieList extends React.PureComponent {
   constructor(props) {
@@ -20,7 +23,7 @@ class MovieList extends React.PureComponent {
     const elements = filmLikeThis.map((film) => {
       const {name, id, preview, video} = film;
 
-      return <MovieListItem key={id} video={video} name={name} id={id} preview={preview} onSmallCardClick={onSmallCardClick} />;
+      return <Components key={id} video={video} name={name} id={id} preview={preview} onSmallCardClick={onSmallCardClick} />;
     });
     return (
       <div className="catalog__movies-list">

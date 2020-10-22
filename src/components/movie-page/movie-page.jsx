@@ -7,6 +7,9 @@ import {Link} from "react-router-dom";
 import MovieDesc from '../movie-desc/movie-desc';
 import tabNames from '../../movie-tabs-names';
 import COUNTFILM from '../../constant/constant';
+import withActiveItem from '../../hocs/with-active-item/with-active-item'
+
+const Components = withActiveItem(MovieDesc);
 
 const MoviePage = (props) => {
 
