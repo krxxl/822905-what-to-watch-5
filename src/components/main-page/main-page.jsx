@@ -4,9 +4,12 @@ import Header from '../header/header';
 import Footer from '../footer/footer';
 import MovieList from '../movie-list/movie-list';
 import GenreList from '../genre-list/genre-list';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../store/action';
+import {sortedFilms} from '../../store/reducer';
 
 
-const MainPage = ({films, onSmallCardClick}) => {
+const MainPage = ({films, onSmallCardClick, genreActive, onGenreChange}) => {
   const {hero, name, poster, genre, year} = films[0];
   return (
 
@@ -55,7 +58,7 @@ const MainPage = ({films, onSmallCardClick}) => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenreList />
+          <GenreList genreActive={genreActive} onGenreChange={onGenreChange}/>
 
           <MovieList films={films} onSmallCardClick = {onSmallCardClick}/>
 
@@ -89,6 +92,20 @@ MainPage.propTypes = {
     id: PropTypes.number.isRequired,
   }).isRequired).isRequired,
   onSmallCardClick: PropTypes.func.isRequired,
+  genreActive: PropTypes.string.isRequired,
+  onGenreChange: PropTypes.func.isRequired,
 };
 
-export default MainPage;
+const mapStateToProps = (state) => ({
+  genreActive: state.genreActive,
+  films: sortedFilms(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onGenreChange(name) {
+    dispatch(ActionCreator.changeGenre(name));
+  },
+});
+
+export {MainPage};
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
