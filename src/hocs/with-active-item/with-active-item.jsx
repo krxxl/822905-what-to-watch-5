@@ -1,5 +1,5 @@
 import React from 'react';
-import MovieNav from '../movie-nav/movie-nav';
+import MovieNav from '../../components/movie-nav/movie-nav';
 import PropTypes from 'prop-types';
 
 const withActiveItem = (Component) => {
@@ -20,12 +20,11 @@ const withActiveItem = (Component) => {
 
     render() {
 
-      const {tabNames} = this.props;
+      // const {tabNames} = this.props;
       const {active} = this.state;
 
       return (
-        <Component onTabHandle={onTabHandle} {...this.props}>
-          <MovieNav active={active} tabNames={tabNames} clickOnTab={this.onTabHandle} />
+        <Component onTabHandle={this.onTabHandle} active={active} {...this.props}>
         </Component>
       );
     }
@@ -69,4 +68,4 @@ const withActiveItem = (Component) => {
   return WithActiveItem;
 }
 
-
+export default withActiveItem;

@@ -62,7 +62,7 @@ const MoviePage = (props) => {
             <div className="movie-card__poster movie-card__poster--big">
               <img src={poster} alt={name} width="218" height="327" />
             </div>
-            <MovieDesc film={film} filmReviews={filmReviews} tabNames={tabNames}/>
+            <Components film={film} filmReviews={filmReviews} tabNames={tabNames}/>
           </div>
         </div>
       </section>

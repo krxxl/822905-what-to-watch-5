@@ -20,13 +20,14 @@ export default class MovieDesc extends React.PureComponent {
 
   render() {
 
-    const {film, filmReviews, tabNames, onTabHandle} = this.props;
-    const {active} = this.state;
+    const {film, filmReviews, tabNames, onTabHandle, active} = this.props;
+    // const {active} = this.state;
+    console.log(active)
 
     return (
       <div className="movie-card__desc">
-        {/* <MovieNav active={active} tabNames={tabNames} clickOnTab={onTabHandle} /> */}
-        {this.props.children}
+        <MovieNav active={active} tabNames={tabNames} clickOnTab={onTabHandle} />
+        {/* {this.props.children} */}
         <Tabs filmReviews={filmReviews} film={film} active={active}/>
       </div>
     );
