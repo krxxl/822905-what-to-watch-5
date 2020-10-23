@@ -1,5 +1,4 @@
 import React from 'react';
-import MovieNav from '../../components/movie-nav/movie-nav';
 import PropTypes from 'prop-types';
 
 const withActiveItem = (Component) => {
@@ -15,12 +14,11 @@ const withActiveItem = (Component) => {
 
     onTabHandle(evt, name) {
       evt.preventDefault();
-      this.setState({ active: name });
+      this.setState({active: name});
     }
 
     render() {
 
-      // const {tabNames} = this.props;
       const {active} = this.state;
 
       return (
@@ -66,6 +64,6 @@ const withActiveItem = (Component) => {
   };
 
   return WithActiveItem;
-}
+};
 
 export default withActiveItem;

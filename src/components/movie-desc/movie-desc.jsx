@@ -3,36 +3,16 @@ import MovieNav from '../movie-nav/movie-nav';
 import Tabs from '../tabs/tabs';
 import PropTypes from 'prop-types';
 
-export default class MovieDesc extends React.PureComponent {
-  constructor(props) {
-    super(props);
+const MovieDesc = (props) => {
+  const {film, filmReviews, tabNames, onTabHandle, active} = props;
+  return (
+    <div className="movie-card__desc">
+      <MovieNav active={active} tabNames={tabNames} clickOnTab={onTabHandle} />
 
-    // this.onTabHandle = this.onTabHandle.bind(this);
-    // this.state = {
-    //   active: `Overview`,
-    // };
-  }
-
-  // onTabHandle(evt, name) {
-  //   evt.preventDefault();
-  //   this.setState({active: name});
-  // }
-
-  render() {
-
-    const {film, filmReviews, tabNames, onTabHandle, active} = this.props;
-    // const {active} = this.state;
-    console.log(active)
-
-    return (
-      <div className="movie-card__desc">
-        <MovieNav active={active} tabNames={tabNames} clickOnTab={onTabHandle} />
-        {/* {this.props.children} */}
-        <Tabs filmReviews={filmReviews} film={film} active={active}/>
-      </div>
-    );
-  }
-}
+      <Tabs filmReviews={filmReviews} film={film} active={active} />
+    </div>
+  );
+};
 
 MovieDesc.propTypes = {
   film: PropTypes.shape({
@@ -67,4 +47,8 @@ MovieDesc.propTypes = {
     id: PropTypes.number.isRequired,
   }).isRequired).isRequired,
   active: PropTypes.string,
+  onTabHandle: PropTypes.func.isRequired,
 };
+
+
+export default MovieDesc;

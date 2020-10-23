@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const MovieListItem = (props) => {
@@ -27,8 +27,7 @@ const MovieListItem = (props) => {
       </h3>
     </article>
   );
-
-}
+};
 
 
 MovieListItem.propTypes = {
@@ -41,6 +40,8 @@ MovieListItem.propTypes = {
     name: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
   }).isRequired),
+  onMouseHandle: PropTypes.func.isRequired,
+  children: PropTypes.element.isRequired,
 };
 
 export default MovieListItem;

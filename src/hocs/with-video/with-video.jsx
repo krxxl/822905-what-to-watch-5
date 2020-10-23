@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
 const withVideo = (Component) => {
@@ -19,10 +19,9 @@ const withVideo = (Component) => {
     onMouseHandle() {
       this.setState((prevState) => ({isPlaying: !prevState.isPlaying}));
     }
-  
+
 
     componentDidMount() {
-      console.log(this.props)
       const video = this.videoref.current;
       video.muted = `muted`;
       video.oncanplaythrough = () => this.setState({
@@ -60,7 +59,7 @@ const withVideo = (Component) => {
       const {isLoading} = this.state;
       return (
         <Component {...this.props} onMouseHandle={this.onMouseHandle} isLoading={isLoading}>
-          <video   ref={this.videoref} className="player__video" poster={preview}></video>
+          <video ref={this.videoref} className="player__video" poster={preview}></video>
         </Component>
       );
     }
@@ -68,8 +67,7 @@ const withVideo = (Component) => {
 
   withVideo.propTypes = {
     preview: PropTypes.string.isRequired,
-    video: PropTypes.string.isRequired,
-    isPlaying: PropTypes.bool.isRequired
+    video: PropTypes.string.isRequired
   };
 
   return WithVideo;
