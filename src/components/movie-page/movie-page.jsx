@@ -6,17 +6,19 @@ import MovieList from '../movie-list/movie-list';
 import {Link} from "react-router-dom";
 import MovieDesc from '../movie-desc/movie-desc';
 import tabNames from '../../movie-tabs-names';
-import COUNTFILM from '../../constant/constant';
+import {COUNTFILM} from '../../constant/constant';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
 
 const Components = withActiveItem(MovieDesc);
 
 const MoviePage = (props) => {
 
-  const {films, reviews, onSmallCardClick, filmId} = props;
+  const { reviews, onSmallCardClick, filmId} = props;
+  let {films} =props;
   const film = films.find((item)=>item.id === +filmId);
   const filmReviews = reviews.find((item)=>item.id === +filmId);
   const {hero, name, poster, genre, year} = film;
+  films = films.filter((film) => film.genre === genre)
 
   return (
     <React.Fragment>
@@ -70,7 +72,7 @@ const MoviePage = (props) => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <MovieList COUNTFILM={COUNTFILM} genre={genre} films={films} onSmallCardClick={onSmallCardClick} />
+          <MovieList COUNTFILM={COUNTFILM} films={films} onSmallCardClick={onSmallCardClick} />
         </section>
 
         <Footer />

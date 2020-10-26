@@ -4,13 +4,17 @@ import Header from '../header/header';
 import Footer from '../footer/footer';
 import MovieList from '../movie-list/movie-list';
 import GenreList from '../genre-list/genre-list';
+import MoreButton from '../more-button/more-button'
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
 import {sortedFilms} from '../../store/reducer';
+// import {SHOW_ON_STAR_FILMS} from '../../constant/constant';
 
 
-const MainPage = ({films, onSmallCardClick, genreActive, onGenreChange}) => {
+const MainPage = ({films, onSmallCardClick, genreActive, onGenreChange, onMoreButton, count}) => {
   const {hero, name, poster, genre, year} = films[0];
+  const countOfFilms = films.length;
+  const COUNTFILM = count;
   return (
 
     <React.Fragment>
@@ -60,11 +64,10 @@ const MainPage = ({films, onSmallCardClick, genreActive, onGenreChange}) => {
 
           <GenreList genreActive={genreActive} onGenreChange={onGenreChange}/>
 
-          <MovieList films={films} onSmallCardClick = {onSmallCardClick}/>
+          <MovieList COUNTFILM={COUNTFILM} films={films} onSmallCardClick = {onSmallCardClick}/>
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          {countOfFilms >= COUNTFILM ? <MoreButton onMoreButton={onMoreButton}/> : null}
+          {/* <MoreButton /> */}
         </section>
 
         <Footer />
@@ -98,12 +101,16 @@ MainPage.propTypes = {
 
 const mapStateToProps = (state) => ({
   genreActive: state.genreActive,
-  films: sortedFilms(state)
+  films: sortedFilms(state),
+  count: state.count,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreChange(name) {
     dispatch(ActionCreator.changeGenre(name));
+  },
+  onMoreButton(count) {
+    dispatch(ActionCreator.moreFilms(count));
   },
 });
 

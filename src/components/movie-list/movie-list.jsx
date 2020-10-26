@@ -13,14 +13,14 @@ class MovieList extends React.PureComponent {
 
   render() {
 
-    const {COUNTFILM, genre, films, onSmallCardClick} = this.props;
-    let filmLikeThis = films;
+    const {COUNTFILM, onSmallCardClick} = this.props;
+    let {films} = this.props;
 
-    if (COUNTFILM) {
-      filmLikeThis = films.filter((film) => film.genre === genre).slice(0, COUNTFILM);
-    }
+    
+    films = films.slice(0, COUNTFILM);
+    
 
-    const elements = filmLikeThis.map((film) => {
+    const elements = films.map((film) => {
       const {name, id, preview, video} = film;
 
       return <Components key={id} video={video} name={name} id={id} preview={preview} onSmallCardClick={onSmallCardClick} />;

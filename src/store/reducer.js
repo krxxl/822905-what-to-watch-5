@@ -2,10 +2,12 @@ import {extend} from '../utils';
 import films from '../mocks/films';
 import {ActionType} from './action';
 import {genresInSingular} from '../mocks/genres';
+import {SHOW_ON_STAR_FILMS, SHOW_ON_BUTTON_FILMS} from '../constant/constant';
 
 const initialState = {
-  genreActive: `Comedies`,
-  films
+  genreActive: `All genres`,
+  films,
+  count: SHOW_ON_STAR_FILMS
 };
 
 
@@ -56,6 +58,11 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_GENRE:
       return extend(state, {
         genreActive: action.payload,
+      });
+    case ActionType.MORE_FILMS:
+      // console.log(11)
+      return extend(state, {
+        count: state.count + action.payload,
       });
   }
   return state;
