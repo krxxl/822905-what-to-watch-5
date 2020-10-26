@@ -13,12 +13,12 @@ const Components = withActiveItem(MovieDesc);
 
 const MoviePage = (props) => {
 
-  const { reviews, onSmallCardClick, filmId} = props;
-  let {films} =props;
+  const {reviews, onSmallCardClick, filmId} = props;
+  let {films} = props;
   const film = films.find((item)=>item.id === +filmId);
   const filmReviews = reviews.find((item)=>item.id === +filmId);
   const {hero, name, poster, genre, year} = film;
-  films = films.filter((film) => film.genre === genre)
+  films = films.filter((element) => element.genre === genre);
 
   return (
     <React.Fragment>

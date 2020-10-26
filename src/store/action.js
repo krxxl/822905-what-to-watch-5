@@ -13,7 +13,7 @@ export const ActionCreator = {
     type: ActionType.MORE_FILMS,
     payload: count
   }),
-  resetCount: (count) => ({
+  resetCount: () => ({
     type: ActionType.RESET_COUNT,
   })
 };

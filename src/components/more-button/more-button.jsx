@@ -1,8 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
-import {sortedFilms} from '../../store/reducer';
-import {SHOW_ON_STAR_FILMS} from '../../constant/constant'
+import {SHOW_ON_STAR_FILMS} from '../../constant/constant';
+import PropTypes from 'prop-types';
 
 const MoreButton = (props) => {
   return (
@@ -17,16 +15,8 @@ const MoreButton = (props) => {
   );
 };
 
-// const mapStateToProps = (state) => ({
-//   genreActive: state.genreActive,
-//   films: sortedFilms(state),
-// });
-
-// const mapDispatchToProps = (dispatch) => ({
-//   onMoreButton() {
-//     dispatch(ActionCreator.moreFilms());
-//   },
-// });
+MoreButton.propTypes = {
+  onMoreButton: PropTypes.func.isRequired,
+};
 
 export default MoreButton;
-// export default connect(mapStateToProps, mapDispatchToProps)(MoreButton);

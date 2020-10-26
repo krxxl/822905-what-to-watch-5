@@ -65,7 +65,7 @@ const withVideo = (Component) => {
     }
   }
 
-  withVideo.propTypes = {
+  WithVideo.propTypes = {
     preview: PropTypes.string.isRequired,
     video: PropTypes.string.isRequired
   };

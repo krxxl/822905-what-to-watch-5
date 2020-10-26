@@ -15,11 +15,7 @@ class MovieList extends React.PureComponent {
 
     const {COUNTFILM, onSmallCardClick} = this.props;
     let {films} = this.props;
-
-    
     films = films.slice(0, COUNTFILM);
-    
-
     const elements = films.map((film) => {
       const {name, id, preview, video} = film;
 

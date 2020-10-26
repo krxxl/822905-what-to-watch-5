@@ -2,14 +2,13 @@ import {extend} from '../utils';
 import films from '../mocks/films';
 import {ActionType} from './action';
 import {genresInSingular} from '../mocks/genres';
-import {SHOW_ON_STAR_FILMS, SHOW_ON_BUTTON_FILMS} from '../constant/constant';
+import {SHOW_ON_STAR_FILMS} from '../constant/constant';
 
 const initialState = {
   genreActive: `All genres`,
   films,
-  count: SHOW_ON_STAR_FILMS
+  count: SHOW_ON_STAR_FILMS,
 };
-
 
 const sortedFilms = (state) => {
   let signular;
@@ -64,9 +63,13 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         count: state.count + action.payload,
       });
+    case ActionType.RESET_COUNT:
+      // console.log(11)
+      return extend(state, {
+        count: SHOW_ON_STAR_FILMS,
+      });
   }
   return state;
 };
-
 
 export {sortedFilms, reducer};
