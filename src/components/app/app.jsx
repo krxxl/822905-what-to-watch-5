@@ -7,6 +7,9 @@ import MyList from '../mylist/mylist';
 import MoviePage from '../movie-page/movie-page';
 import Review from '../review/review';
 import Player from '../player/player';
+import withForm from '../../hocs/with-form/with-form';
+
+const ReviewFilm = withForm(Review);
 
 const App = ({films, reviews}) => {
   return (
@@ -31,9 +34,17 @@ const App = ({films, reviews}) => {
             />
           )}
         />
-        <Route exact path="/films/:id/review">
-          <Review />
-        </Route>
+        <Route exact path="/films/:id/review"
+          render={(props) => {
+            const filmId = +props.match.params.id;
+            return (
+              <ReviewFilm
+                films={films}
+                filmId={filmId}
+              />
+            );
+          }
+          } />
         <Route path="/films/:id"
           render={(props) => {
             const filmId = +props.match.params.id;

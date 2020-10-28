@@ -1,6 +1,9 @@
 import React from 'react';
 import MovieListItem from '../movie-list-item/movie-list-item';
 import PropTypes from 'prop-types';
+import withVideo from '../../hocs/with-video/with-video';
+
+const Components = withVideo(MovieListItem);
 
 class MovieList extends React.PureComponent {
   constructor(props) {
@@ -10,17 +13,13 @@ class MovieList extends React.PureComponent {
 
   render() {
 
-    const {COUNTFILM, genre, films, onSmallCardClick} = this.props;
-    let filmLikeThis = films;
-
-    if (COUNTFILM) {
-      filmLikeThis = films.filter((film) => film.genre === genre).slice(0, COUNTFILM);
-    }
-
-    const elements = filmLikeThis.map((film) => {
+    const {COUNTFILM, onSmallCardClick} = this.props;
+    let {films} = this.props;
+    films = films.slice(0, COUNTFILM);
+    const elements = films.map((film) => {
       const {name, id, preview, video} = film;
 
-      return <MovieListItem key={id} video={video} name={name} id={id} preview={preview} onSmallCardClick={onSmallCardClick} />;
+      return <Components key={id} video={video} name={name} id={id} preview={preview} onSmallCardClick={onSmallCardClick} />;
     });
     return (
       <div className="catalog__movies-list">
