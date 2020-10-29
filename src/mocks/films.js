@@ -377,7 +377,7 @@ export default [{
   isInList: true,
   video: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   id: 18,
-} {
+}, {
   name: `dardjeeling-limited`,
   genre: `comedy`,
   year: `2010`,
@@ -398,7 +398,7 @@ export default [{
   video: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   isInList: true,
   id: 19,
-},{
+}, {
   name: `dardjeeling-limited`,
   genre: `comedy`,
   year: `2010`,
