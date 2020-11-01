@@ -17,8 +17,8 @@ const MoviePage = (props) => {
   const {reviews, onSmallCardClick, onPlayButton, filmId} = props;
   let {films} = props;
   const film = films.find((item)=>item.id === +filmId);
-  const filmReviews = reviews.find((item)=>item.id === +filmId);
-  const {hero, name, poster, genre, year, video} = film;
+  // const filmReviews = reviews.find((item)=>item.id === +filmId);
+  const {background_image, name, poster_image, genre, released, video_link} = film;
   films = films.filter((element) => element.genre === genre);
 
   return (
@@ -26,7 +26,7 @@ const MoviePage = (props) => {
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
           <div className="movie-card__bg">
-            <img src={hero} alt={name} />
+            <img src={background_image} alt={name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -38,11 +38,11 @@ const MoviePage = (props) => {
               <h2 className="movie-card__title">{name}</h2>
               <p className="movie-card__meta">
                 <span className="movie-card__genre">{genre}</span>
-                <span className="movie-card__year">{year}</span>
+                <span className="movie-card__year">{released}</span>
               </p>
 
               <div className="movie-card__buttons">
-                <PlayButton onPlayButton={onPlayButton} id={filmId} video={video}/>
+                <PlayButton onPlayButton={onPlayButton} id={filmId} video={video_link}/>
                 <button className="btn btn--list movie-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use href="#add"></use>
@@ -58,9 +58,11 @@ const MoviePage = (props) => {
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
-              <img src={poster} alt={name} width="218" height="327" />
+              <img src={poster_image} alt={name} width="218" height="327" />
             </div>
-            <Components film={film} filmReviews={filmReviews} tabNames={tabNames}/>
+            <Components film={film} 
+            // filmReviews={filmReviews} 
+            tabNames={tabNames}/>
           </div>
         </div>
       </section>
@@ -82,18 +84,20 @@ MoviePage.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-    year: PropTypes.string.isRequired,
-    poster: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
-    hero: PropTypes.string.isRequired,
-    time: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
+    poster_image: PropTypes.string.isRequired,
+    preview_image: PropTypes.string.isRequired,
+    background_image: PropTypes.string.isRequired,
+    background_color: PropTypes.string.isRequired,
+    run_time: PropTypes.string.isRequired,
     rating: PropTypes.string.isRequired,
-    count: PropTypes.number.isRequired,
-    desc: PropTypes.string.isRequired,
+    scores_count: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
     director: PropTypes.string.isRequired,
     starring: PropTypes.array.isRequired,
-    isInList: PropTypes.bool.isRequired,
-    video: PropTypes.string.isRequired,
+    is_favorite: PropTypes.bool.isRequired,
+    video_link: PropTypes.string.isRequired,
+    preview_video_link: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
   }).isRequired).isRequired,
   onSmallCardClick: PropTypes.func.isRequired,
