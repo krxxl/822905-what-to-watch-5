@@ -11,14 +11,15 @@ import thunk from "redux-thunk";
 import {createAPI} from "./services/api";
 import rootReducer from "./store/reducers/root-reducer";
 import {ActionCreator} from "./store/action";
-import {fetchFilmList} from "./store/api-actions";
+import {fetchFilmList, checkAuth} from "./store/api-actions";
 import {AuthorizationStatus} from "./constant/constant";
+import {redirect} from "./store/middlewares/redirect";
 
 const api = createAPI(
     () => store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH))
 );
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api))));
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api)), applyMiddleware(redirect)));
 
 Promise.all([
   store.dispatch(fetchFilmList()),

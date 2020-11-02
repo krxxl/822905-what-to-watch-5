@@ -1,7 +1,23 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import {AuthorizationStatus} from '../../constant/constant';
+import {connect} from 'react-redux';
 
-const Header = () => {
+const Header = ({authorizationStatus}) => {
+  const signIn = authorizationStatus === AuthorizationStatus.NO_AUTH ? (
+    <div className="user-block">
+        <Link to="/login" href="sign-in.html" className="user-block__link">
+          Sign in
+        </Link>
+      </div>
+  ) : (
+    <div className="user-block">
+      <div className="user-block__avatar">
+        <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+      </div>
+    </div>
+  )
+
   return (
     <header className="page-header">
       <div className="logo">
@@ -12,13 +28,15 @@ const Header = () => {
         </Link>
       </div>
 
-      <div className="user-block">
-        <Link to="/login" href="sign-in.html" className="user-block__link">
-          Sign in
-        </Link>
-      </div>
+      {signIn}
+
     </header>
   );
 };
 
-export default Header;
+const mapStateToProps = (state) => ({
+  authorizationStatus: state.USER.authorizationStatus,
+});
+
+export {Header};
+export default connect(mapStateToProps, null)(Header);

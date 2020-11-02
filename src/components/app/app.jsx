@@ -1,7 +1,7 @@
 import React from 'react';
 import MainPage from '../main-page/main-page';
 import PropTypes from 'prop-types';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {Router as BrowserRouter, Switch, Route} from 'react-router-dom';
 import Login from '../login/login';
 import MyList from '../mylist/mylist';
 import MoviePage from '../movie-page/movie-page';
@@ -11,6 +11,8 @@ import withForm from '../../hocs/with-form/with-form';
 import withBigVideo from '../../hocs/with-big-video/with-big-video';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
+import browserHistory from "../../browser-history";
+import PrivateRoute from '../../components/private-route/private-route'
 
 
 const ReviewFilm = withForm(Review);
@@ -18,7 +20,7 @@ const BigPlayer = withBigVideo(Player);
 
 const App = ({films, isLoading}) => {
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path="/"
           render={({history}) => {
@@ -38,7 +40,7 @@ const App = ({films, isLoading}) => {
         <Route exact path="/login">
           <Login />
         </Route>
-        <Route exact path="/mylist"
+        <PrivateRoute exact path="/mylist"
           render={({history}) => (
             <MyList
               onSmallCardClick={(id) => history.push(`/films/${id}`)}
@@ -46,7 +48,7 @@ const App = ({films, isLoading}) => {
             />
           )}
         />
-        <Route exact path="/films/:id/review"
+        <PrivateRoute exact path="/films/:id/review"
           render={(props) => {
             const filmId = +props.match.params.id;
             return (
@@ -101,12 +103,13 @@ App.propTypes = {
 };
 
 // export default App;
-const mapStateToProps = ({DATA, SHOW}) => ({
+const mapStateToProps = ({DATA, SHOW, USER}) => ({
   genreActive: SHOW.genreActive,
   films: DATA.films,
   count: SHOW.count,
   activeFilm: SHOW.activeFilm,
-  isLoading: DATA.isLoading
+  isLoading: DATA.isLoading,
+  authorizationStatus: USER.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({

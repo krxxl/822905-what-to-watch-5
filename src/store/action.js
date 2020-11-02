@@ -6,6 +6,7 @@ export const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   CHANGE_ACTIVE_FILM: `CHANGE_ACTIVE_FILM`,
   CHECK_STATUS: `CHECK_STATUS`,
+  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
 };
 
 export const ActionCreator = {
@@ -34,5 +35,9 @@ export const ActionCreator = {
   }),
   checkStatus: () => ({
     type: ActionType.CHECK_STATUS,
-  })
+  }),
+  redirectRoute: (url) => ({
+    type: ActionType.REDIRECT_TO_ROUTE,
+    payload: url,
+  }),
 };
