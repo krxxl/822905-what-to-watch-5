@@ -1,11 +1,12 @@
 import {ActionCreator} from "./action";
 import {AuthorizationStatus} from "../constant/constant";
+import {adaptiveFilms} from '../adapter';
 
 export const fetchFilmList = () => (dispatch, _getState, api) => (
   api.get(`/films`)
     .then(({data}) => {
-      dispatch(ActionCreator.loadFilms(data));
-      dispatch(ActionCreator.checkStatus())
+      dispatch(ActionCreator.loadFilms(data.map((film) => adaptiveFilms(film))));
+      dispatch(ActionCreator.checkStatus());
     })
 );
 

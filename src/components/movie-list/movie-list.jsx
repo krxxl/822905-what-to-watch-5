@@ -17,9 +17,9 @@ class MovieList extends React.PureComponent {
     let {films} = this.props;
     films = films.slice(0, COUNTFILM);
     const elements = films.map((film) => {
-      const {name, id, preview_image, preview_video_link} = film;
+      const {name, id, previewImage, previewVideoLink} = film;
 
-      return <Components key={id} video={preview_video_link} name={name} id={id} preview={preview_image} onSmallCardClick={onSmallCardClick} />;
+      return <Components key={id} video={previewVideoLink} name={name} id={id} preview={previewImage} onSmallCardClick={onSmallCardClick} />;
     });
     return (
       <div className="catalog__movies-list">
@@ -33,20 +33,20 @@ MovieList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-    released: PropTypes.string.isRequired,
-    poster_image: PropTypes.string.isRequired,
-    preview_image: PropTypes.string.isRequired,
-    background_image: PropTypes.string.isRequired,
-    background_color: PropTypes.string.isRequired,
-    run_time: PropTypes.string.isRequired,
-    rating: PropTypes.string.isRequired,
-    scores_count: PropTypes.number.isRequired,
+    released: PropTypes.number.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    runTime: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     director: PropTypes.string.isRequired,
     starring: PropTypes.array.isRequired,
-    is_favorite: PropTypes.bool.isRequired,
-    video_link: PropTypes.string.isRequired,
-    preview_video_link: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
   }).isRequired).isRequired,
   onSmallCardClick: PropTypes.func.isRequired,

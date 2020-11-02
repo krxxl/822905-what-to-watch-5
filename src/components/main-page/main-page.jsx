@@ -7,13 +7,13 @@ import GenreList from '../genre-list/genre-list';
 import MoreButton from '../more-button/more-button';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
-import {sortedFilms} from '../../store/reducers/data/data';
+// import {sortedFilms} from '../../store/reducers/data/data';
+import {sortedFilms, getGenres} from '../../store/selectors';
 import PlayButton from '../play-button/play-button';
 
 
-const MainPage = ({films, onChangeActiveFilm, onSmallCardClick, genreActive, onGenreChange, onMoreButton, onPlayButton, count, onResetCount}) => {
-  const {background_image, video_link, name, poster_image, genre, released, id} = films[0];
-  const sortFilms = sortedFilms(films, genreActive);
+const MainPage = ({films, filmsByGenre, genres, onChangeActiveFilm, onSmallCardClick, genreActive, onGenreChange, onMoreButton, onPlayButton, count, onResetCount}) => {
+  const {backgroundImage, videoLink, name, posterImage, genre, released, id} = films[0];
   const COUNTFILM = count;
   onChangeActiveFilm(id);
 
@@ -22,7 +22,7 @@ const MainPage = ({films, onChangeActiveFilm, onSmallCardClick, genreActive, onG
     <React.Fragment>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src={background_image} alt={name} />
+          <img src={backgroundImage} alt={name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -32,7 +32,7 @@ const MainPage = ({films, onChangeActiveFilm, onSmallCardClick, genreActive, onG
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src={poster_image} alt={name} width="218" height="327" />
+              <img src={posterImage} alt={name} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
@@ -49,7 +49,7 @@ const MainPage = ({films, onChangeActiveFilm, onSmallCardClick, genreActive, onG
                   </svg>
                   <span>Play</span>
                 </button> */}
-                <PlayButton onPlayButton={onPlayButton} id={id} video={video_link}/>
+                <PlayButton onPlayButton={onPlayButton} id={id} video={videoLink}/>
                 <button className="btn btn--list movie-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use href="#add"></use>
@@ -65,11 +65,11 @@ const MainPage = ({films, onChangeActiveFilm, onSmallCardClick, genreActive, onG
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenreList genreActive={genreActive} onResetCount={onResetCount} onGenreChange={onGenreChange}/>
+          <GenreList genres={genres} genreActive={genreActive} onResetCount={onResetCount} onGenreChange={onGenreChange}/>
 
-          <MovieList COUNTFILM={COUNTFILM} films={sortFilms} onSmallCardClick = {onSmallCardClick}/>
+          <MovieList COUNTFILM={COUNTFILM} films={filmsByGenre} onSmallCardClick = {onSmallCardClick}/>
 
-          {sortFilms.length >= COUNTFILM ? <MoreButton onMoreButton={onMoreButton}/> : null}
+          {filmsByGenre.length >= COUNTFILM ? <MoreButton onMoreButton={onMoreButton}/> : null}
           {/* <MoreButton /> */}
         </section>
 
@@ -84,21 +84,42 @@ MainPage.propTypes = {
     name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     released: PropTypes.number.isRequired,
-    poster_image: PropTypes.string.isRequired,
-    preview_image: PropTypes.string.isRequired,
-    background_image: PropTypes.string.isRequired,
-    background_color: PropTypes.string.isRequired,
-    run_time: PropTypes.string.isRequired,
-    rating: PropTypes.string.isRequired,
-    scores_count: PropTypes.number.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    runTime: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     director: PropTypes.string.isRequired,
     starring: PropTypes.array.isRequired,
-    is_favorite: PropTypes.bool.isRequired,
-    video_link: PropTypes.string.isRequired,
-    preview_video_link: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
   }).isRequired).isRequired,
+  filmsByGenre: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    runTime: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.array.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+  }).isRequired).isRequired,
+  genres: PropTypes.array.isRequired,
+  onChangeActiveFilm: PropTypes.func.isRequired,
   onSmallCardClick: PropTypes.func.isRequired,
   onPlayButton: PropTypes.func.isRequired,
   genreActive: PropTypes.string.isRequired,
@@ -109,12 +130,14 @@ MainPage.propTypes = {
 };
 
 
-
-const mapStateToProps = ({DATA, SHOW}) => ({
-  genreActive: SHOW.genreActive,
-  films: DATA.films,
-  count: SHOW.count,
+const mapStateToProps = (state) => ({
+  genreActive: state.SHOW.genreActive,
+  films: state.DATA.films,
+  filmsByGenre: sortedFilms(state),
+  count: state.SHOW.count,
+  genres: getGenres(state)
 });
+
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreChange(name) {

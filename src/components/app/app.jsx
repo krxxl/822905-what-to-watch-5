@@ -10,7 +10,7 @@ import Player from '../player/player';
 import withForm from '../../hocs/with-form/with-form';
 import withBigVideo from '../../hocs/with-big-video/with-big-video';
 import {connect} from 'react-redux';
-import { ActionCreator } from '../../store/action';
+import {ActionCreator} from '../../store/action';
 
 
 const ReviewFilm = withForm(Review);
@@ -23,17 +23,17 @@ const App = ({films, isLoading}) => {
         <Route exact path="/"
           render={({history}) => {
             return isLoading ? (
-            <MainPage
-              onSmallCardClick={(id) => history.push(`/films/${id}`)}
-              onPlayButton={(id) => history.push(`/player/${id}`)}
+              <MainPage
+                onSmallCardClick={(id) => history.push(`/films/${id}`)}
+                onPlayButton={(id) => history.push(`/player/${id}`)}
               // films={films}
-            />
-          ) : (
-            <div>
-              <h1>LOADING</h1>
-            </div>
-          )
-        }}
+              />
+            ) : (
+              <div>
+                <h1>LOADING</h1>
+              </div>
+            );
+          }}
         />
         <Route exact path="/login">
           <Login />
@@ -78,10 +78,10 @@ const App = ({films, isLoading}) => {
           render={(props) => {
             const {history} = props;
             const filmId = +props.match.params.id;
-            const film = films.find((item)=> item.id === filmId);
-            const {video_link, background_image, name} = film;
+            const film = films.find((item) => item.id === filmId);
+            const {videoLink, backgroundImage, name} = film;
             return (
-              <BigPlayer name={name} filmId={filmId} history={history} video={video_link} preview={background_image}/>
+              <BigPlayer name={name} filmId={filmId} history={history} video={videoLink} preview={backgroundImage} />
             );
           }}
         />
@@ -95,9 +95,9 @@ const App = ({films, isLoading}) => {
 
 App.propTypes = {
   films: PropTypes.array.isRequired,
-  reviews: PropTypes.array.isRequired,
   history: PropTypes.object,
   match: PropTypes.object,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 // export default App;
@@ -123,7 +123,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.changeActiveFilm(id));
   },
   changeStatus() {
-    dispatch(ActionCreator.checkStatus())
+    dispatch(ActionCreator.checkStatus());
   },
 });
 

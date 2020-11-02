@@ -1,5 +1,3 @@
-import films from "../mocks/films";
-
 export const ActionType = {
   CHANGE_GENRE: `CHANGE_GENRE`,
   MORE_FILMS: `MORE_FILMS`,

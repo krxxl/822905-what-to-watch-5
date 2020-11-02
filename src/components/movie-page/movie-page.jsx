@@ -14,11 +14,11 @@ const Components = withActiveItem(MovieDesc);
 
 const MoviePage = (props) => {
 
-  const {reviews, onSmallCardClick, onPlayButton, filmId} = props;
+  const {onSmallCardClick, onPlayButton, filmId} = props;
   let {films} = props;
   const film = films.find((item)=>item.id === +filmId);
   // const filmReviews = reviews.find((item)=>item.id === +filmId);
-  const {background_image, name, poster_image, genre, released, video_link} = film;
+  const {backgroundImage, name, posterImage, genre, released, videoLink} = film;
   films = films.filter((element) => element.genre === genre);
 
   return (
@@ -26,7 +26,7 @@ const MoviePage = (props) => {
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
           <div className="movie-card__bg">
-            <img src={background_image} alt={name} />
+            <img src={backgroundImage} alt={name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -42,7 +42,7 @@ const MoviePage = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <PlayButton onPlayButton={onPlayButton} id={filmId} video={video_link}/>
+                <PlayButton onPlayButton={onPlayButton} id={filmId} video={videoLink}/>
                 <button className="btn btn--list movie-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use href="#add"></use>
@@ -58,11 +58,9 @@ const MoviePage = (props) => {
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
-              <img src={poster_image} alt={name} width="218" height="327" />
+              <img src={posterImage} alt={name} width="218" height="327" />
             </div>
-            <Components film={film} 
-            // filmReviews={filmReviews} 
-            tabNames={tabNames}/>
+            <Components film={film} tabNames={tabNames}/>
           </div>
         </div>
       </section>
@@ -85,19 +83,19 @@ MoviePage.propTypes = {
     name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     released: PropTypes.number.isRequired,
-    poster_image: PropTypes.string.isRequired,
-    preview_image: PropTypes.string.isRequired,
-    background_image: PropTypes.string.isRequired,
-    background_color: PropTypes.string.isRequired,
-    run_time: PropTypes.string.isRequired,
-    rating: PropTypes.string.isRequired,
-    scores_count: PropTypes.number.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    runTime: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     director: PropTypes.string.isRequired,
     starring: PropTypes.array.isRequired,
-    is_favorite: PropTypes.bool.isRequired,
-    video_link: PropTypes.string.isRequired,
-    preview_video_link: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
   }).isRequired).isRequired,
   onSmallCardClick: PropTypes.func.isRequired,

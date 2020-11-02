@@ -3,12 +3,12 @@ export const extend = (a, b) => {
 };
 
 export const getTimeFromMins = (mins) => {
-  let hours = Math.trunc(mins/60);
+  let hours = Math.trunc(mins / 60);
   let minutes = mins % 60;
-  return hours + 'ч. ' + minutes + 'м.';
+  return hours + `ч. ` + minutes + `м.`;
 };
 
- export const ratingWord = (val) => {
+export const ratingWord = (val) => {
   if (val >= 0 && val < 3) {
     return `Bad`;
   } else if (val >= 3 && val < 5) {

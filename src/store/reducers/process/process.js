@@ -1,5 +1,4 @@
 import {extend} from '../../../utils';
-// import films from '../../../mocks/films';
 import {ActionType} from '../../action';
 import {SHOW_ON_STAR_FILMS} from '../../../constant/constant';
 
