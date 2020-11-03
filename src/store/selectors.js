@@ -7,6 +7,7 @@ export const getGenres = createSelector(
     [getFilms], (films) => {
       let genres = [...new Set(films.map((film) => film.genre))];
       genres.unshift(`All genres`);
+      genres.slice(0, 9);
       return genres;
     }
 );

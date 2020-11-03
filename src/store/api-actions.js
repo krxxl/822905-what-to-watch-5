@@ -22,4 +22,8 @@ export const login = ({email, password}) => (dispatch, _getState, api) => (
   api.post(`/login`, {email, password})
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
     .then(() => dispatch(ActionCreator.redirectRoute(`/`)))
+    .catch((err) => {
+      // dispatch(ActionCreator.showError(ErrorStatus.ERROR))
+      throw err;
+    })
 );

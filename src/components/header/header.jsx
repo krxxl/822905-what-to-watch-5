@@ -2,21 +2,22 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import {AuthorizationStatus} from '../../constant/constant';
 import {connect} from 'react-redux';
+import PropTypes from "prop-types";
 
 const Header = ({authorizationStatus}) => {
   const signIn = authorizationStatus === AuthorizationStatus.NO_AUTH ? (
     <div className="user-block">
-        <Link to="/login" href="sign-in.html" className="user-block__link">
-          Sign in
-        </Link>
-      </div>
+      <Link to="/login" href="sign-in.html" className="user-block__link">
+        Sign in
+      </Link>
+    </div>
   ) : (
     <div className="user-block">
       <div className="user-block__avatar">
         <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
       </div>
     </div>
-  )
+  );
 
   return (
     <header className="page-header">
@@ -32,6 +33,10 @@ const Header = ({authorizationStatus}) => {
 
     </header>
   );
+};
+
+Header.propTypes = {
+  authorizationStatus: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({

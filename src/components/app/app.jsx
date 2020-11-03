@@ -12,7 +12,7 @@ import withBigVideo from '../../hocs/with-big-video/with-big-video';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
 import browserHistory from "../../browser-history";
-import PrivateRoute from '../../components/private-route/private-route'
+import PrivateRoute from '../../components/private-route/private-route';
 
 
 const ReviewFilm = withForm(Review);

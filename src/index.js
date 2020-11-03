@@ -23,9 +23,16 @@ const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk
 
 Promise.all([
   store.dispatch(fetchFilmList()),
-  // store.dispatch(checkAuth()),
+  store.dispatch(checkAuth()),
 ])
   .then(() => {
+    ReactDOM.render(
+        <Provider store={store}>
+          <App />
+        </Provider>,
+        document.querySelector(`#root`)
+    );
+  }).catch(() => {
     ReactDOM.render(
         <Provider store={store}>
           <App />

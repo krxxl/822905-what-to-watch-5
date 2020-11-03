@@ -1,52 +1,87 @@
-import React, {PureComponent, createRef} from "react";
+import React, {PureComponent} from "react";
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {login} from "../../store/api-actions";
+import FormErrors from './form-errors';
 
 class AuthScreen extends PureComponent {
   constructor(props) {
     super(props);
-
-    this.loginRef = createRef();
-    this.passwordRef = createRef();
+    this.state = {
+      email: ``,
+      password: ``,
+      formErrors: ``,
+      emailValid: true,
+      formValid: false
+    };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleUserInput = this.handleUserInput.bind(this);
   }
 
   handleSubmit(evt) {
     const {onSubmit} = this.props;
 
     evt.preventDefault();
-    console.log({
-      email: this.loginRef.current.value,
-      password: this.passwordRef.current.value,
-    })
-
     onSubmit({
-      email: this.loginRef.current.value,
-      password: this.passwordRef.current.value,
+      email: this.state.email.value,
+      password: this.state.password.value,
     });
-
-  
   }
 
+  handleUserInput(evt) {
+    const name = evt.target.name;
+    const value = evt.target.value;
+    this.setState({[name]: value},
+        () => {
+          this.validateField(name, value);
+        });
+  }
+
+  validateField(fieldName, value) {
+    let fieldValidationErrors = this.state.formErrors;
+    let emailValid = this.state.emailValid;
+    // let passwordValid = this.state.passwordValid;
+    switch (fieldName) {
+      case `email`:
+        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+        fieldValidationErrors = emailValid ? `` : `Please enter a valid email address`;
+        break;
+        // case 'password':
+        //   passwordValid = value.length >= 6;
+        //   fieldValidationErrors = passwordValid ? '': ' is too short';
+        //   break;
+        // default:
+        //   break;
+    }
+    this.setState({formErrors: fieldValidationErrors, emailValid}, this.validateForm);
+  }
+
+  validateForm() {
+    this.setState({formValid: this.state.emailValid});
+  }
+
+
   render() {
+    const classError = this.state.emailValid ? `` : `sign-in__field--error`;
     return (
       <div className="user-page">
         <Header />
-  
         <div className="sign-in user-page__content">
           <form onSubmit={this.handleSubmit} action="#" className="sign-in__form">
+            <div className="sign-in__message">
+              <FormErrors formErrors={this.state.formErrors}/>
+            </div>
             <div className="sign-in__fields">
-              <div className="sign-in__field">
+              <div className={`sign-in__field ${classError}`}>
                 <input
-                  ref={this.loginRef}
-                  className="sign-in__input"
+                  onChange={this.handleUserInput}
+                  className= "sign-in__input"
                   type="email"
                   placeholder="Email address"
-                  name="user-email"
+                  name="email"
                   id="user-email"
                 />
                 <label
@@ -58,11 +93,12 @@ class AuthScreen extends PureComponent {
               </div>
               <div className="sign-in__field">
                 <input
-                  ref={this.passwordRef}
+                  // ref={this.passwordRef}
+                  onChange={this.handleUserInput}
                   className="sign-in__input"
                   type="password"
                   placeholder="Password"
-                  name="user-password"
+                  name="password"
                   id="user-password"
                 />
                 <label
@@ -74,22 +110,25 @@ class AuthScreen extends PureComponent {
               </div>
             </div>
             <div className="sign-in__submit">
-              <button className="sign-in__btn" type="submit">
+              <button disabled={!this.state.formValid} className="sign-in__btn" type="submit">
                 Sign in
               </button>
             </div>
           </form>
         </div>
-  
         <Footer />
       </div>
-    )
+    );
   }
-};
+}
 
 AuthScreen.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
+
+// const mapStateToProps = (state) => ({
+//   errorStatus: state.USER.errorStatus,
+// });
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmit(authData) {
