@@ -25,9 +25,13 @@ class AuthScreen extends PureComponent {
     const {onSubmit} = this.props;
 
     evt.preventDefault();
+    console.log({
+      email: this.state.email,
+      password: this.state.password,
+    })
     onSubmit({
-      email: this.state.email.value,
-      password: this.state.password.value,
+      email: this.state.email,
+      password: this.state.password,
     });
   }
 

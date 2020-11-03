@@ -4,7 +4,7 @@ import TabDetail from './tab-detail';
 import TabReviews from './tab-reviews';
 import PropTypes from 'prop-types';
 
-const getComponentByName = (type, film, filmReviews) => {
+const getComponentByName = (type, film, filmId) => {
   switch (type) {
     case `Overview`:
       return <TabOverview film={film} />;
@@ -12,13 +12,13 @@ const getComponentByName = (type, film, filmReviews) => {
       return <TabDetail film={film} />;
   }
 
-  return <TabReviews filmReviews={filmReviews} />;
+  return <TabReviews filmId={filmId} />;
 };
 
-const Tabs = ({active, film, filmReviews}) => {
+const Tabs = ({active, film, filmId}) => {
   return (
     <React.Fragment>
-      {getComponentByName(active, film, filmReviews)}
+      {getComponentByName(active, film, filmId)}
     </React.Fragment>
   );
 };
@@ -28,30 +28,32 @@ Tabs.propTypes = {
   film: PropTypes.shape({
     name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-    year: PropTypes.string.isRequired,
-    poster: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
-    hero: PropTypes.string.isRequired,
-    time: PropTypes.string.isRequired,
-    rating: PropTypes.string.isRequired,
-    count: PropTypes.number.isRequired,
-    desc: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    runTime: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
     director: PropTypes.string.isRequired,
     starring: PropTypes.array.isRequired,
-    isInList: PropTypes.bool.isRequired,
-    video: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
   }).isRequired,
-  filmReviews: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    reviews: PropTypes.arrayOf(PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
-      date: PropTypes.string.isRequired,
-      rating: PropTypes.number.isRequired,
-      id: PropTypes.number.isRequired,
-    }).isRequired).isRequired,
-  })
+  // filmReviews: PropTypes.shape({
+  //   id: PropTypes.number.isRequired,
+  //   reviews: PropTypes.arrayOf(PropTypes.shape({
+  //     text: PropTypes.string.isRequired,
+  //     author: PropTypes.string.isRequired,
+  //     date: PropTypes.string.isRequired,
+  //     rating: PropTypes.number.isRequired,
+  //     id: PropTypes.number.isRequired,
+  //   }).isRequired).isRequired,
+  // })
 };
 
 export default Tabs;

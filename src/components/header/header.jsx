@@ -36,7 +36,7 @@ const Header = ({authorizationStatus}) => {
 };
 
 Header.propTypes = {
-  authorizationStatus: PropTypes.bool.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({

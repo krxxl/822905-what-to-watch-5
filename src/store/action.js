@@ -7,6 +7,8 @@ export const ActionType = {
   CHANGE_ACTIVE_FILM: `CHANGE_ACTIVE_FILM`,
   CHECK_STATUS: `CHECK_STATUS`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
+  LOAD_REVIEWS: `LOAD_REVIEWS`,
+  CLEAR_REVIEWS: `CLEAR_REVIEWS`,  
   //   SHOW_ERROR: `SHOW_ERROR`,
 };
 
@@ -41,6 +43,13 @@ export const ActionCreator = {
     type: ActionType.REDIRECT_TO_ROUTE,
     payload: url,
   }),
+  loadReviews: (reviews) => ({
+    type: ActionType.LOAD_REVIEWS,
+    payload: reviews,
+  }),
+  // clearReviews: () => ({
+  //   type: ActionType.CLEAR_REVIEWS,
+  // }),
   // showError: (errorStatus) => ({
   //   type: ActionType.SHOW_ERROR,
   //   payload: errorStatus,

@@ -100,16 +100,6 @@ MoviePage.propTypes = {
   }).isRequired).isRequired,
   onSmallCardClick: PropTypes.func.isRequired,
   onPlayButton: PropTypes.func.isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    reviews: PropTypes.arrayOf(PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
-      date: PropTypes.string.isRequired,
-      rating: PropTypes.number.isRequired,
-      id: PropTypes.number.isRequired,
-    }).isRequired).isRequired,
-  })).isRequired
 };
 
 export default MoviePage;

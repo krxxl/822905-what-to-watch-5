@@ -6,6 +6,7 @@ import {genresInSingular} from '../../../mocks/genres';
 
 const initialState = {
   films: [],
+  reviews: [],
   isLoading: false,
 };
 
@@ -61,6 +62,14 @@ const filmsData = (state = initialState, action) => {
       return extend(state, {
         isLoading: true,
       });
+    case ActionType.LOAD_REVIEWS:
+      return extend(state, {
+        reviews: action.payload,
+      });
+    // case ActionType.CLEAR_REVIEWS:
+    //   return extend(state, {
+    //     reviews: [],
+    //   });
   }
 
   return state;
