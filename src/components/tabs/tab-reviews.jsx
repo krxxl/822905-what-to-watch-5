@@ -2,7 +2,7 @@ import React from 'react';
 import MovieReviews from '../movie-reviews/movie-reviews';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {fetchCommentsList} from '../../store/api-actions'
+import {fetchCommentsList} from '../../store/api-actions';
 // import { render } from 'react-dom';
 
 class TabsReviews extends React.PureComponent {
@@ -12,7 +12,7 @@ class TabsReviews extends React.PureComponent {
 
   componentDidMount() {
     const {loadComments, filmId} = this.props;
-    loadComments(filmId);  
+    loadComments(filmId);
   }
 
   componentDidUpdate(nextProps) {
@@ -22,11 +22,8 @@ class TabsReviews extends React.PureComponent {
       loadComments(filmId);
     }
   }
-  
   render() {
-    
     const {reviews} = this.props;
-    console.log(reviews)
     const halfOfReviews = Math.round(reviews.length / 2);
     const firstHalfReviews = reviews.slice(0, halfOfReviews);
     const secondHalfReviews = reviews.slice(halfOfReviews);
@@ -39,7 +36,7 @@ class TabsReviews extends React.PureComponent {
                 <MovieReviews review={review} />
               </div>
             );
-          })}  
+          })}
         </div>
         <div className="movie-card__reviews-col">
           {secondHalfReviews.map((review) => {
@@ -48,30 +45,27 @@ class TabsReviews extends React.PureComponent {
                 <MovieReviews review={review} />
               </div>
             );
-          })}  
+          })}
         </div>
       </div>
     );
   }
-  
-};
+}
 
 TabsReviews.propTypes = {
-  reviews: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    reviews: PropTypes.arrayOf(PropTypes.shape({
-      comment: PropTypes.string.isRequired,
-      user: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired
-      }).isRequired,
-      date: PropTypes.string.isRequired,
-      rating: PropTypes.number.isRequired,
+  reviews: PropTypes.arrayOf(PropTypes.shape({
+    comment: PropTypes.string.isRequired,
+    user: PropTypes.shape({
       id: PropTypes.number.isRequired,
-    }).isRequired).isRequired,
-  })
+      name: PropTypes.string.isRequired
+    }).isRequired,
+    date: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+  }).isRequired).isRequired,
+  loadComments: PropTypes.func.isRequired,
+  filmId: PropTypes.number.isRequired,
 };
-
 
 const mapStateToProps = (state) => ({
   reviews: state.DATA.reviews

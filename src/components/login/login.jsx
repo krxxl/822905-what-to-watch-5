@@ -69,7 +69,7 @@ class AuthScreen extends PureComponent {
     const classError = this.state.emailValid ? `` : `sign-in__field--error`;
     return (
       <div className="user-page">
-        <Header />
+        <Header className={`user-page__head`}/>
         <div className="sign-in user-page__content">
           <form onSubmit={this.handleSubmit} action="#" className="sign-in__form">
             <div className="sign-in__message">

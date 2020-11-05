@@ -1,35 +1,48 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const numToWord = (month) => {
-  switch(month) {
+const numToWord = (date) => {
+  let month;
+  switch (date) {
     case 1:
-      return 'January';
+      month = `January`;
+      break;
     case 2:
-      return 'February';
+      month = `February`;
+      break;
     case 3:
-      return 'March';
+      month = `March`;
+      break;
     case 4:
-      return 'April';
+      month = `April`;
+      break;
     case 5:
-      return 'May';
+      month = `May`;
+      break;
     case 6:
-      return 'June';
+      month = `June`;
+      break;
     case 7:
-      return 'July';
+      month = `July`;
+      break;
     case 8:
-      return 'August';
+      month = `August`;
+      break;
     case 9:
-      return 'September';
-    case 10: 
-      return 'October';
-    case 11: 
-      return 'November';
-    case 12: 
-      return 'December';  
+      month = `September`;
+      break;
+    case 10:
+      month = `October`;
+      break;
+    case 11:
+      month = `November`;
+      break;
+    case 12:
+      month = `December`;
+      break;
   }
-
-}
+  return month;
+};
 
 const getDateTime = (time) => {
   const date = new Date(time);
@@ -37,7 +50,7 @@ const getDateTime = (time) => {
 };
 
 const MovieReviews = ({review}) => {
-  const {comment, user: { name }, date, rating} = review;
+  const {comment, user: {name}, date, rating} = review;
   return (
     <React.Fragment>
       <blockquote className="review__quote">

@@ -11,6 +11,7 @@ import withActiveItem from '../../hocs/with-active-item/with-active-item';
 import PlayButton from '../play-button/play-button';
 import {connect} from 'react-redux';
 import {AuthorizationStatus} from '../../constant/constant';
+import MyListButton from '../my-list-button/my-list-button';
 
 const Components = withActiveItem(MovieDesc);
 
@@ -18,8 +19,7 @@ const MoviePage = (props) => {
   const {onSmallCardClick, onPlayButton, filmId, authorizationStatus} = props;
   let {films} = props;
   const film = films.find((item)=>item.id === +filmId);
-  // const filmReviews = reviews.find((item)=>item.id === +filmId);
-  const {backgroundImage, name, posterImage, genre, released, videoLink} = film;
+  const {backgroundImage, name, posterImage, genre, released, videoLink, isFavorite} = film;
   films = films.filter((element) => element.genre === genre);
 
   const addReviewBtn = authorizationStatus === AuthorizationStatus.AUTH ? (
@@ -49,13 +49,7 @@ const MoviePage = (props) => {
 
               <div className="movie-card__buttons">
                 <PlayButton onPlayButton={onPlayButton} id={filmId} video={videoLink}/>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use href="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
-                
+                <MyListButton id={filmId} isFavorite={isFavorite}/>
                 {addReviewBtn}
               </div>
             </div>
@@ -107,14 +101,12 @@ MoviePage.propTypes = {
   }).isRequired).isRequired,
   onSmallCardClick: PropTypes.func.isRequired,
   onPlayButton: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   authorizationStatus: state.USER.authorizationStatus,
 });
-
-
-
 
 export {MoviePage};
 export default connect(mapStateToProps, null)(MoviePage);

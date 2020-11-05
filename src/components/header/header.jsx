@@ -4,8 +4,9 @@ import {AuthorizationStatus} from '../../constant/constant';
 import {connect} from 'react-redux';
 import PropTypes from "prop-types";
 
-const Header = ({authorizationStatus}) => {
-  const signIn = authorizationStatus === AuthorizationStatus.NO_AUTH ? (
+const Header = (props) => {
+  const {className, Breadcrumbs, name, filmId} = props;
+  const signIn = props.authorizationStatus === AuthorizationStatus.NO_AUTH ? (
     <div className="user-block">
       <Link to="/login" href="sign-in.html" className="user-block__link">
         Sign in
@@ -14,13 +15,19 @@ const Header = ({authorizationStatus}) => {
   ) : (
     <div className="user-block">
       <div className="user-block__avatar">
-        <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+        <Link to="/mylist">
+          <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+        </Link>
       </div>
     </div>
   );
 
+  const title = props.title ? (
+    <h1 className="page-title user-page__title">{props.title}</h1>
+  ) : null;
+
   return (
-    <header className="page-header">
+    <header className={`page-header movie-card__head ${className || ``}`}>
       <div className="logo">
         <Link className="logo__link" to="/">
           <span className="logo__letter logo__letter--1">W</span>
@@ -28,7 +35,8 @@ const Header = ({authorizationStatus}) => {
           <span className="logo__letter logo__letter--3">W</span>
         </Link>
       </div>
-
+      {Breadcrumbs && <Breadcrumbs name={name} filmId={filmId}/>}
+      {title}
       {signIn}
 
     </header>
@@ -37,6 +45,11 @@ const Header = ({authorizationStatus}) => {
 
 Header.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
+  filmId: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  Breadcrumbs: PropTypes.element.isRequired,
+  title: PropTypes.string.isRequired,
+  className: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({

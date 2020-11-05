@@ -44,16 +44,7 @@ Tabs.propTypes = {
     previewVideoLink: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
   }).isRequired,
-  // filmReviews: PropTypes.shape({
-  //   id: PropTypes.number.isRequired,
-  //   reviews: PropTypes.arrayOf(PropTypes.shape({
-  //     text: PropTypes.string.isRequired,
-  //     author: PropTypes.string.isRequired,
-  //     date: PropTypes.string.isRequired,
-  //     rating: PropTypes.number.isRequired,
-  //     id: PropTypes.number.isRequired,
-  //   }).isRequired).isRequired,
-  // })
+  filmId: PropTypes.number.isRequired,
 };
 
 export default Tabs;
