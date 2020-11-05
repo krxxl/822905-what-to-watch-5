@@ -24,7 +24,9 @@ class TabsReviews extends React.PureComponent {
   }
   
   render() {
+    
     const {reviews} = this.props;
+    console.log(reviews)
     const halfOfReviews = Math.round(reviews.length / 2);
     const firstHalfReviews = reviews.slice(0, halfOfReviews);
     const secondHalfReviews = reviews.slice(halfOfReviews);

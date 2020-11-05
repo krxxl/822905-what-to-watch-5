@@ -51,10 +51,14 @@ const App = ({films, isLoading}) => {
         <PrivateRoute exact path="/films/:id/review"
           render={(props) => {
             const filmId = +props.match.params.id;
+            const film = films.find((item) => item.id === +filmId);
+            const {backgroundImage, name, posterImage} = film;
             return (
               <ReviewFilm
-                films={films}
+                backgroundImage={backgroundImage}
                 filmId={filmId}
+                name={name}
+                posterImage={posterImage}
               />
             );
           }

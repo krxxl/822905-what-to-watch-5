@@ -8,7 +8,7 @@ export const ActionType = {
   CHECK_STATUS: `CHECK_STATUS`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
-  CLEAR_REVIEWS: `CLEAR_REVIEWS`,  
+  // ADD_REVIEWS: `ADD_REVIEWS`,
   //   SHOW_ERROR: `SHOW_ERROR`,
 };
 
@@ -47,7 +47,7 @@ export const ActionCreator = {
     type: ActionType.LOAD_REVIEWS,
     payload: reviews,
   }),
-  // clearReviews: () => ({
+  // addReviews: () => ({
   //   type: ActionType.CLEAR_REVIEWS,
   // }),
   // showError: (errorStatus) => ({

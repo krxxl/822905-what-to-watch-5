@@ -9,17 +9,23 @@ import tabNames from '../../movie-tabs-names';
 import {COUNTFILM} from '../../constant/constant';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
 import PlayButton from '../play-button/play-button';
+import {connect} from 'react-redux';
+import {AuthorizationStatus} from '../../constant/constant';
 
 const Components = withActiveItem(MovieDesc);
 
 const MoviePage = (props) => {
-
-  const {onSmallCardClick, onPlayButton, filmId} = props;
+  const {onSmallCardClick, onPlayButton, filmId, authorizationStatus} = props;
   let {films} = props;
   const film = films.find((item)=>item.id === +filmId);
   // const filmReviews = reviews.find((item)=>item.id === +filmId);
   const {backgroundImage, name, posterImage, genre, released, videoLink} = film;
   films = films.filter((element) => element.genre === genre);
+
+  const addReviewBtn = authorizationStatus === AuthorizationStatus.AUTH ? (
+    <Link to={`/films/${filmId}/review`} className="btn movie-card__button">Add review</Link>
+  ) : (``);
+
 
   return (
     <React.Fragment>
@@ -49,7 +55,8 @@ const MoviePage = (props) => {
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link to={`/films/${filmId}/review`} className="btn movie-card__button">Add review</Link>
+                
+                {addReviewBtn}
               </div>
             </div>
           </div>
@@ -102,4 +109,12 @@ MoviePage.propTypes = {
   onPlayButton: PropTypes.func.isRequired,
 };
 
-export default MoviePage;
+const mapStateToProps = (state) => ({
+  authorizationStatus: state.USER.authorizationStatus,
+});
+
+
+
+
+export {MoviePage};
+export default connect(mapStateToProps, null)(MoviePage);

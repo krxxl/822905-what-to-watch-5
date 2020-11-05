@@ -1,4 +1,6 @@
 import React from 'react';
+import {connect} from "react-redux";
+import {addReview} from "../../store/api-actions";
 
 
 const withForm = (Component) => {
@@ -17,7 +19,16 @@ const withForm = (Component) => {
     }
 
     handleSubmit(evt) {
+      const {onSubmit} = this.props;
+
       evt.preventDefault();
+      console.log(111)
+
+      onSubmit({
+        id: this.props.filmId,
+        rating: this.state[`rating`],
+        comment: this.state[`review-text`],
+      });
     }
 
     handleFieldChange(evt) {
@@ -50,7 +61,7 @@ const withForm = (Component) => {
             </div>
 
             <div className="add-review__text">
-              <textarea onChange={this.handleFieldChange} className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
+              <textarea minLength="50" maxLength="400" onChange={this.handleFieldChange} className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
               <div className="add-review__submit">
                 <button className="add-review__btn" type="submit">Post</button>
               </div>
@@ -61,7 +72,14 @@ const withForm = (Component) => {
       );
     }
   }
-  return WithForm;
+
+  const mapDispatchToProps = (dispatch) => ({
+    onSubmit(data) {
+      dispatch(addReview(data));
+    }
+  });
+  
+  return connect(null, mapDispatchToProps)(WithForm);
 };
 
 export default withForm;

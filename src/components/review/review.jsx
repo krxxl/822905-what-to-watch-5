@@ -3,14 +3,13 @@ import Header from '../header/header';
 import PropTypes from 'prop-types';
 
 const Review = (props) => {
-  const {films, filmId} = props;
-  const film = films.find((item) => item.id === +filmId);
-  const {hero, name, poster} = film;
+  const {posterImage, backgroundImage, name} = props;
+ 
   return (
     <section className="movie-card movie-card--full">
       <div className="movie-card__header">
         <div className="movie-card__bg">
-          <img src={hero} alt={name} />
+          <img src={backgroundImage} alt={name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -18,7 +17,7 @@ const Review = (props) => {
         <Header />
 
         <div className="movie-card__poster movie-card__poster--small">
-          <img src={poster} alt={name} width="218" height="327" />
+          <img src={posterImage} alt={name} width="218" height="327" />
         </div>
       </div>
 
