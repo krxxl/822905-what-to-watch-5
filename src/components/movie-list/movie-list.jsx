@@ -5,28 +5,20 @@ import withVideo from '../../hocs/with-video/with-video';
 
 const Components = withVideo(MovieListItem);
 
-class MovieList extends React.PureComponent {
-  constructor(props) {
-    super(props);
-  }
+const MovieList = (props) => {
+  const {COUNTFILM, onSmallCardClick} = props;
+  let {films} = props;
+  films = films.slice(0, COUNTFILM);
+  const elements = films.map((film) => {
+    const {name, id, previewImage, previewVideoLink} = film;
 
-
-  render() {
-
-    const {COUNTFILM, onSmallCardClick} = this.props;
-    let {films} = this.props;
-    films = films.slice(0, COUNTFILM);
-    const elements = films.map((film) => {
-      const {name, id, previewImage, previewVideoLink} = film;
-
-      return <Components key={id} video={previewVideoLink} name={name} id={id} preview={previewImage} onSmallCardClick={onSmallCardClick} />;
-    });
-    return (
-      <div className="catalog__movies-list">
-        {elements}
-      </div>
-    );
-  }
+    return <Components key={id} video={previewVideoLink} name={name} id={id} preview={previewImage} onSmallCardClick={onSmallCardClick} />;
+  });
+  return (
+    <div className="catalog__movies-list">
+      {elements}
+    </div>
+  );  
 }
 
 MovieList.propTypes = {
@@ -51,7 +43,6 @@ MovieList.propTypes = {
   }).isRequired).isRequired,
   onSmallCardClick: PropTypes.func.isRequired,
   COUNTFILM: PropTypes.number,
-  genre: PropTypes.string,
 };
 
 export default MovieList;

@@ -32,14 +32,8 @@ const MovieListItem = (props) => {
 
 MovieListItem.propTypes = {
   name: PropTypes.string.isRequired,
-  preview: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
-  video: PropTypes.string.isRequired,
   onSmallCardClick: PropTypes.func.isRequired,
-  tabNames: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
-  }).isRequired),
   onMouseHandle: PropTypes.func.isRequired,
   children: PropTypes.element.isRequired,
 };

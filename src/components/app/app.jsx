@@ -108,27 +108,27 @@ App.propTypes = {
 
 // export default App;
 const mapStateToProps = ({DATA, SHOW, USER}) => ({
-  genreActive: SHOW.genreActive,
+  // genreActive: SHOW.genreActive,
   films: DATA.films,
-  count: SHOW.count,
-  activeFilm: SHOW.activeFilm,
+  // count: SHOW.count,
+  // activeFilm: SHOW.activeFilm,
   isLoading: DATA.isLoading,
-  authorizationStatus: USER.authorizationStatus,
+  // authorizationStatus: USER.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onGenreChange(name) {
-    dispatch(ActionCreator.changeGenre(name));
-  },
-  onMoreButton(count) {
-    dispatch(ActionCreator.moreFilms(count));
-  },
-  onResetCount() {
-    dispatch(ActionCreator.resetCount());
-  },
-  onChangeActiveFilm(id) {
-    dispatch(ActionCreator.changeActiveFilm(id));
-  },
+  // onGenreChange(name) {
+  //   dispatch(ActionCreator.changeGenre(name));
+  // },
+  // onMoreButton(count) {
+  //   dispatch(ActionCreator.moreFilms(count));
+  // },
+  // onResetCount() {
+  //   dispatch(ActionCreator.resetCount());
+  // },
+  // onChangeActiveFilm(id) {
+  //   dispatch(ActionCreator.changeActiveFilm(id));
+  // },
   changeStatus() {
     dispatch(ActionCreator.checkStatus());
   },
