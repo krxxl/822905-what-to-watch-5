@@ -12,3 +12,7 @@ export const ErrorStatus = {
   NO_ERROR: `NO_ERROR`,
 };
 
+export const getFilmById = (state, props) => {
+  return state.DATA.films.find((item) => item.id === props.filmId);
+}
+

@@ -2,9 +2,12 @@ import React from 'react';
 import Header from '../header/header';
 import PropTypes from 'prop-types';
 import Breadcrumbs from '../breadcrumbs/breadcrumbs';
+import {getFilmById} from '../../constant/constant';
+import {connect} from 'react-redux';
 
 const Review = (props) => {
-  const {posterImage, backgroundImage, name, filmId} = props;
+  const {filmId, film} = props;
+  const {backgroundImage, name, posterImage} = film;
   return (
     <section className="movie-card movie-card--full">
       <div className="movie-card__header">
@@ -37,4 +40,9 @@ Review.propTypes = {
   children: PropTypes.element.isRequired,
 };
 
-export default Review;
+const mapStateToProps = (state, props) => ({
+  film: getFilmById(state, props),
+});
+
+export {Review};
+export default connect(mapStateToProps, null)(Review);
