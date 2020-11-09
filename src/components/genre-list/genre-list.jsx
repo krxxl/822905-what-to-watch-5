@@ -1,5 +1,4 @@
 import React from 'react';
-// import {genres} from '../../mocks/genres';
 import GenreListItem from '../genre-list-item/genre-list-item';
 import PropTypes from 'prop-types';
 

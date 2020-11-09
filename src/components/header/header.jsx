@@ -45,11 +45,11 @@ const Header = (props) => {
 
 Header.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
-  filmId: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  Breadcrumbs: PropTypes.element.isRequired,
-  title: PropTypes.string.isRequired,
-  className: PropTypes.string.isRequired,
+  filmId: PropTypes.number,
+  name: PropTypes.string,
+  Breadcrumbs: PropTypes.element,
+  title: PropTypes.string,
+  className: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
