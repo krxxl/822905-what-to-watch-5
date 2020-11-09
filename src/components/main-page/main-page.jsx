@@ -22,9 +22,15 @@ class MainPage extends React.PureComponent {
   }
 
   render() {
-    const {promoFilm, filmsByGenre, genres, onSmallCardClick, genreActive, onGenreChange, onMoreButton, onPlayButton, count, onResetCount} = this.props;
-    const {backgroundImage, videoLink, name, posterImage, genre, released, id, isFavorite} = promoFilm;
+    const {promoFilm, filmsByGenre, genres, isPromoLoading, genreActive, onGenreChange, onMoreButton, count, onResetCount, history} = this.props;
+    
     const COUNTFILM = count;
+    if (!isPromoLoading) {
+      return (
+        <h1>LOADING...</h1>
+      )
+    }
+    const {backgroundImage, videoLink, name, posterImage, genre, released, id, isFavorite} = promoFilm;
 
     return (
       <React.Fragment>
@@ -50,7 +56,7 @@ class MainPage extends React.PureComponent {
                   <span className="movie-card__year">{released}</span>
                 </p>
                 <div className="movie-card__buttons">
-                  <PlayButton onPlayButton={onPlayButton} id={id} video={videoLink}/>
+                  <PlayButton history={history} id={id} video={videoLink}/>
                   <MyListButton id={id} isFavorite={isFavorite}/>
                 </div>
               </div>
@@ -63,7 +69,7 @@ class MainPage extends React.PureComponent {
 
             <GenreList genres={genres} genreActive={genreActive} onResetCount={onResetCount} onGenreChange={onGenreChange}/>
 
-            <MovieList COUNTFILM={COUNTFILM} films={filmsByGenre} onSmallCardClick = {onSmallCardClick}/>
+            <MovieList COUNTFILM={COUNTFILM} films={filmsByGenre} history={history}/>
 
             {filmsByGenre.length >= COUNTFILM ? <MoreButton onMoreButton={onMoreButton}/> : null}
             {/* <MoreButton /> */}
@@ -76,6 +82,10 @@ class MainPage extends React.PureComponent {
   }
 }
 
+
+MainPage.defaultProps ={
+  promoFilm: {}
+}
 MainPage.propTypes = {
   // films: PropTypes.arrayOf(PropTypes.shape({
   //   name: PropTypes.string.isRequired,
@@ -116,8 +126,8 @@ MainPage.propTypes = {
     id: PropTypes.number.isRequired,
   }).isRequired).isRequired,
   genres: PropTypes.array.isRequired,
-  onSmallCardClick: PropTypes.func.isRequired,
-  onPlayButton: PropTypes.func.isRequired,
+  // onSmallCardClick: PropTypes.func.isRequired,
+  // onPlayButton: PropTypes.func.isRequired,
   genreActive: PropTypes.string.isRequired,
   onGenreChange: PropTypes.func.isRequired,
   onResetCount: PropTypes.func.isRequired,
@@ -153,6 +163,7 @@ const mapStateToProps = (state) => ({
   count: state.SHOW.count,
   genres: getGenres(state),
   promoFilm: state.DATA.promoFilm,
+  isPromoLoading: state.DATA.isPromoLoading,
 });
 
 

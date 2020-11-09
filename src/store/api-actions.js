@@ -39,6 +39,7 @@ export const getPromo = () => (dispatch, _getState, api) => (
   api.get(`/films/promo`)
     .then(({data}) => {
       dispatch(ActionCreator.loadPromo(adaptiveFilms(data)));
+      dispatch(ActionCreator.checkPromoStatus());
     })
 );
 

@@ -13,6 +13,7 @@ export const ActionType = {
   SENDING_REVIEW_ERROR: `SENDING_REVIEW_ERROR`,
   CHANGE_FAVORITE_STATUS: `CHANGE_FAVORITE_STATUS`,
   LOAD_PROMO: `LOAD_PROMO`,
+  CHECK_PROMO_STATUS: `CHECK_PROMO_STATUS`,
   // ADD_REVIEWS: `ADD_REVIEWS`,
   //   SHOW_ERROR: `SHOW_ERROR`,
 };
@@ -43,6 +44,9 @@ export const ActionCreator = {
   }),
   checkStatus: () => ({
     type: ActionType.CHECK_STATUS, // проверка пришли ли данные
+  }),
+  checkPromoStatus: () => ({
+    type: ActionType.CHECK_PROMO_STATUS, // проверка пришли ли данные promo
   }),
   redirectRoute: (url) => ({
     type: ActionType.REDIRECT_TO_ROUTE,

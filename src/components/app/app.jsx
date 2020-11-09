@@ -18,24 +18,16 @@ import PrivateRoute from '../../components/private-route/private-route';
 const ReviewFilm = withForm(Review);
 const BigPlayer = withBigVideo(Player);
 
-const App = ({films, isLoading}) => {
+const App = () => {
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path="/"
-          render={({history}) => {
-            return isLoading ? (
+          render={({history}) => (
               <MainPage
-                onSmallCardClick={(id) => history.push(`/films/${id}`)}
-                onPlayButton={(id) => history.push(`/player/${id}`)}
-              // films={films}
+                history={history}
               />
-            ) : (
-              <div>
-                <h1>LOADING</h1>
-              </div>
-            );
-          }}
+            )}
         />
         <Route exact path="/login">
           <Login />
@@ -43,22 +35,16 @@ const App = ({films, isLoading}) => {
         <PrivateRoute exact path="/mylist"
           render={({history}) => (
             <MyList
-              onSmallCardClick={(id) => history.push(`/films/${id}`)}
-              films={films}
+              history={history}
             />
           )}
         />
         <PrivateRoute exact path="/films/:id/review"
           render={(props) => {
             const filmId = +props.match.params.id;
-            const film = films.find((item) => item.id === +filmId);
-            const {backgroundImage, name, posterImage} = film;
             return (
               <ReviewFilm
-                backgroundImage={backgroundImage}
                 filmId={filmId}
-                name={name}
-                posterImage={posterImage}
               />
             );
           }
@@ -69,11 +55,7 @@ const App = ({films, isLoading}) => {
 
             return (
               <MoviePage
-                onSmallCardClick={(id) => props.history.push(`/films/${id}`)}
-                onPlayButton={(id) => props.history.push(`/player/${id}`)}
-                films={films}
                 history={props.history}
-                // reviews={reviews}
                 filmId={filmId}
               />
             );
@@ -84,10 +66,10 @@ const App = ({films, isLoading}) => {
           render={(props) => {
             const {history} = props;
             const filmId = +props.match.params.id;
-            const film = films.find((item) => item.id === filmId);
-            const {videoLink, backgroundImage, name} = film;
+            // const film = films.find((item) => item.id === filmId);
+            // const {videoLink, backgroundImage, name} = film;
             return (
-              <BigPlayer name={name} filmId={filmId} history={history} video={videoLink} preview={backgroundImage} />
+              <BigPlayer filmId={filmId} history={history} />
             );
           }}
         />
@@ -100,7 +82,7 @@ const App = ({films, isLoading}) => {
 };
 
 App.propTypes = {
-  films: PropTypes.array.isRequired,
+  // films: PropTypes.array.isRequired,
   history: PropTypes.object,
   match: PropTypes.object,
   isLoading: PropTypes.bool.isRequired,
@@ -109,10 +91,11 @@ App.propTypes = {
 // export default App;
 const mapStateToProps = ({DATA, SHOW, USER}) => ({
   // genreActive: SHOW.genreActive,
-  films: DATA.films,
+  // films: DATA.films,
   // count: SHOW.count,
   // activeFilm: SHOW.activeFilm,
   isLoading: DATA.isLoading,
+  isPromoLoading: DATA.isPropmoLoading
   // authorizationStatus: USER.authorizationStatus,
 });
 

@@ -2,18 +2,25 @@ import React from 'react';
 import MovieListItem from '../movie-list-item/movie-list-item';
 import PropTypes from 'prop-types';
 import withVideo from '../../hocs/with-video/with-video';
+import {connect} from 'react-redux';
 
 const Components = withVideo(MovieListItem);
 
 const MovieList = (props) => {
-  const {COUNTFILM, onSmallCardClick} = props;
+  const {isLoading, COUNTFILM, history} = props;
   let {films} = props;
   films = films.slice(0, COUNTFILM);
   const elements = films.map((film) => {
     const {name, id, previewImage, previewVideoLink} = film;
 
-    return <Components key={id} video={previewVideoLink} name={name} id={id} preview={previewImage} onSmallCardClick={onSmallCardClick} />;
+    return <Components key={id} history={history} video={previewVideoLink} name={name} id={id} preview={previewImage} />;
   });
+
+  if (!isLoading) {
+    return (
+      <h1>LOADING...</h1>
+    )
+  }
   return (
     <div className="catalog__movies-list">
       {elements}
@@ -41,8 +48,14 @@ MovieList.propTypes = {
     previewVideoLink: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
   }).isRequired).isRequired,
-  onSmallCardClick: PropTypes.func.isRequired,
+  // onSmallCardClick: PropTypes.func.isRequired,
   COUNTFILM: PropTypes.number,
 };
 
-export default MovieList;
+const mapStateToProps = (state) => ({
+  isLoading: state.DATA.isLoading,
+});
+
+// export default MovieList;
+export {MovieList};
+export default connect(mapStateToProps, null)(MovieList);

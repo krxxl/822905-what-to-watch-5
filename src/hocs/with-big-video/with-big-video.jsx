@@ -1,5 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {getFilmById} from '../../constant/constant';
+import {connect} from 'react-redux';
 
 const withBigVideo = (Component) => {
   class WithBigVideo extends PureComponent {
@@ -100,11 +102,13 @@ const withBigVideo = (Component) => {
     }
 
     render() {
-      const {history, filmId, video, preview, name} = this.props;
+      const {history, filmId, film} = this.props;
+      const {videoLink, backgroundImage, name} = film;
 
       return (
         <Component
           name={name}
+          film={film}
           filmId={filmId}
           history={history}
           leftTime={this._leftTime}
@@ -117,9 +121,9 @@ const withBigVideo = (Component) => {
         >
           <video
             ref={this.videoref}
-            src={video}
+            src={videoLink}
             className="player__video"
-            poster={preview}
+            poster={backgroundImage}
           ></video>
         </Component>
       );
@@ -134,7 +138,11 @@ const withBigVideo = (Component) => {
     name: PropTypes.string.isRequired,
   };
 
-  return WithBigVideo;
+  const mapStateToProps = (state, props) => ({
+    film: getFilmById(state, props),
+  });
+  
+  return connect(mapStateToProps, null)(WithBigVideo);
 };
 
 export default withBigVideo;

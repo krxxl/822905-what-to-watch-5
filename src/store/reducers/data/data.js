@@ -7,9 +7,28 @@ const initialState = {
   reviews: [],
   favoriteFilms: [],
   isLoading: false,
+  isPromoLoading: false, 
   sendingReview: false,
   sendingReviewError: false,
-  promoFilm: ``,
+  promoFilm: {
+    name: ``,
+    genre: ``,
+    released: 0,
+    posterImage: ``,
+    previewImage: ``,
+    backgroundImage: ``,
+    backgroundColor: ``,
+    runTime: 0,
+    rating: 0,
+    scoresCount: 0,
+    description: ``,
+    director: ``,
+    starring: [],
+    isFavorite:false,
+    videoLink: ``,
+    previewVideoLink: ``,
+    id: 0,
+  },
 };
 
 const sortedFilms = (films, genreActive) => {
@@ -63,6 +82,10 @@ const filmsData = (state = initialState, action) => {
     case ActionType.CHECK_STATUS:
       return extend(state, {
         isLoading: true,
+      });
+    case ActionType.CHECK_PROMO_STATUS:
+      return extend(state, {
+        isPromoLoading: true,
       });
     case ActionType.LOAD_REVIEWS:
       return extend(state, {
