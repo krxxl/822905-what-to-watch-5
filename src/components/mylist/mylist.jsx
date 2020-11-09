@@ -3,39 +3,68 @@ import PropTypes from 'prop-types';
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import MovieList from '../movie-list/movie-list';
+import {fetchFavoriteFilmList} from '../../store/api-actions';
+import {connect} from 'react-redux';
 
-const MyList = ({films, onSmallCardClick}) => {
-  return (
-    <div className="user-page">
-      <Header />
-      <section className="catalog">
-        <h2 className="catalog__title visually-hidden">Catalog</h2>
-        <MovieList films={films} onSmallCardClick={onSmallCardClick} />
-      </section>
-      <Footer />
-    </div>
-  );
-};
+class MyList extends React.PureComponent {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    const {loadFavoriteFilms} = this.props;
+    loadFavoriteFilms();
+  }
+
+  render() {
+    const films = this.props.favoriteFilms;
+    const {onSmallCardClick} = this.props;
+    return (
+      <div className="user-page">
+        <Header title="My list" className="user-page__head"/>
+        <section className="catalog">
+          <h2 className="catalog__title visually-hidden">Catalog</h2>
+          <MovieList films={films} onSmallCardClick={onSmallCardClick} />
+        </section>
+        <Footer />
+      </div>
+    );
+  }
+}
 
 MyList.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.shape({
+  favoriteFilms: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-    year: PropTypes.string.isRequired,
-    poster: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
-    hero: PropTypes.string.isRequired,
-    time: PropTypes.string.isRequired,
-    rating: PropTypes.string.isRequired,
-    count: PropTypes.number.isRequired,
-    desc: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    runTime: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
     director: PropTypes.string.isRequired,
     starring: PropTypes.array.isRequired,
-    isInList: PropTypes.bool.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
-    video: PropTypes.string.isRequired,
   }).isRequired).isRequired,
   onSmallCardClick: PropTypes.func.isRequired,
+  loadFavoriteFilms: PropTypes.func.isRequired,
 };
 
-export default MyList;
+const mapStateToProps = (state) => ({
+  favoriteFilms: state.DATA.favoriteFilms,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  loadFavoriteFilms() {
+    dispatch(fetchFavoriteFilmList());
+  },
+});
+
+export {MyList};
+export default connect(mapStateToProps, mapDispatchToProps)(MyList);

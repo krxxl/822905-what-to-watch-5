@@ -7,6 +7,13 @@ export const ActionType = {
   CHANGE_ACTIVE_FILM: `CHANGE_ACTIVE_FILM`,
   CHECK_STATUS: `CHECK_STATUS`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
+  LOAD_REVIEWS: `LOAD_REVIEWS`,
+  LOAD_FAVORITE_FILMS: `LOAD_FAVORITE_FILMS`,
+  SENDING_REVIEW: `SENDING_REVIEW`,
+  SENDING_REVIEW_ERROR: `SENDING_REVIEW_ERROR`,
+  CHANGE_FAVORITE_STATUS: `CHANGE_FAVORITE_STATUS`,
+  LOAD_PROMO: `LOAD_PROMO`,
+  // ADD_REVIEWS: `ADD_REVIEWS`,
   //   SHOW_ERROR: `SHOW_ERROR`,
 };
 
@@ -40,6 +47,26 @@ export const ActionCreator = {
   redirectRoute: (url) => ({
     type: ActionType.REDIRECT_TO_ROUTE,
     payload: url,
+  }),
+  loadReviews: (reviews) => ({
+    type: ActionType.LOAD_REVIEWS,
+    payload: reviews,
+  }),
+  sendingReview: (answer) => ({
+    type: ActionType.SENDING_REVIEW,
+    payload: answer,
+  }),
+  sendingReviewError: (answer) => ({
+    type: ActionType.SENDING_REVIEW_ERROR,
+    payload: answer,
+  }),
+  loadFavoriteFilms: (films) => ({
+    type: ActionType.LOAD_FAVORITE_FILMS,
+    payload: films,
+  }),
+  loadPromo: (film) => ({
+    type: ActionType.LOAD_PROMO,
+    payload: film,
   }),
   // showError: (errorStatus) => ({
   //   type: ActionType.SHOW_ERROR,

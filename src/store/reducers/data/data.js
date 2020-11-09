@@ -1,12 +1,15 @@
 import {extend} from '../../../utils';
-// import films from '../../../mocks/films';
 import {ActionType} from '../../action';
 import {genresInSingular} from '../../../mocks/genres';
 
-
 const initialState = {
   films: [],
+  reviews: [],
+  favoriteFilms: [],
   isLoading: false,
+  sendingReview: false,
+  sendingReviewError: false,
+  promoFilm: ``,
 };
 
 const sortedFilms = (films, genreActive) => {
@@ -60,6 +63,30 @@ const filmsData = (state = initialState, action) => {
     case ActionType.CHECK_STATUS:
       return extend(state, {
         isLoading: true,
+      });
+    case ActionType.LOAD_REVIEWS:
+      return extend(state, {
+        reviews: action.payload,
+      });
+    case ActionType.SENDING_REVIEW:
+      return extend(state, {
+        sendingReview: action.payload,
+      });
+    case ActionType.SENDING_REVIEW_ERROR:
+      return extend(state, {
+        sendingReviewError: action.payload,
+      });
+    case ActionType.LOAD_FAVORITE_FILMS:
+      return extend(state, {
+        favoriteFilms: action.payload,
+      });
+    // case ActionType.LOAD_FAVORITE_FILMS:
+    //   return extend(state, {
+    //     favoriteFilms: action.payload,
+    //   });
+    case ActionType.LOAD_PROMO:
+      return extend(state, {
+        promoFilm: action.payload,
       });
   }
 

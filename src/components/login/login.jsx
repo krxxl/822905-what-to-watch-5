@@ -25,9 +25,10 @@ class AuthScreen extends PureComponent {
     const {onSubmit} = this.props;
 
     evt.preventDefault();
+
     onSubmit({
-      email: this.state.email.value,
-      password: this.state.password.value,
+      email: this.state.email,
+      password: this.state.password,
     });
   }
 
@@ -68,7 +69,7 @@ class AuthScreen extends PureComponent {
     const classError = this.state.emailValid ? `` : `sign-in__field--error`;
     return (
       <div className="user-page">
-        <Header />
+        <Header className={`user-page__head`}/>
         <div className="sign-in user-page__content">
           <form onSubmit={this.handleSubmit} action="#" className="sign-in__form">
             <div className="sign-in__message">
