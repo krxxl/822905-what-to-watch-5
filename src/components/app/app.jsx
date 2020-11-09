@@ -8,8 +8,10 @@ import MoviePage from '../movie-page/movie-page';
 import Review from '../review/review';
 import Player from '../player/player';
 import withForm from '../../hocs/with-form/with-form';
+import withBigVideo from '../../hocs/with-big-video/with-big-video';
 
 const ReviewFilm = withForm(Review);
+const BigPlayer = withBigVideo(Player);
 
 const App = ({films, reviews}) => {
   return (
@@ -19,6 +21,7 @@ const App = ({films, reviews}) => {
           render={({history}) => (
             <MainPage
               onSmallCardClick={(id) => history.push(`/films/${id}`)}
+              onPlayButton={(id) => history.push(`/player/${id}`)}
               films={films}
             />
           )}
@@ -52,6 +55,7 @@ const App = ({films, reviews}) => {
             return (
               <MoviePage
                 onSmallCardClick={(id) => props.history.push(`/films/${id}`)}
+                onPlayButton={(id) => props.history.push(`/player/${id}`)}
                 films={films}
                 history={props.history}
                 reviews={reviews}
@@ -61,9 +65,17 @@ const App = ({films, reviews}) => {
           }
 
           } />
-        <Route exact path="/player/:id">
-          <Player />
-        </Route>
+        <Route exact path="/player/:id"
+          render={(props) => {
+            const {history} = props;
+            const filmId = +props.match.params.id;
+            const film = films.find((item)=> item.id === filmId);
+            const {video, preview, name} = film;
+            return (
+              <BigPlayer name={name} filmId={filmId} history={history} video={video} preview={preview}/>
+            );
+          }}
+        />
         <Route>
           <h1>404</h1>
         </Route>

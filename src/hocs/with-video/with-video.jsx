@@ -20,13 +20,13 @@ const withVideo = (Component) => {
       this.setState((prevState) => ({isPlaying: !prevState.isPlaying}));
     }
 
-
     componentDidMount() {
       const video = this.videoref.current;
       video.muted = `muted`;
-      video.oncanplaythrough = () => this.setState({
-        isLoading: false,
-      });
+      video.oncanplaythrough = () =>
+        this.setState({
+          isLoading: false,
+        });
     }
 
     componentDidUpdate() {
@@ -51,15 +51,22 @@ const withVideo = (Component) => {
         video.src = ``;
         video = null;
       }
-
     }
 
     render() {
       const {preview} = this.props;
       const {isLoading} = this.state;
       return (
-        <Component {...this.props} onMouseHandle={this.onMouseHandle} isLoading={isLoading}>
-          <video ref={this.videoref} className="player__video" poster={preview}></video>
+        <Component
+          {...this.props}
+          onMouseHandle={this.onMouseHandle}
+          isLoading={isLoading}
+        >
+          <video
+            ref={this.videoref}
+            className="player__video"
+            poster={preview}
+          ></video>
         </Component>
       );
     }
@@ -67,7 +74,7 @@ const withVideo = (Component) => {
 
   WithVideo.propTypes = {
     preview: PropTypes.string.isRequired,
-    video: PropTypes.string.isRequired
+    video: PropTypes.string.isRequired,
   };
 
   return WithVideo;

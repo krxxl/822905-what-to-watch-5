@@ -8,11 +8,11 @@ import MoreButton from '../more-button/more-button';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
 import {sortedFilms} from '../../store/reducer';
-// import {SHOW_ON_STAR_FILMS} from '../../constant/constant';
+import PlayButton from '../play-button/play-button';
 
 
-const MainPage = ({films, onSmallCardClick, genreActive, onGenreChange, onMoreButton, count, onResetCount}) => {
-  const {hero, name, poster, genre, year} = films[0];
+const MainPage = ({films, onSmallCardClick, genreActive, onGenreChange, onMoreButton, onPlayButton, count, onResetCount}) => {
+  const {hero, video, name, poster, genre, year, id} = films[0];
   const countOfFilms = films.length;
   const COUNTFILM = count;
 
@@ -42,12 +42,13 @@ const MainPage = ({films, onSmallCardClick, genreActive, onGenreChange, onMoreBu
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                {/* <button className="btn btn--play movie-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use href="#play-s"></use>
                   </svg>
                   <span>Play</span>
-                </button>
+                </button> */}
+                <PlayButton onPlayButton={onPlayButton} id={id} video={video}/>
                 <button className="btn btn--list movie-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use href="#add"></use>
@@ -96,6 +97,7 @@ MainPage.propTypes = {
     id: PropTypes.number.isRequired,
   }).isRequired).isRequired,
   onSmallCardClick: PropTypes.func.isRequired,
+  onPlayButton: PropTypes.func.isRequired,
   genreActive: PropTypes.string.isRequired,
   onGenreChange: PropTypes.func.isRequired,
   onResetCount: PropTypes.func.isRequired,

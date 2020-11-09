@@ -8,16 +8,17 @@ import MovieDesc from '../movie-desc/movie-desc';
 import tabNames from '../../movie-tabs-names';
 import {COUNTFILM} from '../../constant/constant';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
+import PlayButton from '../play-button/play-button';
 
 const Components = withActiveItem(MovieDesc);
 
 const MoviePage = (props) => {
 
-  const {reviews, onSmallCardClick, filmId} = props;
+  const {reviews, onSmallCardClick, onPlayButton, filmId} = props;
   let {films} = props;
   const film = films.find((item)=>item.id === +filmId);
   const filmReviews = reviews.find((item)=>item.id === +filmId);
-  const {hero, name, poster, genre, year} = film;
+  const {hero, name, poster, genre, year, video} = film;
   films = films.filter((element) => element.genre === genre);
 
   return (
@@ -41,12 +42,7 @@ const MoviePage = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use href="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
+                <PlayButton onPlayButton={onPlayButton} id={filmId} video={video}/>
                 <button className="btn btn--list movie-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use href="#add"></use>
@@ -101,6 +97,7 @@ MoviePage.propTypes = {
     id: PropTypes.number.isRequired,
   }).isRequired).isRequired,
   onSmallCardClick: PropTypes.func.isRequired,
+  onPlayButton: PropTypes.func.isRequired,
   reviews: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     reviews: PropTypes.arrayOf(PropTypes.shape({

@@ -1,15 +1,49 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const Player = () => {
+const Player = (props) => {
+  const {
+    history,
+    filmId,
+    children,
+    name,
+    leftTime,
+    videoExit,
+    openFullscreen,
+    handleIsPlayingChange,
+    isPlaying,
+    duration,
+    currentTime,
+  } = props;
+
+  const playBtn = isPlaying ? (
+    <React.Fragment>
+      <svg viewBox="0 0 14 21" width="14" height="21">
+        <use href="#pause"></use>
+      </svg>
+      <span>Pause</span>
+    </React.Fragment>
+  ) : (
+    <React.Fragment>
+      <svg viewBox="0 0 19 19" width="19" height="19">
+        <use href="#play-s"></use>
+      </svg>
+      <span>Play</span>
+    </React.Fragment>
+  );
   return (
     <div className="player">
-      <video
-        src="#"
-        className="player__video"
-        poster="img/player-poster.jpg"
-      ></video>
+      {children}
 
-      <button type="button" className="player__exit">
+      <button
+        onClick={(evt) => {
+          evt.preventDefault();
+          videoExit();
+          history.push(`/films/${filmId}`);
+        }}
+        type="button"
+        className="player__exit"
+      >
         Exit
       </button>
 
@@ -18,28 +52,44 @@ const Player = () => {
           <div className="player__time">
             <progress
               className="player__progress"
-              value="30"
-              max="100"
+              value={currentTime}
+              max={duration}
             ></progress>
-            <div className="player__toggler" >
+            <div
+              className="player__toggler"
+              style={{
+                left: `${(currentTime / duration) * 100}%`,
+              }}
+            >
               Toggler
             </div>
           </div>
-          <div className="player__time-value">1:30:29</div>
+          <div className="player__time-value">{leftTime()}</div>
         </div>
 
         <div className="player__controls-row">
-          <button type="button" className="player__play">
-            <svg viewBox="0 0 19 19" width="19" height="19">
-              {/* <use xlink:href="#play-s"></use> */}
-            </svg>
-            <span>Play</span>
+          <button
+            onClick={(evt) => {
+              evt.preventDefault();
+              handleIsPlayingChange();
+            }}
+            type="button"
+            className="player__play"
+          >
+            {playBtn}
           </button>
-          <div className="player__name">Transpotting</div>
+          <div className="player__name">{name}</div>
 
-          <button type="button" className="player__full-screen">
+          <button
+            onClick={(evt) => {
+              evt.preventDefault();
+              openFullscreen();
+            }}
+            type="button"
+            className="player__full-screen"
+          >
             <svg viewBox="0 0 27 27" width="27" height="27">
-              {/* <use xlink:href="#full-screen"></use> */}
+              <use href="#full-screen"></use>
             </svg>
             <span>Full screen</span>
           </button>
@@ -47,6 +97,20 @@ const Player = () => {
       </div>
     </div>
   );
+};
+
+Player.propTypes = {
+  history: PropTypes.object.isRequired,
+  filmId: PropTypes.number.isRequired,
+  children: PropTypes.element.isRequired,
+  name: PropTypes.string.isRequired,
+  leftTime: PropTypes.func.isRequired,
+  videoExit: PropTypes.func.isRequired,
+  openFullscreen: PropTypes.func.isRequired,
+  handleIsPlayingChange: PropTypes.func.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+  duration: PropTypes.number.isRequired,
+  currentTime: PropTypes.number.isRequired,
 };
 
 export default Player;
