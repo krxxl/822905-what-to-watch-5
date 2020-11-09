@@ -17,9 +17,9 @@ class MovieList extends React.PureComponent {
     let {films} = this.props;
     films = films.slice(0, COUNTFILM);
     const elements = films.map((film) => {
-      const {name, id, preview, video} = film;
+      const {name, id, previewImage, previewVideoLink} = film;
 
-      return <Components key={id} video={video} name={name} id={id} preview={preview} onSmallCardClick={onSmallCardClick} />;
+      return <Components key={id} video={previewVideoLink} name={name} id={id} preview={previewImage} onSmallCardClick={onSmallCardClick} />;
     });
     return (
       <div className="catalog__movies-list">
@@ -33,18 +33,20 @@ MovieList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-    year: PropTypes.string.isRequired,
-    poster: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
-    hero: PropTypes.string.isRequired,
-    time: PropTypes.string.isRequired,
-    rating: PropTypes.string.isRequired,
-    count: PropTypes.number.isRequired,
-    desc: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    runTime: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
     director: PropTypes.string.isRequired,
     starring: PropTypes.array.isRequired,
-    isInList: PropTypes.bool.isRequired,
-    video: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
   }).isRequired).isRequired,
   onSmallCardClick: PropTypes.func.isRequired,

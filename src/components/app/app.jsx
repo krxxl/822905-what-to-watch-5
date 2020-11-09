@@ -1,7 +1,7 @@
 import React from 'react';
 import MainPage from '../main-page/main-page';
 import PropTypes from 'prop-types';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {Router as BrowserRouter, Switch, Route} from 'react-router-dom';
 import Login from '../login/login';
 import MyList from '../mylist/mylist';
 import MoviePage from '../movie-page/movie-page';
@@ -9,27 +9,38 @@ import Review from '../review/review';
 import Player from '../player/player';
 import withForm from '../../hocs/with-form/with-form';
 import withBigVideo from '../../hocs/with-big-video/with-big-video';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../store/action';
+import browserHistory from "../../browser-history";
+import PrivateRoute from '../../components/private-route/private-route';
+
 
 const ReviewFilm = withForm(Review);
 const BigPlayer = withBigVideo(Player);
 
-const App = ({films, reviews}) => {
+const App = ({films, isLoading}) => {
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path="/"
-          render={({history}) => (
-            <MainPage
-              onSmallCardClick={(id) => history.push(`/films/${id}`)}
-              onPlayButton={(id) => history.push(`/player/${id}`)}
-              films={films}
-            />
-          )}
+          render={({history}) => {
+            return isLoading ? (
+              <MainPage
+                onSmallCardClick={(id) => history.push(`/films/${id}`)}
+                onPlayButton={(id) => history.push(`/player/${id}`)}
+              // films={films}
+              />
+            ) : (
+              <div>
+                <h1>LOADING</h1>
+              </div>
+            );
+          }}
         />
         <Route exact path="/login">
           <Login />
         </Route>
-        <Route exact path="/mylist"
+        <PrivateRoute exact path="/mylist"
           render={({history}) => (
             <MyList
               onSmallCardClick={(id) => history.push(`/films/${id}`)}
@@ -37,7 +48,7 @@ const App = ({films, reviews}) => {
             />
           )}
         />
-        <Route exact path="/films/:id/review"
+        <PrivateRoute exact path="/films/:id/review"
           render={(props) => {
             const filmId = +props.match.params.id;
             return (
@@ -58,7 +69,7 @@ const App = ({films, reviews}) => {
                 onPlayButton={(id) => props.history.push(`/player/${id}`)}
                 films={films}
                 history={props.history}
-                reviews={reviews}
+                // reviews={reviews}
                 filmId={filmId}
               />
             );
@@ -69,10 +80,10 @@ const App = ({films, reviews}) => {
           render={(props) => {
             const {history} = props;
             const filmId = +props.match.params.id;
-            const film = films.find((item)=> item.id === filmId);
-            const {video, preview, name} = film;
+            const film = films.find((item) => item.id === filmId);
+            const {videoLink, backgroundImage, name} = film;
             return (
-              <BigPlayer name={name} filmId={filmId} history={history} video={video} preview={preview}/>
+              <BigPlayer name={name} filmId={filmId} history={history} video={videoLink} preview={backgroundImage} />
             );
           }}
         />
@@ -86,9 +97,38 @@ const App = ({films, reviews}) => {
 
 App.propTypes = {
   films: PropTypes.array.isRequired,
-  reviews: PropTypes.array.isRequired,
   history: PropTypes.object,
   match: PropTypes.object,
+  isLoading: PropTypes.bool.isRequired,
 };
 
-export default App;
+// export default App;
+const mapStateToProps = ({DATA, SHOW, USER}) => ({
+  genreActive: SHOW.genreActive,
+  films: DATA.films,
+  count: SHOW.count,
+  activeFilm: SHOW.activeFilm,
+  isLoading: DATA.isLoading,
+  authorizationStatus: USER.authorizationStatus,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onGenreChange(name) {
+    dispatch(ActionCreator.changeGenre(name));
+  },
+  onMoreButton(count) {
+    dispatch(ActionCreator.moreFilms(count));
+  },
+  onResetCount() {
+    dispatch(ActionCreator.resetCount());
+  },
+  onChangeActiveFilm(id) {
+    dispatch(ActionCreator.changeActiveFilm(id));
+  },
+  changeStatus() {
+    dispatch(ActionCreator.checkStatus());
+  },
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);
