@@ -40,7 +40,9 @@ const withForm = (Component) => {
     }
 
     validateForm() {
-      this.setState({[`formValid`]: Boolean(this.state[`rating`]) && Boolean(this.state[`review-text`])});
+      this.setState((prevState) => ({
+        [`formValid`]: Boolean(prevState[`rating`]) && Boolean(prevState[`review-text`])
+      }));
     }
 
 
