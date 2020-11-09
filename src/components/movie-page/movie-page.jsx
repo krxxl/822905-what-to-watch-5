@@ -99,8 +99,6 @@ MoviePage.propTypes = {
     previewVideoLink: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
   }).isRequired).isRequired,
-  onSmallCardClick: PropTypes.func.isRequired,
-  onPlayButton: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
 };
 

@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 import {login} from "../../store/api-actions";
 import FormErrors from './form-errors';
 
-class AuthScreen extends PureComponent {
+class Login extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -123,7 +123,7 @@ class AuthScreen extends PureComponent {
   }
 }
 
-AuthScreen.propTypes = {
+Login.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
 
@@ -137,5 +137,5 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-export {AuthScreen};
-export default connect(null, mapDispatchToProps)(AuthScreen);
+export {Login};
+export default connect(null, mapDispatchToProps)(Login);

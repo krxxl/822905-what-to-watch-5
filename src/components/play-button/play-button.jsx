@@ -38,7 +38,6 @@ class PlayButton extends React.PureComponent {
 
 PlayButton.propTypes = {
   id: PropTypes.number.isRequired,
-  // onPlayButton: PropTypes.func.isRequired,
 };
 
 export default PlayButton;

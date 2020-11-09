@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import MovieList from "./movie-list";
+import {MovieList} from "./movie-list";
 import films from '../../mocks/films'
 import { Router } from "react-router-dom";
 import browserHistory from '../../browser-history';

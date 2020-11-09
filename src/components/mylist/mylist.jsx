@@ -52,8 +52,8 @@ MyList.propTypes = {
     previewVideoLink: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
   }).isRequired).isRequired,
-  onSmallCardClick: PropTypes.func.isRequired,
   loadFavoriteFilms: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
