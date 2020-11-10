@@ -100,6 +100,7 @@ MoviePage.propTypes = {
     id: PropTypes.number.isRequired,
   }).isRequired).isRequired,
   authorizationStatus: PropTypes.string.isRequired,
+  history: PropTypes.object
 };
 
 const mapStateToProps = (state) => ({

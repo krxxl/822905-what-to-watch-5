@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
 class PlayButton extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.handlerPlayButtonClick = this.handlerPlayButtonClick.bind(this)
+    this.handlerPlayButtonClick = this.handlerPlayButtonClick.bind(this);
   }
 
   handlerPlayButtonClick(id) {
     const {history} = this.props;
-    history.push(`/player/${id}`)
+    history.push(`/player/${id}`);
   }
 
   render() {
@@ -33,11 +32,11 @@ class PlayButton extends React.PureComponent {
       </button>
     );
   }
-  
-};
+}
 
 PlayButton.propTypes = {
   id: PropTypes.number.isRequired,
+  history: PropTypes.object
 };
 
 export default PlayButton;

@@ -100,7 +100,7 @@ const Player = (props) => {
 };
 
 Player.propTypes = {
-  history: PropTypes.object.isRequired,
+  history: PropTypes.object,
   filmId: PropTypes.number.isRequired,
   children: PropTypes.element.isRequired,
   name: PropTypes.string.isRequired,

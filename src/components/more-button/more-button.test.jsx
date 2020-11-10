@@ -6,7 +6,7 @@ describe(`Render MoreButton`, () => {
   it(`Render MoreButton`, () => {
     const tree = renderer
       .create(
-        <MoreButton onMoreButton={()=>{}}/>
+          <MoreButton onMoreButton={()=>{}}/>
       )
       .toJSON();
 

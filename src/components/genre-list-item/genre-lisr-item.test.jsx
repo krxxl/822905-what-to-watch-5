@@ -8,7 +8,7 @@ describe(`Render GenreListItem`, () => {
   it(`Render GenreListItem`, () => {
     const tree = renderer
       .create(
-        <GenreListItem name={genres[0].name} className={`catalog__genres-item--active`} onGenreChange={noop} onResetCount={noop}/>
+          <GenreListItem name={genres[0]} className={`catalog__genres-item--active`} onGenreChange={noop} onResetCount={noop}/>
       )
       .toJSON();
 

@@ -9,8 +9,6 @@ import Review from '../review/review';
 import Player from '../player/player';
 import withForm from '../../hocs/with-form/with-form';
 import withBigVideo from '../../hocs/with-big-video/with-big-video';
-import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
 import browserHistory from "../../browser-history";
 import PrivateRoute from '../../components/private-route/private-route';
 
@@ -24,10 +22,10 @@ const App = () => {
       <Switch>
         <Route exact path="/"
           render={({history}) => (
-              <MainPage
-                history={history}
-              />
-            )}
+            <MainPage
+              history={history}
+            />
+          )}
         />
         <Route exact path="/login">
           <Login />

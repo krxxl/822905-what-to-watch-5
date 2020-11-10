@@ -14,4 +14,4 @@ export const ErrorStatus = {
 
 export const getFilmById = (state, props) => {
   return state.DATA.films.find((item) => item.id === props.filmId);
-}
+};

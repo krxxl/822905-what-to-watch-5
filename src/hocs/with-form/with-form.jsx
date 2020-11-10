@@ -80,7 +80,7 @@ const withForm = (Component) => {
   }
 
   WithForm.propTypes = {
-    active: PropTypes.string.isRequired,
+    // active: PropTypes.string.isRequired,
     film: PropTypes.shape({
       name: PropTypes.string.isRequired,
       genre: PropTypes.string.isRequired,

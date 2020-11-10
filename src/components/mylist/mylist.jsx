@@ -53,7 +53,7 @@ MyList.propTypes = {
     id: PropTypes.number.isRequired,
   }).isRequired).isRequired,
   loadFavoriteFilms: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired,
+  history: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({

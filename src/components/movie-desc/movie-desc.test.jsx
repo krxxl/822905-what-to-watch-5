@@ -8,7 +8,7 @@ describe(`Render MovieDesc`, () => {
   it(`Render MovieDesc`, () => {
     const tree = renderer
       .create(
-        <MovieDesc film={films[0]} tabNames={tabNames} onTabHandle={()=>{}} active={tabNames[0].name}/>
+          <MovieDesc film={films[0]} tabNames={tabNames} onTabHandle={()=>{}} active={tabNames[0].name}/>
       )
       .toJSON();
 

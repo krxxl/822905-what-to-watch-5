@@ -7,7 +7,7 @@ const initialState = {
   reviews: [],
   favoriteFilms: [],
   isLoading: false,
-  isPromoLoading: false, 
+  isPromoLoading: false,
   sendingReview: false,
   sendingReviewError: false,
   promoFilm: {
@@ -24,7 +24,7 @@ const initialState = {
     description: ``,
     director: ``,
     starring: [],
-    isFavorite:false,
+    isFavorite: false,
     videoLink: ``,
     previewVideoLink: ``,
     id: 0,
