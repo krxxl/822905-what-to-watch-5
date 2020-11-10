@@ -1,13 +1,27 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {App} from "./app";
+import App from "./app";
+import {Provider} from "react-redux";
+import configureMockStore from "redux-mock-store";
+import {TEST_MOCK_STORE} from '../../mocks/test-mocks';
+import thunk from 'redux-thunk';
+import {createAPI} from "../../services/api";
 
+const api = createAPI(
+  () => {}
+);
+
+const middlewares = [thunk.withExtraArgument(api)]
+const mockStore = configureMockStore(middlewares)
+const store = mockStore(TEST_MOCK_STORE);
 
 describe(`Render App`, () => {
-  it(`Render App`, () => {
+  it(`Render App False`, () => {
     const tree = renderer
       .create(
-        <App />,
+        <Provider store={store}>
+          <App />
+        </Provider>,        
         {
           createNodeMock: () => {
             return {};
@@ -15,6 +29,25 @@ describe(`Render App`, () => {
         }
       )
       .toJSON();
+      
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`Render App True`, () => {
+    const tree = renderer
+      .create(
+        <Provider store={store}>
+          <App isLoading={True}/>
+        </Provider>,        
+        {
+          createNodeMock: () => {
+            return {};
+          },
+        }
+      )
+      .toJSON();
+      
 
     expect(tree).toMatchSnapshot();
   });

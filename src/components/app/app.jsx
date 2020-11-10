@@ -66,8 +66,6 @@ const App = () => {
           render={(props) => {
             const {history} = props;
             const filmId = +props.match.params.id;
-            // const film = films.find((item) => item.id === filmId);
-            // const {videoLink, backgroundImage, name} = film;
             return (
               <BigPlayer filmId={filmId} history={history} />
             );
@@ -85,37 +83,37 @@ App.propTypes = {
   // films: PropTypes.array.isRequired,
   history: PropTypes.object,
   match: PropTypes.object,
-  isLoading: PropTypes.bool.isRequired,
+  // isLoading: PropTypes.bool.isRequired,
 };
 
 // export default App;
-const mapStateToProps = ({DATA, SHOW, USER}) => ({
-  // genreActive: SHOW.genreActive,
-  // films: DATA.films,
-  // count: SHOW.count,
-  // activeFilm: SHOW.activeFilm,
-  isLoading: DATA.isLoading,
-  isPromoLoading: DATA.isPropmoLoading
-  // authorizationStatus: USER.authorizationStatus,
-});
+// const mapStateToProps = ({DATA, SHOW, USER}) => ({
+//   // genreActive: SHOW.genreActive,
+//   // films: DATA.films,
+//   // count: SHOW.count,
+//   // activeFilm: SHOW.activeFilm,
+//   isLoading: DATA.isLoading,
+//   isPromoLoading: DATA.isPropmoLoading
+//   // authorizationStatus: USER.authorizationStatus,
+// });
 
-const mapDispatchToProps = (dispatch) => ({
-  // onGenreChange(name) {
-  //   dispatch(ActionCreator.changeGenre(name));
-  // },
-  // onMoreButton(count) {
-  //   dispatch(ActionCreator.moreFilms(count));
-  // },
-  // onResetCount() {
-  //   dispatch(ActionCreator.resetCount());
-  // },
-  // onChangeActiveFilm(id) {
-  //   dispatch(ActionCreator.changeActiveFilm(id));
-  // },
-  changeStatus() {
-    dispatch(ActionCreator.checkStatus());
-  },
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   // onGenreChange(name) {
+//   //   dispatch(ActionCreator.changeGenre(name));
+//   // },
+//   // onMoreButton(count) {
+//   //   dispatch(ActionCreator.moreFilms(count));
+//   // },
+//   // onResetCount() {
+//   //   dispatch(ActionCreator.resetCount());
+//   // },
+//   // onChangeActiveFilm(id) {
+//   //   dispatch(ActionCreator.changeActiveFilm(id));
+//   // },
+//   changeStatus() {
+//     dispatch(ActionCreator.checkStatus());
+//   },
+// });
 
-export {App};
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
+// export default connect(mapStateToProps, mapDispatchToProps)(App);
