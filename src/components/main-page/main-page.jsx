@@ -27,6 +27,7 @@ class MainPage extends React.PureComponent {
       filmsByGenre,
       genres,
       isPromoLoading,
+      isLoadingPromoError,
       genreActive,
       onGenreChange,
       onMoreButton,
@@ -36,9 +37,14 @@ class MainPage extends React.PureComponent {
     } = this.props;
 
     const COUNTFILM = count;
-    if (!isPromoLoading) {
-      return <h1>LOADING...</h1>;
-    }
+    const alert = () => {
+      if (!isPromoLoading && !isLoadingPromoError) {
+        return <div className="alert-loading">LOADING...</div>;
+      } else if (isLoadingPromoError) {
+        return <div className="alert-error">Somethimg went wrong, try again</div>
+      }
+    };
+
     const {
       backgroundImage,
       videoLink,
@@ -62,6 +68,7 @@ class MainPage extends React.PureComponent {
           <Header />
 
           <div className="movie-card__wrap">
+            {alert()}
             <div className="movie-card__info">
               <div className="movie-card__poster">
                 <img src={posterImage} alt={name} width="218" height="327" />
@@ -174,6 +181,7 @@ const mapStateToProps = (state) => ({
   genres: getGenres(state),
   promoFilm: state.DATA.promoFilm,
   isPromoLoading: state.DATA.isLoadingPromo,
+  isLoadingPromoError: state.DATA.isLoadingPromoError
 });
 
 const mapDispatchToProps = (dispatch) => ({

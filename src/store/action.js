@@ -18,7 +18,10 @@ export const ActionType = {
   LOAD_FILMS_ERROR: `LOAD_FILMS_ERROR`,
   IS_LOAD_FAVORITE_FILMS: `IS_LOAD_FAVORITE_FILMS`,
   LOAD_FAVORITE_FILMS_ERROR: `LOAD_FAVORITE_FILMS_ERROR`,
-  LOAD_PROMO_ERROR: `LOAD_PROMO_ERROR`
+  LOAD_PROMO_ERROR: `LOAD_PROMO_ERROR`,
+  IS_LOAD_REVIEWS: `IS_LOAD_REVIEWS`,
+  LOAD_REVIEWS_ERROR: `LOAD_REVIEWS_ERROR`,
+
   // ADD_REVIEWS: `ADD_REVIEWS`,
   //   SHOW_ERROR: `SHOW_ERROR`,
 };
@@ -64,6 +67,12 @@ export const ActionCreator = {
   }),
   errorLoadFavorite: () => ({
     type: ActionType.LOAD_FAVORITE_FILMS_ERROR, //error load favorite
+  }),
+  checkReviewsStatus: () => ({
+    type: ActionType.IS_LOAD_REVIEWS, // проверка пришли ли данные favorite
+  }),
+  errorLoadReviews: () => ({
+    type: ActionType.LOAD_REVIEWS_ERROR, //error load favorite
   }),
   redirectRoute: (url) => ({
     type: ActionType.REDIRECT_TO_ROUTE,

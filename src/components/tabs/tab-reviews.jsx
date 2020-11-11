@@ -22,13 +22,22 @@ class TabsReviews extends React.PureComponent {
       loadComments(filmId);
     }
   }
+
   render() {
-    const {reviews} = this.props;
+    const {reviews, isLoadingReviews, isLoadingReviewsError} = this.props;
     const halfOfReviews = Math.round(reviews.length / 2);
     const firstHalfReviews = reviews.slice(0, halfOfReviews);
     const secondHalfReviews = reviews.slice(halfOfReviews);
+    const alert = () => {
+      if (!isLoadingReviews && !isLoadingReviewsError) {
+        return <div className="alert-loading">LOADING...</div>;
+      } else if (isLoadingReviewsError) {
+        return <div className="alert-error">Somethimg went wrong, try again</div>
+      }
+    };
     return (
       <div className="movie-card__reviews movie-card__row">
+        {alert()}
         <div className="movie-card__reviews-col">
           {firstHalfReviews.map((review) => {
             return (
@@ -68,7 +77,9 @@ TabsReviews.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  reviews: state.DATA.reviews
+  reviews: state.DATA.reviews,
+  isLoadingReviews: state.DATA.isLoadingReviews,
+  isLoadingReviewsError: state.DATA.isLoadingReviewsError
 });
 
 const mapDispatchToProps = (dispatch) => ({

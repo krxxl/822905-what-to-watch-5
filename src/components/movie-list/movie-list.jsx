@@ -25,17 +25,18 @@ const MovieList = (props) => {
     );
   });
 
-  if (!isLoading && !isLoadingError) {
-    return <h1>LOADING...</h1>;
-  } else if (isLoadingError) {
-    return <h1>SOMETHING GOES WRONG, TRY AGAIN...</h1>;
-  }
-  // if (!isLoading && !isLoadingError && !isLoadingFavorite && !isLoadingFavoriteError) {
-  //   return <h1>LOADING...</h1>;
-  // } else if (isLoadingError || isLoadingFavorite) {
-  //   return <h1>SOMETHING GOES WRONG, TRY AGAIN...</h1>;
-  // }
-  return <div className="catalog__movies-list">{elements}</div>;
+ 
+  const alert = () => {
+    if (!isLoading && !isLoadingError && !isLoadingFavorite && !isLoadingFavoriteError) {
+      return <div className="alert-loading">LOADING...</div>;
+    } else if (isLoadingError || isLoadingFavoriteError) {
+      return <div className="alert-error">Somethimg went wrong, try again</div>
+    }
+  };
+  return <div className="catalog__movies-list">
+    {alert()}
+    {elements}
+    </div>;
 };
 
 MovieList.propTypes = {

@@ -11,7 +11,9 @@ const initialState = {
   isLoadingFavorite: false,
   isLoadingFavoriteError: false,
   isLoadingPromo: false,
-  isLoadingErrorPromo: false,
+  isLoadingPromoError: false,
+  isLoadingReviews: false,
+  isLoadingReviewsError: false,
   sendingReview: false,
   sendingReviewError: false,
   promoFilm: {
@@ -126,6 +128,14 @@ const filmsData = (state = initialState, action) => {
     case ActionType.LOAD_PROMO_ERROR:
       return extend(state, {
         isLoadingPromoError: true,
+      });
+    case ActionType.IS_LOAD_REVIEWS:
+      return extend(state, {
+        isLoadingReviews: true,
+      });
+    case ActionType.LOAD_REVIEWS_ERROR:
+      return extend(state, {
+        isLoadingReviewsError: true,
       });
   }
 

@@ -47,7 +47,7 @@ const withForm = (Component) => {
 
 
     render() {
-      const isError = this.props.sendingReviewError ? `Something goes wrong, try it again...` : null;
+      const isError = this.props.sendingReviewError ? <div className="alert-error">Something goes wrong, try it again...</div> : null;
       return (
         <Component {...this.props}>
           <form action="#" className="add-review__form" onSubmit={this.handleSubmit}>
@@ -71,7 +71,7 @@ const withForm = (Component) => {
               <div className="add-review__submit">
                 <button className="add-review__btn" disabled={!this.state.formValid || this.props.sendingReview} type="submit">Post</button>
               </div>
-              <h2>{isError}</h2>
+              {isError}
             </div>
           </form>
         </Component>

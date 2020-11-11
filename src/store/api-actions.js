@@ -30,6 +30,11 @@ export const fetchCommentsList = (id) => (dispatch, _getState, api) => (
   api.get(`/comments/${id}`)
     .then(({data}) => {
       dispatch(ActionCreator.loadReviews(data));
+      dispatch(ActionCreator.checkReviewsStatus());
+    })
+    .catch((err) => {
+      dispatch(ActionCreator.errorLoadReviews());
+      throw err;
     })
 );
 
@@ -49,6 +54,10 @@ export const getPromo = () => (dispatch, _getState, api) => (
     .then(({data}) => {
       dispatch(ActionCreator.loadPromo(adaptiveFilms(data)));
       dispatch(ActionCreator.checkPromoStatus());
+    })
+    .catch((err) => {
+      dispatch(ActionCreator.errorLoadPromo());
+      throw err;
     })
 );
 
