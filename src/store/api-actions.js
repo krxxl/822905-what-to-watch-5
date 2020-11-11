@@ -1,5 +1,5 @@
 import {ActionCreator} from "./action";
-import {AuthorizationStatus} from "../constant/constant";
+import {AuthorizationStatus, ErrorMessage} from "../constant/constant";
 import {adaptiveFilms} from '../adapter';
 
 export const fetchFilmList = () => (dispatch, _getState, api) => (
@@ -8,12 +8,21 @@ export const fetchFilmList = () => (dispatch, _getState, api) => (
       dispatch(ActionCreator.loadFilms(data.map((film) => adaptiveFilms(film))));
       dispatch(ActionCreator.checkStatus());
     })
+    .catch((err) => {
+      dispatch(ActionCreator.errorLoadFilms());
+      throw err;
+    })
 );
 
 export const fetchFavoriteFilmList = () => (dispatch, _getState, api) => (
   api.get(`/favorite`)
     .then(({data}) => {
       dispatch(ActionCreator.loadFavoriteFilms(data.map((film) => adaptiveFilms(film))));
+      dispatch(ActionCreator.checkFavoriteStatus());
+    })
+    .catch((err) => {
+      dispatch(ActionCreator.errorLoadFavorite());
+      throw err;
     })
 );
 

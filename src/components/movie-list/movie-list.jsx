@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 const Components = withVideo(MovieListItem);
 
 const MovieList = (props) => {
-  const {isLoading, COUNTFILM, history} = props;
+  const {isLoading, isLoadingError, isLoadingFavorite, isLoadingFavoriteError, COUNTFILM, history} = props;
   let {films} = props;
   films = films.slice(0, COUNTFILM);
   const elements = films.map((film) => {
@@ -25,9 +25,16 @@ const MovieList = (props) => {
     );
   });
 
-  if (!isLoading) {
+  if (!isLoading && !isLoadingError) {
     return <h1>LOADING...</h1>;
+  } else if (isLoadingError) {
+    return <h1>SOMETHING GOES WRONG, TRY AGAIN...</h1>;
   }
+  // if (!isLoading && !isLoadingError && !isLoadingFavorite && !isLoadingFavoriteError) {
+  //   return <h1>LOADING...</h1>;
+  // } else if (isLoadingError || isLoadingFavorite) {
+  //   return <h1>SOMETHING GOES WRONG, TRY AGAIN...</h1>;
+  // }
   return <div className="catalog__movies-list">{elements}</div>;
 };
 
@@ -60,6 +67,9 @@ MovieList.propTypes = {
 
 const mapStateToProps = (state) => ({
   isLoading: state.DATA.isLoading,
+  isLoadingError: state.DATA.isLoadingError,
+  isLoadingFavorite: state.DATA.isLoadingFavorite,
+  isLoadingFavoriteError: state.DATA.isLoadingFavoriteError
 });
 
 // export default MovieList;

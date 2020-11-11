@@ -173,7 +173,7 @@ const mapStateToProps = (state) => ({
   count: state.SHOW.count,
   genres: getGenres(state),
   promoFilm: state.DATA.promoFilm,
-  isPromoLoading: state.DATA.isPromoLoading,
+  isPromoLoading: state.DATA.isLoadingPromo,
 });
 
 const mapDispatchToProps = (dispatch) => ({

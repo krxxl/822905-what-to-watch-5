@@ -7,7 +7,11 @@ const initialState = {
   reviews: [],
   favoriteFilms: [],
   isLoading: false,
-  isPromoLoading: false,
+  isLoadingError: false,
+  isLoadingFavorite: false,
+  isLoadingFavoriteError: false,
+  isLoadingPromo: false,
+  isLoadingErrorPromo: false,
   sendingReview: false,
   sendingReviewError: false,
   promoFilm: {
@@ -83,10 +87,6 @@ const filmsData = (state = initialState, action) => {
       return extend(state, {
         isLoading: true,
       });
-    case ActionType.CHECK_PROMO_STATUS:
-      return extend(state, {
-        isPromoLoading: true,
-      });
     case ActionType.LOAD_REVIEWS:
       return extend(state, {
         reviews: action.payload,
@@ -103,13 +103,29 @@ const filmsData = (state = initialState, action) => {
       return extend(state, {
         favoriteFilms: action.payload,
       });
-    // case ActionType.LOAD_FAVORITE_FILMS:
-    //   return extend(state, {
-    //     favoriteFilms: action.payload,
-    //   });
     case ActionType.LOAD_PROMO:
       return extend(state, {
         promoFilm: action.payload,
+      });
+    case ActionType.LOAD_FILMS_ERROR:
+      return extend(state, {
+        isLoadingError: true,
+      });
+    case ActionType.IS_LOAD_FAVORITE_FILMS:
+      return extend(state, {
+        isLoadingFavorite: true,
+      });
+    case ActionType.LOAD_FAVORITE_FILMS_ERROR:
+      return extend(state, {
+        isLoadingFavoriteError: true,
+      });
+    case ActionType.IS_LOAD_PROMO:
+      return extend(state, {
+        isLoadingPromo: true,
+      });
+    case ActionType.LOAD_PROMO_ERROR:
+      return extend(state, {
+        isLoadingPromoError: true,
       });
   }
 
