@@ -1,5 +1,5 @@
 import {ActionCreator} from "./action";
-import {AuthorizationStatus, ErrorMessage} from "../constant/constant";
+import {AuthorizationStatus} from "../constant/constant";
 import {adaptiveFilms} from '../adapter';
 
 export const fetchFilmList = () => (dispatch, _getState, api) => (

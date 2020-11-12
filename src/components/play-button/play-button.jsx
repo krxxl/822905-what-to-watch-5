@@ -1,42 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
-class PlayButton extends React.PureComponent {
-  constructor(props) {
-    super(props);
+const PlayButton = (props) => {
+  const {id} = props;
 
-    this.handlerPlayButtonClick = this.handlerPlayButtonClick.bind(this);
-  }
-
-  handlerPlayButtonClick(id) {
-    const {history} = this.props;
-    history.push(`/player/${id}`);
-  }
-
-  render() {
-    const {id} = this.props;
-
-    return (
-      <button
-        className="btn btn--play movie-card__button"
-        type="button"
-        onClick={(evt) => {
-          evt.preventDefault();
-          this.handlerPlayButtonClick(id);
-        }}
-      >
-        <svg viewBox="0 0 19 19" width="19" height="19">
-          <use href="#play-s"></use>
-        </svg>
-        <span>Play</span>
-      </button>
-    );
-  }
-}
+  return (
+    <Link
+      className="btn btn--play movie-card__button"
+      type="button"
+      to={`/player/${id}`}
+    >
+      <svg viewBox="0 0 19 19" width="19" height="19">
+        <use href="#play-s"></use>
+      </svg>
+      <span>Play</span>
+    </Link>
+  );
+};
 
 PlayButton.propTypes = {
   id: PropTypes.number.isRequired,
-  history: PropTypes.object
 };
 
 export default PlayButton;

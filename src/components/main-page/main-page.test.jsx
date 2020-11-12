@@ -34,6 +34,7 @@ describe(`Render MainPage`, () => {
                 promoFilm={films[0]}
                 filmsByGenre={films}
                 isPromoLoading={true}
+                isLoadingPromoError={false}
                 count={8}/>
             </MemoryRouter>
           </Provider>,

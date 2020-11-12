@@ -6,38 +6,68 @@ import {connect} from 'react-redux';
 
 const Components = withVideo(MovieListItem);
 
-const MovieList = (props) => {
-  const {isLoading, isLoadingError, isLoadingFavorite, isLoadingFavoriteError, COUNTFILM, history} = props;
-  let {films} = props;
-  films = films.slice(0, COUNTFILM);
-  const elements = films.map((film) => {
-    const {name, id, previewImage, previewVideoLink} = film;
+class MovieList extends React.PureComponent {
+  constructor(props) {
+    super(props);
 
+    this._handleSmallCardClick = this._handleSmallCardClick.bind(this);
+  }
+
+  _handleSmallCardClick(id) {
+    const {history} = this.props;
+    history.push(`/films/${id}`);
+  }
+
+  render() {
+    const {
+      isLoading,
+      isLoadingError,
+      isLoadingFavorite,
+      isLoadingFavoriteError,
+      COUNTFILM,
+      history,
+    } = this.props;
+    let {films} = this.props;
+    films = films.slice(0, COUNTFILM);
+    const elements = films.map((film) => {
+      const {name, id, previewImage, previewVideoLink} = film;
+
+      return (
+        <Components
+          key={id}
+          history={history}
+          video={previewVideoLink}
+          name={name}
+          id={id}
+          preview={previewImage}
+          onSmallCardClick={this._handleSmallCardClick}
+        />
+      );
+    });
+
+    const alert = () => {
+      if (
+        !isLoading &&
+        !isLoadingError &&
+        !isLoadingFavorite &&
+        !isLoadingFavoriteError
+      ) {
+        return <div className="alert-loading">LOADING...</div>;
+      } else if (isLoadingError || isLoadingFavoriteError) {
+        return (
+          <div className="alert-error">Somethimg went wrong, try again</div>
+        );
+      }
+      return false;
+    };
     return (
-      <Components
-        key={id}
-        history={history}
-        video={previewVideoLink}
-        name={name}
-        id={id}
-        preview={previewImage}
-      />
+      <div className="catalog__movies-list">
+        {alert()}
+        {elements}
+      </div>
     );
-  });
-
- 
-  const alert = () => {
-    if (!isLoading && !isLoadingError && !isLoadingFavorite && !isLoadingFavoriteError) {
-      return <div className="alert-loading">LOADING...</div>;
-    } else if (isLoadingError || isLoadingFavoriteError) {
-      return <div className="alert-error">Somethimg went wrong, try again</div>
-    }
-  };
-  return <div className="catalog__movies-list">
-    {alert()}
-    {elements}
-    </div>;
-};
+  }
+}
 
 MovieList.propTypes = {
   films: PropTypes.arrayOf(
@@ -61,7 +91,10 @@ MovieList.propTypes = {
         id: PropTypes.number.isRequired,
       }).isRequired
   ).isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
+  isLoadingError: PropTypes.bool,
+  isLoadingFavorite: PropTypes.bool,
+  isLoadingFavoriteError: PropTypes.bool,
   COUNTFILM: PropTypes.number,
   history: PropTypes.object,
 };
@@ -70,7 +103,7 @@ const mapStateToProps = (state) => ({
   isLoading: state.DATA.isLoading,
   isLoadingError: state.DATA.isLoadingError,
   isLoadingFavorite: state.DATA.isLoadingFavorite,
-  isLoadingFavoriteError: state.DATA.isLoadingFavoriteError
+  isLoadingFavoriteError: state.DATA.isLoadingFavoriteError,
 });
 
 // export default MovieList;

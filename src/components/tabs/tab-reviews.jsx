@@ -32,8 +32,9 @@ class TabsReviews extends React.PureComponent {
       if (!isLoadingReviews && !isLoadingReviewsError) {
         return <div className="alert-loading">LOADING...</div>;
       } else if (isLoadingReviewsError) {
-        return <div className="alert-error">Somethimg went wrong, try again</div>
+        return <div className="alert-error">Somethimg went wrong, try again</div>;
       }
+      return false;
     };
     return (
       <div className="movie-card__reviews movie-card__row">
@@ -74,6 +75,8 @@ TabsReviews.propTypes = {
   }).isRequired).isRequired,
   loadComments: PropTypes.func.isRequired,
   filmId: PropTypes.number.isRequired,
+  isLoadingReviews: PropTypes.bool.isRequired,
+  isLoadingReviewsError: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({

@@ -62,6 +62,11 @@ Array [
       className="movie-card__wrap"
     >
       <div
+        className="alert-loading"
+      >
+        LOADING...
+      </div>
+      <div
         className="movie-card__info"
       >
         <div
@@ -99,8 +104,9 @@ Array [
           <div
             className="movie-card__buttons"
           >
-            <button
+            <a
               className="btn btn--play movie-card__button"
+              href="/player/1"
               onClick={[Function]}
               type="button"
             >
@@ -116,7 +122,7 @@ Array [
               <span>
                 Play
               </span>
-            </button>
+            </a>
             <button
               className="btn btn--list movie-card__button"
               onClick={[Function]}
@@ -180,6 +186,11 @@ Array [
       <div
         className="catalog__movies-list"
       >
+        <div
+          className="alert-loading"
+        >
+          LOADING...
+        </div>
         <article
           className="small-movie-card catalog__movies-card"
           onClick={[Function]}

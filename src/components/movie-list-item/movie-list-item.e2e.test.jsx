@@ -9,12 +9,12 @@ const mockEvent = {
   preventDefault() {},
 };
 
-it(`Should movielistitem be pressed`, () => {
-  // const handleSmallCardClick = jest.fn();
-  const handleOnMouseHandle = jest.fn();
+it(`Should MovieListItem be pressed`, () => {
+  const handleSmallCardClick = jest.fn();
+  const wrapper = shallow(
+      <MovieListItem onSmallCardClick={handleSmallCardClick} />
+  );
 
-  const wrapper = shallow(<MovieListItem onMouseHandle={handleOnMouseHandle}  />);
-
-  wrapper.find(`.small-movie-card`).simulate(`onMouseEnter`, mockEvent);
-  expect(handleOnMouseHandle).toHaveBeenCalledTimes(1);
+  wrapper.find(`.small-movie-card`).simulate(`click`, mockEvent);
+  expect(handleSmallCardClick).toHaveBeenCalledTimes(1);
 });

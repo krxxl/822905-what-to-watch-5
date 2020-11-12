@@ -1,6 +1,6 @@
 import films from './films';
 import reviews from './reviews';
-import {AuthorizationStatus} from "../constant/constant";
+import {AuthorizationStatus} from '../constant/constant';
 import {SHOW_ON_STAR_FILMS} from '../constant/constant';
 
 export const TEST_MOCK_STORE = {
@@ -8,8 +8,14 @@ export const TEST_MOCK_STORE = {
     films,
     reviews,
     favoriteFilms: films,
-    isLoading: true,
-    isPromoLoading: true,
+    isLoading: false,
+    isLoadingError: false,
+    isLoadingFavorite: false,
+    isLoadingFavoriteError: false,
+    isLoadingPromo: false,
+    isLoadingPromoError: false,
+    isLoadingReviews: false,
+    isLoadingReviewsError: false,
     sendingReview: false,
     sendingReviewError: false,
     promoFilm: films[0],
@@ -20,5 +26,5 @@ export const TEST_MOCK_STORE = {
   SHOW: {
     genreActive: `All genres`,
     count: SHOW_ON_STAR_FILMS,
-  }
+  },
 };

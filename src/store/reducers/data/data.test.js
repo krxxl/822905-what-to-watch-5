@@ -1,10 +1,16 @@
-import MockAdapter from "axios-mock-adapter";
-import {createAPI} from "../../../services/api";
-import {filmsData} from "./data";
+import MockAdapter from 'axios-mock-adapter';
+import {createAPI} from '../../../services/api';
+import {filmsData} from './data';
 import films from '../../../mocks/films';
 import {reviews} from '../../../mocks/reviews';
-import {ActionType} from "../../action";
-import {fetchFilmList, fetchFavoriteFilmList, fetchCommentsList, addReview, getPromo, changeFavorite} from "../../api-actions";
+import {ActionType} from '../../action';
+import {
+  fetchFilmList,
+  fetchFavoriteFilmList,
+  fetchCommentsList,
+  addReview,
+  getPromo,
+} from '../../api-actions';
 import {adaptiveFilms} from '../../../adapter';
 
 const api = createAPI(() => {});
@@ -35,7 +41,13 @@ const initialState = {
   reviews: [],
   favoriteFilms: [],
   isLoading: false,
-  isPromoLoading: false,
+  isLoadingError: false,
+  isLoadingFavorite: false,
+  isLoadingFavoriteError: false,
+  isLoadingPromo: false,
+  isLoadingPromoError: false,
+  isLoadingReviews: false,
+  isLoadingReviewsError: false,
   sendingReview: false,
   sendingReviewError: false,
   promoFilm: {
@@ -61,99 +73,139 @@ const initialState = {
 
 const apiMock = new MockAdapter(api);
 
-
-
 describe(`Reducer Data`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
     expect(filmsData(void 0, {})).toEqual(initialState);
   });
 
   it(`Should update films by load`, () => {
-    expect(filmsData({
-      films: [],
-    }, {
-      type: ActionType.LOAD_FILMS,
-      payload: films
-    })).toEqual({
+    expect(
+        filmsData(
+            {
+              films: [],
+            },
+            {
+              type: ActionType.LOAD_FILMS,
+              payload: films,
+            }
+        )
+    ).toEqual({
       films,
     });
   });
 
   it(`Should update favorite by load`, () => {
-    expect(filmsData({
-      favoriteFilms: [],
-    }, {
-      type: ActionType.LOAD_FAVORITE_FILMS,
-      payload: films
-    })).toEqual({
+    expect(
+        filmsData(
+            {
+              favoriteFilms: [],
+            },
+            {
+              type: ActionType.LOAD_FAVORITE_FILMS,
+              payload: films,
+            }
+        )
+    ).toEqual({
       favoriteFilms: films,
     });
   });
 
   it(`Should update isLoading`, () => {
-    expect(filmsData({
-      isLoading: false,
-    }, {
-      type: ActionType.CHECK_STATUS,
-    })).toEqual({
+    expect(
+        filmsData(
+            {
+              isLoading: false,
+            },
+            {
+              type: ActionType.CHECK_STATUS,
+            }
+        )
+    ).toEqual({
       isLoading: true,
     });
   });
 
   it(`Should update isPromoLoading`, () => {
-    expect(filmsData({
-      isPromoLoading: false,
-    }, {
-      type: ActionType.CHECK_PROMO_STATUS,
-    })).toEqual({
-      isPromoLoading: true,
+    expect(
+        filmsData(
+            {
+              isLoadingPromo: false,
+            },
+            {
+              type: ActionType.IS_LOAD_PROMO,
+            }
+        )
+    ).toEqual({
+      isLoadingPromo: true,
     });
   });
 
   it(`Should update reviews by load`, () => {
-    expect(filmsData({
-      reviews: [],
-    }, {
-      type: ActionType.LOAD_REVIEWS,
-      payload: reviews
-    })).toEqual({
+    expect(
+        filmsData(
+            {
+              reviews: [],
+            },
+            {
+              type: ActionType.LOAD_REVIEWS,
+              payload: reviews,
+            }
+        )
+    ).toEqual({
       reviews,
     });
   });
 
   it(`Should update isSendingReview`, () => {
-    expect(filmsData({
-      sendingReview: false,
-    }, {
-      type: ActionType.SENDING_REVIEW,
-      payload: true
-    })).toEqual({
+    expect(
+        filmsData(
+            {
+              sendingReview: false,
+            },
+            {
+              type: ActionType.SENDING_REVIEW,
+              payload: true,
+            }
+        )
+    ).toEqual({
       sendingReview: true,
     });
   });
 
   it(`Should update sendingReviewError`, () => {
-    expect(filmsData({
-      sendingReviewError: false,
-    }, {
-      type: ActionType.SENDING_REVIEW_ERROR,
-      payload: true
-    })).toEqual({
+    expect(
+        filmsData(
+            {
+              sendingReviewError: false,
+            },
+            {
+              type: ActionType.SENDING_REVIEW_ERROR,
+              payload: true,
+            }
+        )
+    ).toEqual({
       sendingReviewError: true,
     });
   });
 
   it(`Should update promoFilm by load`, () => {
-    expect(filmsData({
-      promoFilm: {},
-    }, {
-      type: ActionType.LOAD_PROMO,
-      payload: films[0]
-    })).toEqual({
+    expect(
+        filmsData(
+            {
+              promoFilm: {},
+            },
+            {
+              type: ActionType.LOAD_PROMO,
+              payload: films[0],
+            }
+        )
+    ).toEqual({
       promoFilm: films[0],
     });
   });
 });
+
+/* eslint max-nested-callbacks: ["error", 4]*/
 
 describe(`Async operation work correctly`, () => {
   it(`Should make a correct API call to /films`, () => {
@@ -161,21 +213,18 @@ describe(`Async operation work correctly`, () => {
     const dispatch = jest.fn();
     const filmsLoader = fetchFilmList();
 
-    apiMock
-      .onGet(`films`)
-      .reply(200, dataMock);
+    apiMock.onGet(`films`).reply(200, dataMock);
 
-    return filmsLoader(dispatch, () => {}, api)
-      .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(2);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: ActionType.LOAD_FILMS,
-          payload: dataMock.map((film) => adaptiveFilms(film)),
-        });
-        expect(dispatch).toHaveBeenNthCalledWith(2, {
-          type: ActionType.CHECK_STATUS,
-        });
+    return filmsLoader(dispatch, () => {}, api).then(() => {
+      expect(dispatch).toHaveBeenCalledTimes(2);
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: ActionType.LOAD_FILMS,
+        payload: dataMock.map((film) => adaptiveFilms(film)),
       });
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
+        type: ActionType.CHECK_STATUS,
+      });
+    });
   });
 
   it(`Should make a correct API call to /favorite`, () => {
@@ -183,18 +232,18 @@ describe(`Async operation work correctly`, () => {
     const dispatch = jest.fn();
     const filmsLoader = fetchFavoriteFilmList();
 
-    apiMock
-      .onGet(`favorite`)
-      .reply(200, dataMock);
+    apiMock.onGet(`favorite`).reply(200, dataMock);
 
-    return filmsLoader(dispatch, () => {}, api)
-      .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: ActionType.LOAD_FAVORITE_FILMS,
-          payload: dataMock.map((film) => adaptiveFilms(film)),
-        });
+    return filmsLoader(dispatch, () => {}, api).then(() => {
+      expect(dispatch).toHaveBeenCalledTimes(2);
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: ActionType.LOAD_FAVORITE_FILMS,
+        payload: dataMock.map((film) => adaptiveFilms(film)),
       });
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
+        type: ActionType.IS_LOAD_FAVORITE_FILMS,
+      });
+    });
   });
 
   it(`Should make a correct API call to /comments`, () => {
@@ -203,51 +252,47 @@ describe(`Async operation work correctly`, () => {
     const dispatch = jest.fn();
     const filmsLoader = fetchCommentsList(id);
 
-    apiMock
-      .onGet(`/comments/${id}`)
-      .reply(200, dataMock);
+    apiMock.onGet(`/comments/${id}`).reply(200, dataMock);
 
-    return filmsLoader(dispatch, () => {}, api)
-      .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: ActionType.LOAD_REVIEWS,
-          payload: dataMock,
-        });
+    return filmsLoader(dispatch, () => {}, api).then(() => {
+      expect(dispatch).toHaveBeenCalledTimes(2);
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: ActionType.LOAD_REVIEWS,
+        payload: dataMock,
       });
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
+        type: ActionType.IS_LOAD_REVIEWS,
+      });
+    });
   });
 
   it(`Should make a correct API call addReview to /comments`, () => {
     const dataMock = [{fake: true}];
     const dispatch = jest.fn();
     const fakeComment = {
-      rating: 1, 
-      comment: `test`, 
-      id: 0
-    }
+      rating: 1,
+      comment: `test`,
+      id: 0,
+    };
     const sendReview = addReview(fakeComment);
-    
 
-    apiMock
-      .onPost(`/comments/${fakeComment.id}`)
-      .reply(200, dataMock);
+    apiMock.onPost(`/comments/${fakeComment.id}`).reply(200, dataMock);
 
-    return sendReview(dispatch, () => {}, api)
-      .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(3);
-        expect(dispatch).toHaveBeenNthCalledWith(2, {
-          type: ActionType.REDIRECT_TO_ROUTE,
-          payload: `/films/${fakeComment.id}`,
-        });
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: ActionType.SENDING_REVIEW,
-          payload: true,
-        });
-        expect(dispatch).toHaveBeenNthCalledWith(3, {
-          type: ActionType.SENDING_REVIEW,
-          payload: false,
-        });
+    return sendReview(dispatch, () => {}, api).then(() => {
+      expect(dispatch).toHaveBeenCalledTimes(3);
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
+        type: ActionType.REDIRECT_TO_ROUTE,
+        payload: `/films/${fakeComment.id}`,
       });
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: ActionType.SENDING_REVIEW,
+        payload: true,
+      });
+      expect(dispatch).toHaveBeenNthCalledWith(3, {
+        type: ActionType.SENDING_REVIEW,
+        payload: false,
+      });
+    });
   });
 
   it(`Should make a correct API call to /promo`, () => {
@@ -255,20 +300,17 @@ describe(`Async operation work correctly`, () => {
     const dispatch = jest.fn();
     const filmsLoader = getPromo();
 
-    apiMock
-      .onGet(`/films/promo`)
-      .reply(200, dataMock);
+    apiMock.onGet(`/films/promo`).reply(200, dataMock);
 
-    return filmsLoader(dispatch, () => {}, api)
-      .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(2);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: ActionType.LOAD_PROMO,
-          payload: adaptiveFilms(dataMock),
-        });
-        expect(dispatch).toHaveBeenNthCalledWith(2, {
-          type: ActionType.CHECK_PROMO_STATUS,
-        });
+    return filmsLoader(dispatch, () => {}, api).then(() => {
+      expect(dispatch).toHaveBeenCalledTimes(2);
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: ActionType.LOAD_PROMO,
+        payload: adaptiveFilms(dataMock),
       });
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
+        type: ActionType.IS_LOAD_PROMO,
+      });
+    });
   });
 });

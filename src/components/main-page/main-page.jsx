@@ -41,8 +41,9 @@ class MainPage extends React.PureComponent {
       if (!isPromoLoading && !isLoadingPromoError) {
         return <div className="alert-loading">LOADING...</div>;
       } else if (isLoadingPromoError) {
-        return <div className="alert-error">Somethimg went wrong, try again</div>
+        return <div className="alert-error">Somethimg went wrong, try again</div>;
       }
+      return false;
     };
 
     const {
@@ -151,6 +152,7 @@ MainPage.propTypes = {
   count: PropTypes.number.isRequired,
   loadPromo: PropTypes.func.isRequired,
   isPromoLoading: PropTypes.bool.isRequired,
+  isLoadingPromoError: PropTypes.bool.isRequired,
   history: PropTypes.object,
   promoFilm: PropTypes.shape({
     name: PropTypes.string.isRequired,

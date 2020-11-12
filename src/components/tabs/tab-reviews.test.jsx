@@ -11,6 +11,8 @@ describe(`Render TabsReviews`, () => {
           <TabsReviews
             filmId={films[0].id}
             reviews={reviews}
+            isLoadingReviews={true}
+            isLoadingReviewsError={false}
             loadComments={() => {}}
           />
       )

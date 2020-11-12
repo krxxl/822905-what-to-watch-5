@@ -15,18 +15,3 @@ export const ErrorStatus = {
 export const getFilmById = (state, props) => {
   return state.DATA.films.find((item) => item.id === props.filmId);
 };
-
-export const ErrorMessage = {
-  ADD_COMMENT: `Ошибка отправки комментария на сервер`,
-  BAD_REQUEST: `Ошибка 400: отправлены некорректные данные`,
-  NOT_FOUND: `Ошибка 404, сервер не найден`,
-  OTHER: `Внутренняя ошибка сервера`,
-
-  FETCH_FILMS_LIST_FAIL: `Ошибка загрузки списка фильмов`,
-  FETCH_PROMO_FAIL: `Ошибка загрука фильма-промо`,
-  FETCH_COMMENTS_FAIL: `Ошибка загрузки комментариев`,
-  FETCH_FAVORITES_FAIL: `Ошибка загрузки списка избранных фильмов`,
-
-  WRONG_EMAIL: `Некорректно введен email`,
-  WRONG_PASSWORD: `Не указан пароль`,
-};
