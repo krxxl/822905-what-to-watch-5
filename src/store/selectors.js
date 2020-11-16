@@ -14,39 +14,6 @@ export const getGenres = createSelector(
 
 export const sortedFilms = createSelector(
     [getFilms, getGenreActive], (films, genreActive) => {
-    // let signular;
-    // switch (genreActive) {
-    //   case genresInSingular.ALL:
-    //     signular = `All`;
-    //     break;
-    //   case genresInSingular.COMEDY:
-    //     signular = `Comedy`;
-    //     break;
-    //   case genresInSingular.CRIME:
-    //     signular = `Crime`;
-    //     break;
-    //   case genresInSingular.KIDS:
-    //     signular = `Kids & Family `;
-    //     break;
-    //   case genresInSingular.DOCUMENTARY:
-    //     signular = `Documentary`;
-    //     break;
-    //   case genresInSingular.HORROR:
-    //     signular = `Horror`;
-    //     break;
-    //   case genresInSingular.SCI_FI:
-    //     signular = `Sci-Fi`;
-    //     break;
-    //   case genresInSingular.THRILLER:
-    //     signular = `Thriller`;
-    //     break;
-    //   case genresInSingular.DRAMA:
-    //     signular = `Drama`;
-    //     break;
-    //   case genresInSingular.ROMANCE:
-    //     signular = `Romance`;
-    //     break;
-    // }
       if (genreActive === `All genres`) {
         return films;
       }

@@ -106,6 +106,5 @@ const mapStateToProps = (state) => ({
   isLoadingFavoriteError: state.DATA.isLoadingFavoriteError,
 });
 
-// export default MovieList;
 export {MovieList};
 export default connect(mapStateToProps, null)(MovieList);

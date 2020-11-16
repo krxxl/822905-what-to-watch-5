@@ -11,7 +11,7 @@ describe(`Render MovieNav`, () => {
           <MovieNav
             tabNames={tabNames}
             active={tabNames[0].name}
-            clickOnTab={noom}
+            onTabHandle={noom}
           />
       )
       .toJSON();

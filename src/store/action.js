@@ -95,8 +95,4 @@ export const ActionCreator = {
     type: ActionType.LOAD_PROMO,
     payload: film,
   }),
-  // showError: (errorStatus) => ({
-  //   type: ActionType.SHOW_ERROR,
-  //   payload: errorStatus,
-  // }),
 };

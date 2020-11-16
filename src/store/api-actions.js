@@ -65,6 +65,7 @@ export const changeFavorite = (id, status) => (dispatch, _getState, api) => {
   return api.post(`/favorite/${id}/${status}`)
   .then(() => {
     dispatch(fetchFilmList());
+    dispatch(getPromo());
   })
     .catch((err) => {
       throw err;

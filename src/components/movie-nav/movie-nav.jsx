@@ -2,13 +2,13 @@ import React from 'react';
 import MovieNavItem from '../movie-nav-item/movie-nav-item';
 import PropTypes from 'prop-types';
 
-const MovieNav = ({tabNames, active, clickOnTab}) => {
+const MovieNav = ({tabNames, active, onTabHandle}) => {
   return (
     <nav className="movie-nav movie-card__nav">
       <ul className="movie-nav__list">
         {tabNames.map((tabName) => {
           const className = active === tabName.name ? `movie-nav__item--active` : ``;
-          return <MovieNavItem className={className} key={tabName.id} name={tabName.name} clickOnTab={clickOnTab} />;
+          return <MovieNavItem className={className} key={tabName.id} name={tabName.name} onTabHandle={onTabHandle} />;
         }
         )}
       </ul>
@@ -25,5 +25,5 @@ MovieNav.propTypes = {
     id: PropTypes.number.isRequired,
   }).isRequired).isRequired,
   active: PropTypes.string.isRequired,
-  clickOnTab: PropTypes.func.isRequired,
+  onTabHandle: PropTypes.func.isRequired,
 };

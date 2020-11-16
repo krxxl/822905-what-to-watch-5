@@ -17,7 +17,7 @@ it(`Should MovieNavItem be pressed`, () => {
       <MovieNavItem
         name={tabNames[0].name}
         className={`movie-nav__item--active`}
-        clickOnTab={handleClickOnTab}
+        onTabHandle={handleClickOnTab}
       />
   );
 

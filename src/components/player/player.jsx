@@ -8,9 +8,9 @@ const Player = (props) => {
     children,
     name,
     leftTime,
-    videoExit,
-    openFullscreen,
-    handleIsPlayingChange,
+    // onVideoExit,
+    onOpenFullscreen,
+    onIsPlayingChange,
     isPlaying,
     duration,
     currentTime,
@@ -38,7 +38,7 @@ const Player = (props) => {
       <button
         onClick={(evt) => {
           evt.preventDefault();
-          videoExit();
+          // onVideoExit();
           history.push(`/films/${filmId}`);
         }}
         type="button"
@@ -71,7 +71,7 @@ const Player = (props) => {
           <button
             onClick={(evt) => {
               evt.preventDefault();
-              handleIsPlayingChange();
+              onIsPlayingChange();
             }}
             type="button"
             className="player__play"
@@ -83,7 +83,7 @@ const Player = (props) => {
           <button
             onClick={(evt) => {
               evt.preventDefault();
-              openFullscreen();
+              onOpenFullscreen();
             }}
             type="button"
             className="player__full-screen"
@@ -105,12 +105,12 @@ Player.propTypes = {
   children: PropTypes.element.isRequired,
   name: PropTypes.string.isRequired,
   leftTime: PropTypes.func.isRequired,
-  videoExit: PropTypes.func.isRequired,
-  openFullscreen: PropTypes.func.isRequired,
-  handleIsPlayingChange: PropTypes.func.isRequired,
-  isPlaying: PropTypes.bool.isRequired,
+  // onVideoExit: PropTypes.func.isRequired,
+  onOpenFullscreen: PropTypes.func.isRequired,
+  onIsPlayingChange: PropTypes.func.isRequired,
   duration: PropTypes.number.isRequired,
   currentTime: PropTypes.number.isRequired,
+  isPlaying: PropTypes.bool.isRequired
 };
 
 export default Player;

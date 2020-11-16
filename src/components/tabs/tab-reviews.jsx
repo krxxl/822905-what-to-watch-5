@@ -3,7 +3,6 @@ import MovieReviews from '../movie-reviews/movie-reviews';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {fetchCommentsList} from '../../store/api-actions';
-// import { render } from 'react-dom';
 
 class TabsReviews extends React.PureComponent {
   constructor(props) {

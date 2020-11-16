@@ -44,18 +44,11 @@ class Login extends PureComponent {
   validateField(fieldName, value) {
     let fieldValidationErrors = this.state.formErrors;
     let emailValid = this.state.emailValid;
-    // let passwordValid = this.state.passwordValid;
     switch (fieldName) {
       case `email`:
         emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
         fieldValidationErrors = emailValid ? `` : `Please enter a valid email address`;
         break;
-        // case 'password':
-        //   passwordValid = value.length >= 6;
-        //   fieldValidationErrors = passwordValid ? '': ' is too short';
-        //   break;
-        // default:
-        //   break;
     }
     this.setState({formErrors: fieldValidationErrors, emailValid}, this.validateForm);
   }
@@ -126,10 +119,6 @@ class Login extends PureComponent {
 Login.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
-
-// const mapStateToProps = (state) => ({
-//   errorStatus: state.USER.errorStatus,
-// });
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmit(authData) {

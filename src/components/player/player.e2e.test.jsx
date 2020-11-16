@@ -16,7 +16,6 @@ const mockEvent = {
 it(`When user intercat Player`, () => {
   const handlePlayPause = jest.fn();
   const handleFullScreen = jest.fn();
-  const handleVideoExit = jest.fn();
 
   const wrapper = shallow(
       <Player
@@ -24,9 +23,8 @@ it(`When user intercat Player`, () => {
         filmId={films[0].id}
         name={films[0].name}
         leftTime={() => {}}
-        videoExit={handleVideoExit}
-        openFullscreen={handleFullScreen}
-        handleIsPlayingChange={handlePlayPause}
+        onOpenFullscreen={handleFullScreen}
+        onIsPlayingChange={handlePlayPause}
         isPlaying={false}
         duration={20}
         currentTime={3}
@@ -42,13 +40,10 @@ it(`When user intercat Player`, () => {
 
   const playPauseButton = wrapper.find(`.player__play`);
   const fullScreenButton = wrapper.find(`.player__full-screen`);
-  const exitButton = wrapper.find(`.player__exit`);
 
   playPauseButton.simulate(`click`, mockEvent);
   fullScreenButton.simulate(`click`, mockEvent);
-  exitButton.simulate(`click`, mockEvent);
 
   expect(handlePlayPause).toHaveBeenCalledTimes(1);
   expect(handleFullScreen).toHaveBeenCalledTimes(1);
-  expect(handleVideoExit).toHaveBeenCalledTimes(1);
 });

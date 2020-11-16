@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const MovieNavItem = ({name, className, clickOnTab}) => {
+const MovieNavItem = ({name, className, onTabHandle}) => {
   return (
     <li className={`movie-nav__item ${className}`} >
-      <a href="#" className="movie-nav__link" onClick={(evt) => clickOnTab(evt, name)}>
+      <a href="#" className="movie-nav__link" onClick={(evt) => onTabHandle(evt, name)}>
         {name}
       </a>
     </li>
@@ -16,5 +16,5 @@ export default MovieNavItem;
 MovieNavItem.propTypes = {
   name: PropTypes.string.isRequired,
   className: PropTypes.string.isRequired,
-  clickOnTab: PropTypes.func.isRequired
+  onTabHandle: PropTypes.func.isRequired
 };

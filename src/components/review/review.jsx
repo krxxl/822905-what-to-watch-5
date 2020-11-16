@@ -30,9 +30,6 @@ const Review = (props) => {
 };
 
 Review.propTypes = {
-  name: PropTypes.string.isRequired,
-  posterImage: PropTypes.string.isRequired,
-  backgroundImage: PropTypes.string.isRequired,
   filmId: PropTypes.number.isRequired,
   children: PropTypes.element.isRequired,
   film: PropTypes.shape({
