@@ -8,7 +8,7 @@ describe(`Render GenreList`, () => {
   it(`Render GenreList`, () => {
     const tree = renderer
       .create(
-        <GenreList genres={genres} genreActive={`All genres`} onGenreChange={noop} onResetCount={noop}/>
+          <GenreList genres={genres} genreActive={`All genres`} onGenreChange={noop} onResetCount={noop}/>
       )
       .toJSON();
 

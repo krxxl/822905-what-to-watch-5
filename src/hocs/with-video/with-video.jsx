@@ -13,11 +13,7 @@ const withVideo = (Component) => {
         isPlaying: false,
       };
 
-      this.onMouseHandle = this.onMouseHandle.bind(this);
-    }
-
-    onMouseHandle() {
-      this.setState((prevState) => ({isPlaying: !prevState.isPlaying}));
+      this._handleOnMouse = this._handleOnMouse.bind(this);
     }
 
     componentDidMount() {
@@ -33,9 +29,7 @@ const withVideo = (Component) => {
       const video = this.videoref.current;
       video.src = this.props.video;
       if (this.state.isPlaying) {
-        // setTimeout(()=>{
         video.play();
-        // }, 1000);
       } else {
         video.pause();
       }
@@ -53,13 +47,17 @@ const withVideo = (Component) => {
       }
     }
 
+    _handleOnMouse(isPlaying) {
+      this.setState({isPlaying});
+    }
+
     render() {
       const {preview} = this.props;
       const {isLoading} = this.state;
       return (
         <Component
           {...this.props}
-          onMouseHandle={this.onMouseHandle}
+          onMouseHandle={this._handleOnMouse}
           isLoading={isLoading}
         >
           <video

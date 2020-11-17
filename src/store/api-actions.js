@@ -8,12 +8,21 @@ export const fetchFilmList = () => (dispatch, _getState, api) => (
       dispatch(ActionCreator.loadFilms(data.map((film) => adaptiveFilms(film))));
       dispatch(ActionCreator.checkStatus());
     })
+    .catch((err) => {
+      dispatch(ActionCreator.errorLoadFilms());
+      throw err;
+    })
 );
 
 export const fetchFavoriteFilmList = () => (dispatch, _getState, api) => (
   api.get(`/favorite`)
     .then(({data}) => {
       dispatch(ActionCreator.loadFavoriteFilms(data.map((film) => adaptiveFilms(film))));
+      dispatch(ActionCreator.checkFavoriteStatus());
+    })
+    .catch((err) => {
+      dispatch(ActionCreator.errorLoadFavorite());
+      throw err;
     })
 );
 
@@ -21,6 +30,11 @@ export const fetchCommentsList = (id) => (dispatch, _getState, api) => (
   api.get(`/comments/${id}`)
     .then(({data}) => {
       dispatch(ActionCreator.loadReviews(data));
+      dispatch(ActionCreator.checkReviewsStatus());
+    })
+    .catch((err) => {
+      dispatch(ActionCreator.errorLoadReviews());
+      throw err;
     })
 );
 
@@ -39,6 +53,11 @@ export const getPromo = () => (dispatch, _getState, api) => (
   api.get(`/films/promo`)
     .then(({data}) => {
       dispatch(ActionCreator.loadPromo(adaptiveFilms(data)));
+      dispatch(ActionCreator.checkPromoStatus());
+    })
+    .catch((err) => {
+      dispatch(ActionCreator.errorLoadPromo());
+      throw err;
     })
 );
 
@@ -46,6 +65,7 @@ export const changeFavorite = (id, status) => (dispatch, _getState, api) => {
   return api.post(`/favorite/${id}/${status}`)
   .then(() => {
     dispatch(fetchFilmList());
+    dispatch(getPromo());
   })
     .catch((err) => {
       throw err;

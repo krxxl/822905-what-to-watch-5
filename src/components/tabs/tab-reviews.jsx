@@ -3,7 +3,6 @@ import MovieReviews from '../movie-reviews/movie-reviews';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {fetchCommentsList} from '../../store/api-actions';
-// import { render } from 'react-dom';
 
 class TabsReviews extends React.PureComponent {
   constructor(props) {
@@ -22,13 +21,23 @@ class TabsReviews extends React.PureComponent {
       loadComments(filmId);
     }
   }
+
   render() {
-    const {reviews} = this.props;
+    const {reviews, isLoadingReviews, isLoadingReviewsError} = this.props;
     const halfOfReviews = Math.round(reviews.length / 2);
     const firstHalfReviews = reviews.slice(0, halfOfReviews);
     const secondHalfReviews = reviews.slice(halfOfReviews);
+    const alert = () => {
+      if (!isLoadingReviews && !isLoadingReviewsError) {
+        return <div className="alert-loading">LOADING...</div>;
+      } else if (isLoadingReviewsError) {
+        return <div className="alert-error">Somethimg went wrong, try again</div>;
+      }
+      return false;
+    };
     return (
       <div className="movie-card__reviews movie-card__row">
+        {alert()}
         <div className="movie-card__reviews-col">
           {firstHalfReviews.map((review) => {
             return (
@@ -65,10 +74,14 @@ TabsReviews.propTypes = {
   }).isRequired).isRequired,
   loadComments: PropTypes.func.isRequired,
   filmId: PropTypes.number.isRequired,
+  isLoadingReviews: PropTypes.bool.isRequired,
+  isLoadingReviewsError: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  reviews: state.DATA.reviews
+  reviews: state.DATA.reviews,
+  isLoadingReviews: state.DATA.isLoadingReviews,
+  isLoadingReviewsError: state.DATA.isLoadingReviewsError
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -22,9 +22,40 @@ class MainPage extends React.PureComponent {
   }
 
   render() {
-    const {promoFilm, filmsByGenre, genres, onSmallCardClick, genreActive, onGenreChange, onMoreButton, onPlayButton, count, onResetCount} = this.props;
-    const {backgroundImage, videoLink, name, posterImage, genre, released, id, isFavorite} = promoFilm;
+    const {
+      promoFilm,
+      filmsByGenre,
+      genres,
+      isPromoLoading,
+      isLoadingPromoError,
+      genreActive,
+      onGenreChange,
+      onMoreButton,
+      count,
+      onResetCount,
+      history,
+    } = this.props;
+
     const COUNTFILM = count;
+    const alert = () => {
+      if (!isPromoLoading && !isLoadingPromoError) {
+        return <div className="alert-loading">LOADING...</div>;
+      } else if (isLoadingPromoError) {
+        return <div className="alert-error">Somethimg went wrong, try again</div>;
+      }
+      return false;
+    };
+
+    const {
+      backgroundImage,
+      videoLink,
+      name,
+      posterImage,
+      genre,
+      released,
+      id,
+      isFavorite,
+    } = promoFilm;
 
     return (
       <React.Fragment>
@@ -38,6 +69,7 @@ class MainPage extends React.PureComponent {
           <Header />
 
           <div className="movie-card__wrap">
+            {alert()}
             <div className="movie-card__info">
               <div className="movie-card__poster">
                 <img src={posterImage} alt={name} width="218" height="327" />
@@ -50,8 +82,8 @@ class MainPage extends React.PureComponent {
                   <span className="movie-card__year">{released}</span>
                 </p>
                 <div className="movie-card__buttons">
-                  <PlayButton onPlayButton={onPlayButton} id={id} video={videoLink}/>
-                  <MyListButton id={id} isFavorite={isFavorite}/>
+                  <PlayButton history={history} id={id} video={videoLink} />
+                  <MyListButton id={id} isFavorite={isFavorite} />
                 </div>
               </div>
             </div>
@@ -61,11 +93,22 @@ class MainPage extends React.PureComponent {
           <section className="catalog">
             <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-            <GenreList genres={genres} genreActive={genreActive} onResetCount={onResetCount} onGenreChange={onGenreChange}/>
+            <GenreList
+              genres={genres}
+              genreActive={genreActive}
+              onResetCount={onResetCount}
+              onGenreChange={onGenreChange}
+            />
 
-            <MovieList COUNTFILM={COUNTFILM} films={filmsByGenre} onSmallCardClick = {onSmallCardClick}/>
+            <MovieList
+              COUNTFILM={COUNTFILM}
+              films={filmsByGenre}
+              history={history}
+            />
 
-            {filmsByGenre.length >= COUNTFILM ? <MoreButton onMoreButton={onMoreButton}/> : null}
+            {filmsByGenre.length >= COUNTFILM ? (
+              <MoreButton onMoreButton={onMoreButton} />
+            ) : null}
             {/* <MoreButton /> */}
           </section>
 
@@ -76,54 +119,41 @@ class MainPage extends React.PureComponent {
   }
 }
 
+MainPage.defaultProps = {
+  promoFilm: {},
+};
 MainPage.propTypes = {
-  // films: PropTypes.arrayOf(PropTypes.shape({
-  //   name: PropTypes.string.isRequired,
-  //   genre: PropTypes.string.isRequired,
-  //   released: PropTypes.number.isRequired,
-  //   posterImage: PropTypes.string.isRequired,
-  //   previewImage: PropTypes.string.isRequired,
-  //   backgroundImage: PropTypes.string.isRequired,
-  //   backgroundColor: PropTypes.string.isRequired,
-  //   runTime: PropTypes.number.isRequired,
-  //   rating: PropTypes.number.isRequired,
-  //   scoresCount: PropTypes.number.isRequired,
-  //   description: PropTypes.string.isRequired,
-  //   director: PropTypes.string.isRequired,
-  //   starring: PropTypes.array.isRequired,
-  //   isFavorite: PropTypes.bool.isRequired,
-  //   videoLink: PropTypes.string.isRequired,
-  //   previewVideoLink: PropTypes.string.isRequired,
-  //   id: PropTypes.number.isRequired,
-  // }).isRequired).isRequired,
-  filmsByGenre: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    released: PropTypes.number.isRequired,
-    posterImage: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    backgroundImage: PropTypes.string.isRequired,
-    backgroundColor: PropTypes.string.isRequired,
-    runTime: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    scoresCount: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    director: PropTypes.string.isRequired,
-    starring: PropTypes.array.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    videoLink: PropTypes.string.isRequired,
-    previewVideoLink: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
-  }).isRequired).isRequired,
+  filmsByGenre: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        genre: PropTypes.string.isRequired,
+        released: PropTypes.number.isRequired,
+        posterImage: PropTypes.string.isRequired,
+        previewImage: PropTypes.string.isRequired,
+        backgroundImage: PropTypes.string.isRequired,
+        backgroundColor: PropTypes.string.isRequired,
+        runTime: PropTypes.number.isRequired,
+        rating: PropTypes.number.isRequired,
+        scoresCount: PropTypes.number.isRequired,
+        description: PropTypes.string.isRequired,
+        director: PropTypes.string.isRequired,
+        starring: PropTypes.array.isRequired,
+        isFavorite: PropTypes.bool.isRequired,
+        videoLink: PropTypes.string.isRequired,
+        previewVideoLink: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
+      }).isRequired
+  ).isRequired,
   genres: PropTypes.array.isRequired,
-  onSmallCardClick: PropTypes.func.isRequired,
-  onPlayButton: PropTypes.func.isRequired,
   genreActive: PropTypes.string.isRequired,
   onGenreChange: PropTypes.func.isRequired,
   onResetCount: PropTypes.func.isRequired,
   onMoreButton: PropTypes.func.isRequired,
   count: PropTypes.number.isRequired,
   loadPromo: PropTypes.func.isRequired,
+  isPromoLoading: PropTypes.bool.isRequired,
+  isLoadingPromoError: PropTypes.bool.isRequired,
+  history: PropTypes.object,
   promoFilm: PropTypes.shape({
     name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
@@ -142,9 +172,8 @@ MainPage.propTypes = {
     videoLink: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
-  }).isRequired
+  }).isRequired,
 };
-
 
 const mapStateToProps = (state) => ({
   genreActive: state.SHOW.genreActive,
@@ -153,8 +182,9 @@ const mapStateToProps = (state) => ({
   count: state.SHOW.count,
   genres: getGenres(state),
   promoFilm: state.DATA.promoFilm,
+  isPromoLoading: state.DATA.isLoadingPromo,
+  isLoadingPromoError: state.DATA.isLoadingPromoError
 });
-
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreChange(name) {

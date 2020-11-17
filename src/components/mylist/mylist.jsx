@@ -18,13 +18,13 @@ class MyList extends React.PureComponent {
 
   render() {
     const films = this.props.favoriteFilms;
-    const {onSmallCardClick} = this.props;
+    const {history} = this.props;
     return (
       <div className="user-page">
         <Header title="My list" className="user-page__head"/>
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <MovieList films={films} onSmallCardClick={onSmallCardClick} />
+          <MovieList history={history} films={films} />
         </section>
         <Footer />
       </div>
@@ -52,8 +52,8 @@ MyList.propTypes = {
     previewVideoLink: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
   }).isRequired).isRequired,
-  onSmallCardClick: PropTypes.func.isRequired,
   loadFavoriteFilms: PropTypes.func.isRequired,
+  history: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({

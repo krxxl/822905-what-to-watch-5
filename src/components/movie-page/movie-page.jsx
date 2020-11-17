@@ -16,7 +16,7 @@ import MyListButton from '../my-list-button/my-list-button';
 const Components = withActiveItem(MovieDesc);
 
 const MoviePage = (props) => {
-  const {onSmallCardClick, onPlayButton, filmId, authorizationStatus} = props;
+  const {history, filmId, authorizationStatus} = props;
   let {films} = props;
   const film = films.find((item)=>item.id === +filmId);
   const {backgroundImage, name, posterImage, genre, released, videoLink, isFavorite} = film;
@@ -48,7 +48,7 @@ const MoviePage = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <PlayButton onPlayButton={onPlayButton} id={filmId} video={videoLink}/>
+                <PlayButton history={history} id={filmId} video={videoLink}/>
                 <MyListButton id={filmId} isFavorite={isFavorite}/>
                 {addReviewBtn}
               </div>
@@ -69,7 +69,7 @@ const MoviePage = (props) => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <MovieList COUNTFILM={COUNTFILM} films={films} onSmallCardClick={onSmallCardClick} />
+          <MovieList COUNTFILM={COUNTFILM} films={films} history={history} />
         </section>
 
         <Footer />
@@ -99,13 +99,13 @@ MoviePage.propTypes = {
     previewVideoLink: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
   }).isRequired).isRequired,
-  onSmallCardClick: PropTypes.func.isRequired,
-  onPlayButton: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
+  history: PropTypes.object
 };
 
 const mapStateToProps = (state) => ({
   authorizationStatus: state.USER.authorizationStatus,
+  films: state.DATA.films,
 });
 
 export {MoviePage};

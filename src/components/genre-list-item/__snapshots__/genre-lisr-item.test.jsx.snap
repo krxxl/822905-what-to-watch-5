@@ -8,6 +8,8 @@ exports[`Render GenreListItem Render GenreListItem 1`] = `
     className="catalog__genres-link"
     href="#"
     onClick={[Function]}
-  />
+  >
+    All genres
+  </a>
 </li>
 `;

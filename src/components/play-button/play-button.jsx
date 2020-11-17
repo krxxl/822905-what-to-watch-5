@@ -1,29 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
 const PlayButton = (props) => {
-  const {id, onPlayButton} = props;
+  const {id} = props;
 
   return (
-    <button
+    <Link
       className="btn btn--play movie-card__button"
       type="button"
-      onClick={(evt) => {
-        evt.preventDefault();
-        onPlayButton(id);
-      }}
+      to={`/player/${id}`}
     >
       <svg viewBox="0 0 19 19" width="19" height="19">
         <use href="#play-s"></use>
       </svg>
       <span>Play</span>
-    </button>
+    </Link>
   );
 };
 
 PlayButton.propTypes = {
   id: PropTypes.number.isRequired,
-  onPlayButton: PropTypes.func.isRequired,
 };
 
 export default PlayButton;

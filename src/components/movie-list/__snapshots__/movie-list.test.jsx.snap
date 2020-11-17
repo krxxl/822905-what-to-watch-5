@@ -218,5 +218,11 @@ exports[`Render MovieList Render MovieList 1`] = `
 exports[`Render MovieList Render MovieList empty 1`] = `
 <div
   className="catalog__movies-list"
-/>
+>
+  <div
+    className="alert-loading"
+  >
+    LOADING...
+  </div>
+</div>
 `;

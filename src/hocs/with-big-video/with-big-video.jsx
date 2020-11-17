@@ -1,5 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {getFilmById} from '../../constant/constant';
+import {connect} from 'react-redux';
 
 const withBigVideo = (Component) => {
   class WithBigVideo extends PureComponent {
@@ -7,7 +9,6 @@ const withBigVideo = (Component) => {
       super(props);
 
       this.videoref = React.createRef();
-
       this.state = {
         currentTime: 0,
         duration: 0,
@@ -16,12 +17,12 @@ const withBigVideo = (Component) => {
 
       this._leftTime = this._leftTime.bind(this);
       this._handleIsPlayingChange = this._handleIsPlayingChange.bind(this);
-      this.openFullscreen = this.openFullscreen.bind(this);
-      this.videoExit = this.videoExit.bind(this);
+      this._handleOpenFullscreen = this._handleOpenFullscreen.bind(this);
     }
 
     componentDidMount() {
       const video = this.videoref.current;
+      video.src = this.props.film.videoLink;
       video.onloadedmetadata = () =>
         this.setState({
           duration: video.duration,
@@ -35,9 +36,7 @@ const withBigVideo = (Component) => {
     componentDidUpdate() {
       const video = this.videoref.current;
       if (this.state.isPlaying) {
-        // setTimeout(()=>{
         video.play();
-        // }, 1000);
       } else {
         video.pause();
       }
@@ -45,21 +44,20 @@ const withBigVideo = (Component) => {
 
     componentWillUnmount() {
       let video = this.videoref.current;
-
-      if (video) {
-        video.oncanplaythrough = null;
-        video.onplay = null;
-        video.onpause = null;
-        video.src = ``;
-        video = null;
-      }
+      video.oncanplaythrough = null;
+      video.onplay = null;
+      video.onloadedmetadata = null;
+      video.ontimeupdate = null;
+      video.onpause = null;
+      video.controls = null;
+      video.src = ``;
     }
 
     _handleIsPlayingChange() {
       this.setState((prevState) => ({isPlaying: !prevState.isPlaying}));
     }
 
-    openFullscreen() {
+    _handleOpenFullscreen() {
       const video = this.videoref.current;
       if (video.requestFullscreen) {
         video.requestFullscreen();
@@ -72,19 +70,6 @@ const withBigVideo = (Component) => {
       }
     }
 
-    videoExit() {
-      let video = this.videoref.current;
-      if (this.state.isPlaying) {
-        video.pause();
-      }
-      if (video) {
-        video.oncanplaythrough = null;
-        video.onplay = null;
-        video.onpause = null;
-        video.src = ``;
-        video = null;
-      }
-    }
 
     _leftTime() {
       const {currentTime, duration} = this.state;
@@ -100,26 +85,26 @@ const withBigVideo = (Component) => {
     }
 
     render() {
-      const {history, filmId, video, preview, name} = this.props;
+      const {history, filmId, film} = this.props;
+      const {backgroundImage, name} = film;
 
       return (
         <Component
           name={name}
+          film={film}
           filmId={filmId}
           history={history}
           leftTime={this._leftTime}
-          videoExit={this.videoExit}
-          openFullscreen={this.openFullscreen}
+          onOpenFullscreen={this._handleOpenFullscreen}
           isPlaying={this.state.isPlaying}
           duration={this.state.duration}
           currentTime={this.state.currentTime}
-          handleIsPlayingChange={this._handleIsPlayingChange}
+          onIsPlayingChange={this._handleIsPlayingChange}
         >
           <video
             ref={this.videoref}
-            src={video}
             className="player__video"
-            poster={preview}
+            poster={backgroundImage}
           ></video>
         </Component>
       );
@@ -128,13 +113,33 @@ const withBigVideo = (Component) => {
 
   WithBigVideo.propTypes = {
     history: PropTypes.object.isRequired,
-    video: PropTypes.string.isRequired,
     filmId: PropTypes.number.isRequired,
-    preview: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
+    film: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      genre: PropTypes.string.isRequired,
+      released: PropTypes.number.isRequired,
+      posterImage: PropTypes.string.isRequired,
+      previewImage: PropTypes.string.isRequired,
+      backgroundImage: PropTypes.string.isRequired,
+      backgroundColor: PropTypes.string.isRequired,
+      runTime: PropTypes.number.isRequired,
+      rating: PropTypes.number.isRequired,
+      scoresCount: PropTypes.number.isRequired,
+      description: PropTypes.string.isRequired,
+      director: PropTypes.string.isRequired,
+      starring: PropTypes.array.isRequired,
+      isFavorite: PropTypes.bool.isRequired,
+      videoLink: PropTypes.string.isRequired,
+      previewVideoLink: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+    }).isRequired
   };
 
   return WithBigVideo;
 };
 
-export default withBigVideo;
+const mapStateToProps = (state, props) => ({
+  film: getFilmById(state, props),
+});
+export {withBigVideo};
+export default (Component) => connect(mapStateToProps)(withBigVideo(Component));

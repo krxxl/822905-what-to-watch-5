@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {ratingWord} from '../../utils';
+import {getRatingNumtoWord} from '../../utils';
 
 const TabsOverview = ({film}) => {
   const {rating, scoresCount, description, director, starring} = film;
@@ -9,7 +9,7 @@ const TabsOverview = ({film}) => {
       <div className="movie-rating">
         <div className="movie-rating__score">{rating}</div>
         <p className="movie-rating__meta">
-          <span className="movie-rating__level">{ratingWord(rating)}</span>
+          <span className="movie-rating__level">{getRatingNumtoWord(rating)}</span>
           <span className="movie-rating__count">{scoresCount} ratings</span>
         </p>
       </div>

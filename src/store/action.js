@@ -13,8 +13,14 @@ export const ActionType = {
   SENDING_REVIEW_ERROR: `SENDING_REVIEW_ERROR`,
   CHANGE_FAVORITE_STATUS: `CHANGE_FAVORITE_STATUS`,
   LOAD_PROMO: `LOAD_PROMO`,
-  // ADD_REVIEWS: `ADD_REVIEWS`,
-  //   SHOW_ERROR: `SHOW_ERROR`,
+  IS_LOAD_PROMO: `IS_LOAD_PROMO`,
+
+  LOAD_FILMS_ERROR: `LOAD_FILMS_ERROR`,
+  IS_LOAD_FAVORITE_FILMS: `IS_LOAD_FAVORITE_FILMS`,
+  LOAD_FAVORITE_FILMS_ERROR: `LOAD_FAVORITE_FILMS_ERROR`,
+  LOAD_PROMO_ERROR: `LOAD_PROMO_ERROR`,
+  IS_LOAD_REVIEWS: `IS_LOAD_REVIEWS`,
+  LOAD_REVIEWS_ERROR: `LOAD_REVIEWS_ERROR`,
 };
 
 export const ActionCreator = {
@@ -44,6 +50,27 @@ export const ActionCreator = {
   checkStatus: () => ({
     type: ActionType.CHECK_STATUS, // проверка пришли ли данные
   }),
+  errorLoadFilms: () => ({
+    type: ActionType.LOAD_FILMS_ERROR, // error load films
+  }),
+  checkPromoStatus: () => ({
+    type: ActionType.IS_LOAD_PROMO, //  проверка пришли ли данные promo
+  }),
+  errorLoadPromo: () => ({
+    type: ActionType.LOAD_PROMO_ERROR, // error load promo
+  }),
+  checkFavoriteStatus: () => ({
+    type: ActionType.IS_LOAD_FAVORITE_FILMS, // проверка пришли ли данные favorite
+  }),
+  errorLoadFavorite: () => ({
+    type: ActionType.LOAD_FAVORITE_FILMS_ERROR, //  error load favorite
+  }),
+  checkReviewsStatus: () => ({
+    type: ActionType.IS_LOAD_REVIEWS, //  проверка пришли ли данные favorite
+  }),
+  errorLoadReviews: () => ({
+    type: ActionType.LOAD_REVIEWS_ERROR, // error load favorite
+  }),
   redirectRoute: (url) => ({
     type: ActionType.REDIRECT_TO_ROUTE,
     payload: url,
@@ -68,8 +95,4 @@ export const ActionCreator = {
     type: ActionType.LOAD_PROMO,
     payload: film,
   }),
-  // showError: (errorStatus) => ({
-  //   type: ActionType.SHOW_ERROR,
-  //   payload: errorStatus,
-  // }),
 };

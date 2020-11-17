@@ -8,14 +8,14 @@ describe(`Render Footer`, () => {
   it(`Render Footer`, () => {
     const tree = renderer
       .create(
-        <Router history={browserHistory}>
-          <Footer/>
-        </Router>,
-        {
-          createNodeMock: () => {
-            return {};
-          },
-        }
+          <Router history={browserHistory}>
+            <Footer/>
+          </Router>,
+          {
+            createNodeMock: () => {
+              return {};
+            },
+          }
       )
       .toJSON();
 

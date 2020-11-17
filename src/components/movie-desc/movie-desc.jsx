@@ -8,7 +8,7 @@ const MovieDesc = (props) => {
   const filmId = film.id;
   return (
     <div className="movie-card__desc">
-      <MovieNav active={active} tabNames={tabNames} clickOnTab={onTabHandle} />
+      <MovieNav active={active} tabNames={tabNames} onTabHandle={onTabHandle} />
 
       <Tabs filmId={filmId} film={film} active={active} />
     </div>

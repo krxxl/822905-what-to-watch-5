@@ -47,7 +47,7 @@ Header.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   filmId: PropTypes.number,
   name: PropTypes.string,
-  Breadcrumbs: PropTypes.element,
+  Breadcrumbs: PropTypes.func,
   title: PropTypes.string,
   className: PropTypes.string,
 };

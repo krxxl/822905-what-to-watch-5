@@ -8,7 +8,7 @@ export const getTimeFromMins = (mins) => {
   return hours + `ч. ` + minutes + `м.`;
 };
 
-export const ratingWord = (val) => {
+export const getRatingNumtoWord = (val) => {
   if (val >= 0 && val < 3) {
     return `Bad`;
   } else if (val >= 3 && val < 5) {
