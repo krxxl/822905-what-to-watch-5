@@ -6,6 +6,7 @@ import films from '../../mocks/films';
 import {MemoryRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
+import {AuthorizationStatus} from '../../constant/constant';
 
 import {TEST_MOCK_STORE} from '../../mocks/test-mocks';
 
@@ -27,6 +28,7 @@ it(`When user adds to list`, () => {
           <MyListButton
             id={films[0].id}
             isFavorite={films[0].isFavorite}
+            authorizationStatus={AuthorizationStatus.AUTH}
             onChangeFavoriteFilm={handleAddToListClick}
           />
         </MemoryRouter>

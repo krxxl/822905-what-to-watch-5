@@ -109,7 +109,6 @@ class MainPage extends React.PureComponent {
             {filmsByGenre.length >= COUNTFILM ? (
               <MoreButton onMoreButton={onMoreButton} />
             ) : null}
-            {/* <MoreButton /> */}
           </section>
 
           <Footer />

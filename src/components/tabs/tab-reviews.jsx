@@ -24,6 +24,7 @@ class TabsReviews extends React.PureComponent {
 
   render() {
     const {reviews, isLoadingReviews, isLoadingReviewsError} = this.props;
+    const hint = reviews.length === 0 ? <h3>no reviews yet</h3> : null;
     const halfOfReviews = Math.round(reviews.length / 2);
     const firstHalfReviews = reviews.slice(0, halfOfReviews);
     const secondHalfReviews = reviews.slice(halfOfReviews);
@@ -38,6 +39,7 @@ class TabsReviews extends React.PureComponent {
     return (
       <div className="movie-card__reviews movie-card__row">
         {alert()}
+        {hint}
         <div className="movie-card__reviews-col">
           {firstHalfReviews.map((review) => {
             return (
