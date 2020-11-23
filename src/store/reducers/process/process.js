@@ -1,9 +1,9 @@
 import {extend} from '../../../utils';
 import {ActionType} from '../../action';
-import {SHOW_ON_STAR_FILMS} from '../../../constant/constant';
+import {SHOW_ON_STAR_FILMS, DEFAULT_GENRE} from '../../../constant/constant';
 
 const initialState = {
-  genreActive: `All genres`,
+  genreActive: DEFAULT_GENRE,
   count: SHOW_ON_STAR_FILMS,
   activeFilm: null,
 };

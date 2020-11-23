@@ -1,14 +1,15 @@
 import React from 'react';
-import TabOverview from './tab-overview';
-import TabDetail from './tab-detail';
-import TabReviews from './tab-reviews';
+import TabOverview from '../tab-overview/tab-overview';
+import TabDetail from '../tab-detail/tab-detail';
+import TabReviews from '../tab-review/tab-reviews';
 import PropTypes from 'prop-types';
+import {TabName} from '../../constant/constant';
 
 const getComponentByName = (type, film, filmId) => {
   switch (type) {
-    case `Overview`:
+    case TabName.OVERVIEW:
       return <TabOverview film={film} />;
-    case `Detail`:
+    case TabName.DETAIL:
       return <TabDetail film={film} />;
   }
 
@@ -38,7 +39,9 @@ Tabs.propTypes = {
     scoresCount: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     director: PropTypes.string.isRequired,
-    starring: PropTypes.array.isRequired,
+    starring: PropTypes.arrayOf(
+        PropTypes.string.isRequired
+    ).isRequired,
     isFavorite: PropTypes.bool.isRequired,
     videoLink: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired,

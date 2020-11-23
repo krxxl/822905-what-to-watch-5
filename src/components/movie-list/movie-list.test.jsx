@@ -10,7 +10,7 @@ describe(`Render MovieList`, () => {
     const tree = renderer
       .create(
           <Router history={browserHistory}>
-            <MovieList COUNTFILM={8} isLoading={true} isLoadingError={false} isLoadingFavorite={false} isLoadingFavoriteError={false} films={films} onSmallCardClick={() => {}} />
+            <MovieList COUNT_FILM={8} isLoading={true} isLoadingError={false} isLoadingFavorite={false} isLoadingFavoriteError={false} films={films} onSmallCardClick={() => {}} />
           </Router>,
           {
             createNodeMock: () => {
@@ -26,7 +26,7 @@ describe(`Render MovieList`, () => {
     const tree = renderer
       .create(
           <Router history={browserHistory}>
-            <MovieList COUNTFILM={8} isLoading={false} isLoadingError={false} isLoadingFavorite={false} isLoadingFavoriteError={false} films={[]} onSmallCardClick={() => {}} />
+            <MovieList COUNT_FILM={8} isLoading={false} isLoadingError={false} isLoadingFavorite={false} isLoadingFavoriteError={false} films={[]} onSmallCardClick={() => {}} />
           </Router>,
           {
             createNodeMock: () => {

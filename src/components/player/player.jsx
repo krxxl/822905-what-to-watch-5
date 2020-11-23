@@ -8,7 +8,6 @@ const Player = (props) => {
     children,
     name,
     leftTime,
-    // onVideoExit,
     onOpenFullscreen,
     onIsPlayingChange,
     isPlaying,
@@ -38,7 +37,6 @@ const Player = (props) => {
       <button
         onClick={(evt) => {
           evt.preventDefault();
-          // onVideoExit();
           history.push(`/films/${filmId}`);
         }}
         type="button"
@@ -105,7 +103,6 @@ Player.propTypes = {
   children: PropTypes.element.isRequired,
   name: PropTypes.string.isRequired,
   leftTime: PropTypes.func.isRequired,
-  // onVideoExit: PropTypes.func.isRequired,
   onOpenFullscreen: PropTypes.func.isRequired,
   onIsPlayingChange: PropTypes.func.isRequired,
   duration: PropTypes.number.isRequired,

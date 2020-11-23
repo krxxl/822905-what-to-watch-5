@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {MyList} from './mylist';
+import {MyList} from './my-list';
 import films from '../../mocks/films';
 import {Provider} from 'react-redux';
 import configureMockStore from 'redux-mock-store';

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {getRatingNumtoWord} from '../../utils';
+import {getRatingNumToWord} from '../../utils';
 
 const TabsOverview = ({film}) => {
   const {rating, scoresCount, description, director, starring} = film;
@@ -9,7 +9,7 @@ const TabsOverview = ({film}) => {
       <div className="movie-rating">
         <div className="movie-rating__score">{rating}</div>
         <p className="movie-rating__meta">
-          <span className="movie-rating__level">{getRatingNumtoWord(rating)}</span>
+          <span className="movie-rating__level">{getRatingNumToWord(rating)}</span>
           <span className="movie-rating__count">{scoresCount} ratings</span>
         </p>
       </div>
@@ -39,7 +39,9 @@ TabsOverview.propTypes = {
     scoresCount: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     director: PropTypes.string.isRequired,
-    starring: PropTypes.array.isRequired,
+    starring: PropTypes.arrayOf(
+        PropTypes.string.isRequired
+    ).isRequired,
     isFavorite: PropTypes.bool.isRequired,
     videoLink: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired,

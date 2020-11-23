@@ -74,6 +74,7 @@ export const changeFavorite = (id, status) => (dispatch, _getState, api) => {
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(`/login`)
+    .then(({data}) => dispatch(ActionCreator.changeUserImg(data.avatar_url)))
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
     .catch((err) => {
       throw err;
@@ -82,6 +83,7 @@ export const checkAuth = () => (dispatch, _getState, api) => (
 
 export const login = ({email, password}) => (dispatch, _getState, api) => (
   api.post(`/login`, {email, password})
+    .then(({data}) => dispatch(ActionCreator.changeUserImg(data.avatar_url)))
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
     .then(() => dispatch(ActionCreator.redirectRoute(`/`)))
     .catch((err) => {

@@ -6,7 +6,7 @@ import MovieList from '../movie-list/movie-list';
 import {Link} from "react-router-dom";
 import MovieDesc from '../movie-desc/movie-desc';
 import tabNames from '../../movie-tabs-names';
-import {COUNTFILM} from '../../constant/constant';
+import {COUNT_FILM} from '../../constant/constant';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
 import PlayButton from '../play-button/play-button';
 import {connect} from 'react-redux';
@@ -69,7 +69,7 @@ const MoviePage = (props) => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <MovieList COUNTFILM={COUNTFILM} films={films} history={history} />
+          <MovieList COUNT_FILM={COUNT_FILM} films={films} history={history} />
         </section>
 
         <Footer />
@@ -93,7 +93,9 @@ MoviePage.propTypes = {
     scoresCount: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     director: PropTypes.string.isRequired,
-    starring: PropTypes.array.isRequired,
+    starring: PropTypes.arrayOf(
+        PropTypes.string.isRequired
+    ).isRequired,
     isFavorite: PropTypes.bool.isRequired,
     videoLink: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired,

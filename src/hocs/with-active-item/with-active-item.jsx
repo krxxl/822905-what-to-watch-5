@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {TabName} from '../../constant/constant';
 
 const withActiveItem = (Component) => {
   class WithActiveItem extends React.PureComponent {
@@ -8,7 +9,7 @@ const withActiveItem = (Component) => {
 
       this.onTabHandle = this.onTabHandle.bind(this);
       this.state = {
-        active: `Overview`,
+        active: TabName.OVERVIEW,
       };
     }
 
@@ -41,7 +42,9 @@ const withActiveItem = (Component) => {
       count: PropTypes.number.isRequired,
       desc: PropTypes.string.isRequired,
       director: PropTypes.string.isRequired,
-      starring: PropTypes.array.isRequired,
+      starring: PropTypes.arrayOf(
+          PropTypes.string.isRequired
+      ).isRequired,
       isInList: PropTypes.bool.isRequired,
       video: PropTypes.string.isRequired,
       id: PropTypes.number.isRequired,

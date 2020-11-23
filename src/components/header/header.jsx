@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import PropTypes from "prop-types";
 
 const Header = (props) => {
-  const {className, Breadcrumbs, name, filmId} = props;
+  const {className, Breadcrumbs, name, filmId, userImg} = props;
   const signIn = props.authorizationStatus === AuthorizationStatus.NO_AUTH ? (
     <div className="user-block">
       <Link to="/login" href="sign-in.html" className="user-block__link">
@@ -16,7 +16,7 @@ const Header = (props) => {
     <div className="user-block">
       <div className="user-block__avatar">
         <Link to="/mylist">
-          <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+          <img src={userImg} alt="User avatar" width="63" height="63" />
         </Link>
       </div>
     </div>
@@ -50,10 +50,12 @@ Header.propTypes = {
   Breadcrumbs: PropTypes.func,
   title: PropTypes.string,
   className: PropTypes.string,
+  userImg: PropTypes.string
 };
 
 const mapStateToProps = (state) => ({
   authorizationStatus: state.USER.authorizationStatus,
+  userImg: state.USER.userImg,
 });
 
 export {Header};

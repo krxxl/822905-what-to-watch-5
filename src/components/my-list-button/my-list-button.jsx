@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import {changeFavorite} from '../../store/api-actions';
 import {connect} from 'react-redux';
 import browserHistory from '../../browser-history';
-import {AuthorizationStatus} from '../../constant/constant';
+import {AuthorizationStatus, Status} from '../../constant/constant';
 
 const MyListButton = (props) => {
   const {id, isFavorite, authorizationStatus, onChangeFavoriteFilm} = props;
-  const status = isFavorite ? 0 : 1;
+  const status = isFavorite ? Status.FALSE : Status.TRUE;
 
   const isInMyLyst = isFavorite ?
     <React.Fragment>

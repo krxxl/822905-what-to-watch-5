@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {TIMEOUT} from '../../constant/constant';
 
 class MovieListItem extends React.PureComponent {
   constructor(props) {
@@ -21,7 +22,7 @@ class MovieListItem extends React.PureComponent {
         onMouseEnter={() => {
           this.timeout = setTimeout(() => {
             onMouseHandle(true);
-          }, 1000);
+          }, TIMEOUT);
         }}
         onMouseLeave={
           () => {

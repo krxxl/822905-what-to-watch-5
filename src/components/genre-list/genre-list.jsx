@@ -15,7 +15,9 @@ const GenreList = ({genres, genreActive, onGenreChange, onResetCount}) => {
 };
 
 GenreList.propTypes = {
-  genres: PropTypes.array.isRequired,
+  genres: PropTypes.arrayOf(
+      PropTypes.string.isRequired
+  ).isRequired,
   genreActive: PropTypes.string.isRequired,
   onGenreChange: PropTypes.func.isRequired,
   onResetCount: PropTypes.func.isRequired,

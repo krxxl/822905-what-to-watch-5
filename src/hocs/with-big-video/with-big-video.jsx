@@ -127,7 +127,9 @@ const withBigVideo = (Component) => {
       scoresCount: PropTypes.number.isRequired,
       description: PropTypes.string.isRequired,
       director: PropTypes.string.isRequired,
-      starring: PropTypes.array.isRequired,
+      starring: PropTypes.arrayOf(
+          PropTypes.string.isRequired
+      ).isRequired,
       isFavorite: PropTypes.bool.isRequired,
       videoLink: PropTypes.string.isRequired,
       previewVideoLink: PropTypes.string.isRequired,

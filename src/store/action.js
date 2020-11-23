@@ -21,6 +21,7 @@ export const ActionType = {
   LOAD_PROMO_ERROR: `LOAD_PROMO_ERROR`,
   IS_LOAD_REVIEWS: `IS_LOAD_REVIEWS`,
   LOAD_REVIEWS_ERROR: `LOAD_REVIEWS_ERROR`,
+  CHANGE_USER_IMG: `CHANGE_USER_IMG`
 };
 
 export const ActionCreator = {
@@ -94,5 +95,9 @@ export const ActionCreator = {
   loadPromo: (film) => ({
     type: ActionType.LOAD_PROMO,
     payload: film,
+  }),
+  changeUserImg: (img) => ({
+    type: ActionType.CHANGE_USER_IMG,
+    payload: img,
   }),
 };

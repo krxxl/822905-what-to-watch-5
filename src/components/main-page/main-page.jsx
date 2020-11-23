@@ -36,7 +36,7 @@ class MainPage extends React.PureComponent {
       history,
     } = this.props;
 
-    const COUNTFILM = count;
+    const COUNT_FILM = count;
     const alert = () => {
       if (!isPromoLoading && !isLoadingPromoError) {
         return <div className="alert-loading">LOADING...</div>;
@@ -101,12 +101,12 @@ class MainPage extends React.PureComponent {
             />
 
             <MovieList
-              COUNTFILM={COUNTFILM}
+              COUNT_FILM={COUNT_FILM}
               films={filmsByGenre}
               history={history}
             />
 
-            {filmsByGenre.length >= COUNTFILM ? (
+            {filmsByGenre.length >= COUNT_FILM ? (
               <MoreButton onMoreButton={onMoreButton} />
             ) : null}
           </section>
@@ -136,14 +136,18 @@ MainPage.propTypes = {
         scoresCount: PropTypes.number.isRequired,
         description: PropTypes.string.isRequired,
         director: PropTypes.string.isRequired,
-        starring: PropTypes.array.isRequired,
+        starring: PropTypes.arrayOf(
+            PropTypes.string.isRequired
+        ).isRequired,
         isFavorite: PropTypes.bool.isRequired,
         videoLink: PropTypes.string.isRequired,
         previewVideoLink: PropTypes.string.isRequired,
         id: PropTypes.number.isRequired,
       }).isRequired
   ).isRequired,
-  genres: PropTypes.array.isRequired,
+  genres: PropTypes.arrayOf(
+      PropTypes.string.isRequired
+  ).isRequired,
   genreActive: PropTypes.string.isRequired,
   onGenreChange: PropTypes.func.isRequired,
   onResetCount: PropTypes.func.isRequired,
@@ -166,7 +170,9 @@ MainPage.propTypes = {
     scoresCount: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     director: PropTypes.string.isRequired,
-    starring: PropTypes.array.isRequired,
+    starring: PropTypes.arrayOf(
+        PropTypes.string.isRequired
+    ).isRequired,
     isFavorite: PropTypes.bool.isRequired,
     videoLink: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired,

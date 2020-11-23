@@ -1,120 +1,115 @@
-import React, {PureComponent} from "react";
+import React, {useState} from "react";
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {login} from "../../store/api-actions";
-import FormErrors from './form-errors';
+import FormErrors from '../form-errors/form-errors';
+import {REG_EXP_MAIL} from '../../constant/constant';
+import {extend} from '../../utils';
 
-class Login extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: ``,
-      password: ``,
-      formErrors: ``,
-      emailValid: true,
-      formValid: false
-    };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleUserInput = this.handleUserInput.bind(this);
-  }
-
-  handleSubmit(evt) {
-    const {onSubmit} = this.props;
+const Login = (props) => {
+  const [inputs, setInput] = useState({
+    email: ``,
+    password: ``,
+  });
+  const {email, password} = inputs;
+  const [formErrors, setFormErrors] = useState(``);
+  const [emailValid, setEmailVaild] = useState(true);
+  const [formValid, setFormValid] = useState(false);
+  const handleSubmit = (evt) => {
+    const {onSubmit} = props;
 
     evt.preventDefault();
 
     onSubmit({
-      email: this.state.email,
-      password: this.state.password,
+      email,
+      password,
     });
-  }
+  };
 
-  handleUserInput(evt) {
+  const handleUserInput = (evt) => {
     const name = evt.target.name;
     const value = evt.target.value;
-    this.setState({[name]: value},
-        () => {
-          this.validateField(name, value);
-        });
-  }
+    setInput(extend(inputs, {
+      [name]: value
+    }));
+    validateField(name, value);
+  };
 
-  validateField(fieldName, value) {
-    let fieldValidationErrors = this.state.formErrors;
-    let emailValid = this.state.emailValid;
+  const validateField = (fieldName, value) => {
+    let fieldValidationErrors = formErrors;
+    let isEmailValid = emailValid;
     switch (fieldName) {
       case `email`:
-        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-        fieldValidationErrors = emailValid ? `` : `Please enter a valid email address`;
+        isEmailValid = value.match(REG_EXP_MAIL);
+        fieldValidationErrors = isEmailValid ? `` : `Please enter a valid email address`;
         break;
     }
-    this.setState({formErrors: fieldValidationErrors, emailValid}, this.validateForm);
-  }
+    setFormErrors(fieldValidationErrors);
+    setEmailVaild(isEmailValid);
+    validateForm();
+  };
 
-  validateForm() {
-    this.setState({formValid: this.state.emailValid});
-  }
+  const validateForm = () => {
+    setFormValid(emailValid);
+  };
 
-
-  render() {
-    const classError = this.state.emailValid ? `` : `sign-in__field--error`;
-    return (
-      <div className="user-page">
-        <Header className={`user-page__head`}/>
-        <div className="sign-in user-page__content">
-          <form onSubmit={this.handleSubmit} action="#" className="sign-in__form">
-            <div className="sign-in__message">
-              <FormErrors formErrors={this.state.formErrors}/>
+  const classError = emailValid ? `` : `sign-in__field--error`;
+  return (
+    <div className="user-page">
+      <Header className={`user-page__head`}/>
+      <div className="sign-in user-page__content">
+        <form onSubmit={handleSubmit} action="#" className="sign-in__form">
+          <div className="sign-in__message">
+            <FormErrors formErrors={formErrors}/>
+          </div>
+          <div className="sign-in__fields">
+            <div className={`sign-in__field ${classError}`}>
+              <input
+                onChange={handleUserInput}
+                className= "sign-in__input"
+                type="email"
+                placeholder="Email address"
+                name="email"
+                id="user-email"
+              />
+              <label
+                className="sign-in__label visually-hidden"
+                htmlFor="user-email"
+              >
+                Email address
+              </label>
             </div>
-            <div className="sign-in__fields">
-              <div className={`sign-in__field ${classError}`}>
-                <input
-                  onChange={this.handleUserInput}
-                  className= "sign-in__input"
-                  type="email"
-                  placeholder="Email address"
-                  name="email"
-                  id="user-email"
-                />
-                <label
-                  className="sign-in__label visually-hidden"
-                  htmlFor="user-email"
-                >
-                  Email address
-                </label>
-              </div>
-              <div className="sign-in__field">
-                <input
-                  // ref={this.passwordRef}
-                  onChange={this.handleUserInput}
-                  className="sign-in__input"
-                  type="password"
-                  placeholder="Password"
-                  name="password"
-                  id="user-password"
-                />
-                <label
-                  className="sign-in__label visually-hidden"
-                  htmlFor="user-password"
-                >
-                  Password
-                </label>
-              </div>
+            <div className="sign-in__field">
+              <input
+                onChange={handleUserInput}
+                className="sign-in__input"
+                type="password"
+                placeholder="Password"
+                name="password"
+                id="user-password"
+              />
+              <label
+                className="sign-in__label visually-hidden"
+                htmlFor="user-password"
+              >
+                Password
+              </label>
             </div>
-            <div className="sign-in__submit">
-              <button disabled={!this.state.formValid} className="sign-in__btn" type="submit">
-                Sign in
-              </button>
-            </div>
-          </form>
-        </div>
-        <Footer />
+          </div>
+          <div className="sign-in__submit">
+            <button disabled={!formValid} className="sign-in__btn" type="submit">
+              Sign in
+            </button>
+          </div>
+        </form>
       </div>
-    );
-  }
-}
+      <Footer />
+    </div>
+  );
+};
 
 Login.propTypes = {
   onSubmit: PropTypes.func.isRequired,

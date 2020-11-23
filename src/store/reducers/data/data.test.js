@@ -203,6 +203,86 @@ describe(`Reducer Data`, () => {
       promoFilm: films[0],
     });
   });
+
+  it(`Should update LoadingError by load`, () => {
+    expect(
+        filmsData(
+            {
+              isLoadingError: false,
+            },
+            {
+              type: ActionType.LOAD_FILMS_ERROR,
+              payload: true,
+            }
+        )
+    ).toEqual({
+      isLoadingError: true,
+    });
+  });
+
+  it(`Should update LoadingFavoriteError by load`, () => {
+    expect(
+        filmsData(
+            {
+              isLoadingFavoriteError: false,
+            },
+            {
+              type: ActionType.LOAD_FAVORITE_FILMS_ERROR,
+              payload: true,
+            }
+        )
+    ).toEqual({
+      isLoadingFavoriteError: true,
+    });
+  });
+
+  it(`Should update isLoadingPromoError by load`, () => {
+    expect(
+        filmsData(
+            {
+              isLoadingPromoError: false,
+            },
+            {
+              type: ActionType.LOAD_PROMO_ERROR,
+              payload: true,
+            }
+        )
+    ).toEqual({
+      isLoadingPromoError: true,
+    });
+  });
+
+  it(`Should update isLoadingReviewsError by load`, () => {
+    expect(
+        filmsData(
+            {
+              isLoadingReviewsError: false,
+            },
+            {
+              type: ActionType.LOAD_REVIEWS_ERROR,
+              payload: true,
+            }
+        )
+    ).toEqual({
+      isLoadingReviewsError: true,
+    });
+  });
+
+  it(`Should update sendingReviewError by load`, () => {
+    expect(
+        filmsData(
+            {
+              sendingReviewError: false,
+            },
+            {
+              type: ActionType.SENDING_REVIEW_ERROR,
+              payload: true,
+            }
+        )
+    ).toEqual({
+      sendingReviewError: true,
+    });
+  });
 });
 
 /* eslint max-nested-callbacks: ["error", 4]*/

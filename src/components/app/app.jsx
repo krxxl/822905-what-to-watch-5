@@ -3,7 +3,7 @@ import MainPage from '../main-page/main-page';
 import PropTypes from 'prop-types';
 import {Router as BrowserRouter, Switch, Route} from 'react-router-dom';
 import Login from '../login/login';
-import MyList from '../mylist/mylist';
+import MyList from '../my-list/my-list';
 import MoviePage from '../movie-page/movie-page';
 import Review from '../review/review';
 import Player from '../player/player';

@@ -11,7 +11,7 @@ describe(`Render Header`, () => {
     const tree = renderer
       .create(
           <Router history={browserHistory}>
-            <Header className={``} Breadcrumbs={null} name={films[0].name} filmId={films[0].id} authorizationStatus={AuthorizationStatus.NO_AUTH}/>
+            <Header className={``} Breadcrumbs={null} name={films[0].name} filmId={films[0].id} authorizationStatus={AuthorizationStatus.NO_AUTH} userImg={``}/>
           </Router>
       )
       .toJSON();
