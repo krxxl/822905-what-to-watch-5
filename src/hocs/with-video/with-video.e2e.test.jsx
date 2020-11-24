@@ -32,28 +32,28 @@ describe(`HOC withVideo`, () => {
         }
     );
 
-    wrapper.instance().onMouseHandle();
+    wrapper.instance()._handleOnMouse(true);
     expect(wrapper.state().isPlaying).toEqual(true);
   });
 
-  // it(`Should withVideo off play`, () => {
-  //   const ComponentWrapped = withVideo(mockComponent);
+  it(`Should withVideo off play`, () => {
+    const ComponentWrapped = withVideo(mockComponent);
 
-  //   const wrapper = mount(
-  //       <ComponentWrapped
-  //         video={films[0].previewVideoLink}
-  //         name={films[0].name}
-  //         id={films[0].id}
-  //         preview={films[0].previewImage}
-  //         onMouseHandle={onMouseHandle}
-  //       />
-  //   );
+    const wrapper = mount(
+        <ComponentWrapped
+          video={films[0].previewVideoLink}
+          name={films[0].name}
+          id={films[0].id}
+          preview={films[0].previewImage}
+          onMouseHandle={onMouseHandle}
+        />
+    );
 
-  //   wrapper.setState({
-  //     isPlaying: true,
-  //   });
+    wrapper.setState({
+      isPlaying: true,
+    });
 
-  //   wrapper.instance().onMouseHandle();
-  //   expect(wrapper.state().isPlaying).toEqual(false);
-  // });
+    wrapper.instance()._handleOnMouse(false);
+    expect(wrapper.state().isPlaying).toEqual(false);
+  });
 });

@@ -18,20 +18,24 @@ const withVideo = (Component) => {
 
     componentDidMount() {
       const video = this.videoref.current;
-      video.muted = `muted`;
-      video.oncanplaythrough = () =>
-        this.setState({
-          isLoading: false,
-        });
+      if (video) {
+        video.muted = `muted`;
+        video.oncanplaythrough = () =>
+          this.setState({
+            isLoading: false,
+          });
+      }
     }
 
     componentDidUpdate() {
       const video = this.videoref.current;
-      video.src = this.props.video;
-      if (this.state.isPlaying) {
-        video.play();
-      } else {
-        video.pause();
+      if (video) {
+        video.src = this.props.video;
+        if (this.state.isPlaying) {
+          video.play();
+        } else {
+          video.pause();
+        }
       }
     }
 
