@@ -86,17 +86,19 @@ const withForm = (Component) => {
     sendingReview: PropTypes.bool.isRequired,
   };
 
-  const mapStateToProps = (state) => ({
-    sendingReview: state.DATA.sendingReview,
-    sendingReviewError: state.DATA.sendingReviewError,
-  });
-
-  const mapDispatchToProps = (dispatch) => ({
-    onSubmit(data) {
-      dispatch(addReview(data));
-    }
-  });
-  return connect(mapStateToProps, mapDispatchToProps)(WithForm);
+  return WithForm;
 };
 
-export default withForm;
+const mapStateToProps = (state) => ({
+  sendingReview: state.DATA.sendingReview,
+  sendingReviewError: state.DATA.sendingReviewError,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit(data) {
+    dispatch(addReview(data));
+  }
+});
+
+export {withForm};
+export default (Component) => connect(mapStateToProps, mapDispatchToProps)(withForm(Component));
