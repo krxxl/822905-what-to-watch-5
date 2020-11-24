@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render withBigVideo Render withBigVideo 1`] = `
+<div>
+  <video
+    className="player__video"
+    poster="img/bg-the-grand-budapest-hotel.jpg"
+  />
+</div>
+`;

@@ -11,10 +11,10 @@ const MovieNavItem = ({name, className, onTabHandle}) => {
   );
 };
 
-export default MovieNavItem;
-
 MovieNavItem.propTypes = {
   name: PropTypes.string.isRequired,
   className: PropTypes.string.isRequired,
   onTabHandle: PropTypes.func.isRequired
 };
+
+export default MovieNavItem;

@@ -22,15 +22,17 @@ const withBigVideo = (Component) => {
 
     componentDidMount() {
       const video = this.videoref.current;
-      video.src = this.props.film.videoLink;
-      video.onloadedmetadata = () =>
-        this.setState({
-          duration: video.duration,
-        });
-      video.ontimeupdate = () =>
-        this.setState({
-          currentTime: Math.trunc(video.currentTime),
-        });
+      if (video) {
+        video.src = this.props.film.videoLink;
+        video.onloadedmetadata = () =>
+          this.setState({
+            duration: video.duration,
+          });
+        video.ontimeupdate = () =>
+          this.setState({
+            currentTime: Math.trunc(video.currentTime),
+          });
+      }
     }
 
     componentDidUpdate() {

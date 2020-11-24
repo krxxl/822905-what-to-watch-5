@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render withVideo Render withVideo 1`] = `
+<div>
+  <video
+    className="player__video"
+    poster="img/bohemian-rhapsody.jpg"
+  />
+</div>
+`;
