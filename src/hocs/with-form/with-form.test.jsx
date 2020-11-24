@@ -2,6 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {withForm} from './with-form';
 import films from '../../mocks/films';
+import PropTypes from "prop-types";
 
 const mockComponent = (props) => {
   const {children} = props;
@@ -9,6 +10,10 @@ const mockComponent = (props) => {
   return <div>
     {children}
   </div>;
+};
+
+mockComponent.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 const MockComponentWrapped = withForm(mockComponent);
